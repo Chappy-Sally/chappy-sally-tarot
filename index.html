@@ -1,10 +1,298 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Chappy & Sally Tarot</title>
+  <style>
+    :root{
+      --bg1:#fff7fb;
+      --bg2:#f3fbff;
+      --card:#ffffffcc;
+      --border:#ffd6e7;
+      --text:#2b2b2b;
+      --muted:#6b6b6b;
+      --shadow: 0 12px 30px rgba(0,0,0,.08);
+      --radius: 20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:
+        radial-gradient(900px 500px at 10% 10%, var(--bg2), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, var(--bg1), transparent 60%),
+        linear-gradient(180deg, #ffffff, #fffafc);
+    }
+    .wrap{
+      width:min(720px, 100%);
+    }
+    .header{
+      text-align:center;
+      margin-bottom:14px;
+    }
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:7px 12px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      box-shadow:0 6px 16px rgba(0,0,0,.05);
+    }
+    h1{
+      margin:10px 0 6px;
+      font-size:28px;
+      letter-spacing:.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .panel{
+      margin-top:16px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panel-inner{
+      padding:16px;
+      display:grid;
+      gap:12px;
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      padding:14px 16px;
+      border-top:1px dashed #ffd6e7;
+      background:linear-gradient(180deg, #ffffffaa, #fff7fb66);
+    }
+    button{
+      appearance:none;
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 22px rgba(0,0,0,.08);
+      transition: transform .08s ease, filter .2s ease;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    .primary{
+      background: linear-gradient(135deg, #ff75b5, #7bd6ff);
+      color:#fff;
+    }
+    .ghost{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 640px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .card{
+      position:relative;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background:#fff;
+      padding:14px;
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+      min-height:120px;
+    }
+    .card .label{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      margin-bottom:8px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .pill{
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff7fb;
+      color:#7b4b61;
+      white-space:nowrap;
+    }
+    .title{
+      font-size:18px;
+      font-weight:800;
+      margin:0 0 6px;
+    }
+    .desc{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .sparkle{
+      position:absolute;
+      inset:-40px -40px auto auto;
+      width:140px;
+      height:140px;
+      background: radial-gradient(circle at 30% 30%, #ffd6e7, transparent 55%),
+                  radial-gradient(circle at 70% 60%, #c9f2ff, transparent 55%);
+      filter: blur(0px);
+      opacity:.6;
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .result{
+      margin-top:6px;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .result h2{
+      margin:0 0 6px;
+      font-size:16px;
+    }
+    .result p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:13px;
+    }
+    .footer{
+      text-align:center;
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .tiny{
+      opacity:.8;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>チャッピー＆サリー タロット</h1>
+  <main class="wrap">
+    <div class="header">
+      <div class="badge">🐶 チャッピー＆サリーのタロット 🔮 <span class="tiny">GitHub Pages</span></div>
+      <h1>チャッピー＆サリー タロット</h1>
+      <p class="sub">今日の気分でOK。ボタンを押して、今のあなたに必要なメッセージを受け取ろう✨</p>
+    </div>
+
+    <section class="panel">
+      <div class="panel-inner">
+        <div class="grid">
+          <div class="card" id="cardBox">
+            <div class="sparkle"></div>
+            <div class="label">
+              <span>🎴 引いたカード</span>
+              <span class="pill" id="drawCount">0 回</span>
+            </div>
+            <p class="title" id="cardName">まだ引いてないよ</p>
+            <p class="desc" id="cardMsg">「カードを引く」を押してみてね🐾</p>
+          </div>
+
+          <div class="result">
+            <h2>🐾 チャッピーのひとこと</h2>
+            <p id="chappyLine">深呼吸して、いちばんやさしい選択からいこうね。</p>
+            <br />
+            <h2>💖 サリーのひとこと</h2>
+            <p id="sallyLine">あなたのペースで大丈夫。ちゃんと進んでるよ。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="primary" id="drawBtn">カードを引く✨</button>
+        <button class="ghost" id="resetBtn">リセット</button>
+      </div>
+    </section>
+
+    <p class="footer">※これはデモ版だよ。カード名とメッセージはあとで好きなだけ増やせるよ🌈</p>
+  </main>
+
+  <script>
+    // まずはデモ用カード（あとで22枚や77枚に増やせる）
+    const CARDS = [
+      {
+        name: "太陽 ☀️",
+        msg: "あなたの中の明るさが、ちゃんと周りを照らしてるよ。今日は“堂々と受け取る日”。",
+        chappy: "遠慮しないで、受け取りMAXでいこう🐶✨",
+        sally: "嬉しいことは、嬉しいって認めると増えるよ💖"
+      },
+      {
+        name: "節制 🌿",
+        msg: "急がなくてOK。混ぜ合わせて整えていくと、ちょうど良いバランスに戻るよ。",
+        chappy: "一回深呼吸して、ちょうどいいに戻そ🐾",
+        sally: "小さな調整が、未来を大きく変えるよ。"
+      },
+      {
+        name: "星 ⭐",
+        msg: "希望は消えてないよ。今日は“信じる力”を取り戻す日。願いを1つだけ言葉にしてみて。",
+        chappy: "願いは、言葉にしたぶん叶いに近づくよ🐶",
+        sally: "あなたの願い、ちゃんと受け取ってるよ。"
+      },
+      {
+        name: "運命の輪 🎡",
+        msg: "流れが来てる！タイミングの波に乗って、今できる一歩を軽く踏み出してみて。",
+        chappy: "来た来た来た〜！波に乗るよ〜🐾",
+        sally: "迷ったら“ワクワクの方”でOK。"
+      },
+      {
+        name: "女教皇 🌙",
+        msg: "答えはもう内側にあるよ。静かな時間を5分だけ作ると、直感が戻ってくる。",
+        chappy: "心の声、今いちばん信じていいよ🐶",
+        sally: "焦らなくて大丈夫。静けさは味方。"
+      }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+
+    let count = 0;
+
+    function draw() {
+      const i = Math.floor(Math.random() * CARDS.length);
+      const c = CARDS[i];
+
+      count += 1;
+
+      $("cardName").textContent = c.name;
+      $("cardMsg").textContent = c.msg;
+      $("chappyLine").textContent = c.chappy;
+      $("sallyLine").textContent = c.sally;
+      $("drawCount").textContent = `${count} 回`;
+    }
+
+    function resetAll() {
+      count = 0;
+      $("drawCount").textContent = "0 回";
+      $("cardName").textContent = "まだ引いてないよ";
+      $("cardMsg").textContent = "「カードを引く」を押してみてね🐾";
+      $("chappyLine").textContent = "深呼吸して、いちばんやさしい選択からいこうね。";
+      $("sallyLine").textContent = "あなたのペースで大丈夫。ちゃんと進んでるよ。";
+    }
+
+    $("drawBtn").addEventListener("click", draw);
+    $("resetBtn").addEventListener("click", resetAll);
+  </script>
 </body>
 </html>
