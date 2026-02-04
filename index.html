@@ -1,228 +1,145 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>チャッピー＆サリーのタロットカード🐾</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チャッピー＆サリーのタロットカード</title>
 
-  <style>
-    body{
-      font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-      text-align:center;
-      background:#fff0f5;
-      padding:20px;
-      margin:0;
-    }
+<style>
+body {
+  font-family: "ヒラギノ角ゴシックProN", sans-serif;
+  text-align: center;
+  background: #fff0f5;
+  padding: 20px;
+}
 
-    h1{
-      font-size:26px;
-      margin:12px 0 10px;
-      color:#5a3a22; /* 🍫チョコレート */
-      line-height:1.25;
-    }
+/* タイトル */
+h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #5a3a1a; /* チョコレート色 */
+}
+h1 span {
+  font-size: 0.9em;
+}
 
-    .sub{
-      margin:0 0 16px;
-      color:#555;
-      font-size:14px;
-    }
+/* 説明文 */
+p {
+  color: #555;
+}
 
-    .btns{ margin:14px 0 8px; }
+/* ボタン */
+button {
+  font-size: 16px;
+  padding: 12px 20px;
+  margin: 6px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f7c1cc, #c9b6ff);
+  color: #fff;
+}
 
-    button{
-      font-size:16px;
-      padding:12px 20px;
-      margin:6px;
-      border:none;
-      border-radius:30px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
-      color:#fff;
-    }
+/* カード表示 */
+.cards-area {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
 
-    button.secondary{
-      background:linear-gradient(135deg,#f3d1dc,#e6a4b4);
-    }
+.card-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .cards-area{
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      margin-top:25px;
-      flex-wrap:wrap;
-    }
+.card-box img {
+  width: 160px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
 
-    .card-box{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      min-width:180px;
-    }
+.reversed {
+  transform: rotate(180deg);
+}
 
-    .card-title{
-      font-size:14px;
-      color:#5a3a22;
-      margin:0 0 8px;
-      font-weight:700;
-    }
+/* 🐾 コピーボタン */
+.copy-btn {
+  margin-top: 8px;
+  font-size: 22px;
+  background: linear-gradient(135deg, #f7c1cc, #e6a4b4, #f3d1dc);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(230,164,180,0.6);
+}
 
-    .card-box img{
-      width:160px;
-      border-radius:12px;
-      box-shadow:0 6px 14px rgba(0,0,0,0.2);
-      transition:transform 0.3s;
-      background:#fff;
-    }
+.copy-btn:active {
+  transform: scale(0.88);
+}
 
-    .reversed{
-      transform:rotate(180deg);
-    }
-
-    .copy-btn{
-      margin-top:8px;
-      font-size:22px;
-      background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-      color:#fff;
-      border:none;
-      border-radius:50%;
-      padding:10px 12px;
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(230,164,180,0.6);
-      transition:transform 0.12s, box-shadow 0.12s;
-    }
-
-    .copy-btn:active{
-      transform:scale(0.88);
-      box-shadow:0 2px 6px rgba(230,164,180,0.4);
-    }
-
-    .hint{
-      margin-top:18px;
-      font-size:12px;
-      color:#777;
-      line-height:1.6;
-    }
-
-    footer{
-      margin-top:30px;
-      font-size:12px;
-      color:#888;
-    }
-  </style>
+/* フッター */
+footer {
+  margin-top: 30px;
+  font-size: 12px;
+  color: #888;
+}
+</style>
 </head>
 
 <body>
-  <h1>🐶チャッピー＆サリーの<br>タロットカード🐾</h1>
-  <p class="sub">ボタンを押してカードを引いてね✨<br>（🐾でカード名をコピーできるよ）</p>
 
-  <div class="btns">
-    <button id="oneBtn">1枚引き</button>
-    <button id="threeBtn">3枚引き</button>
-    <button class="secondary" id="resetBtn">リセット</button>
-  </div>
+<h1>
+🐶 チャッピー＆サリーの<br>
+<span>タロットカード 🐾</span>
+</h1>
 
-  <div class="cards-area" id="cardsArea"></div>
+<p>ボタンを押してカードを引いてね✨</p>
 
-  <p class="hint">
-    ※カード画像は「cards」フォルダに置いてね（例：cards/00_The_Fool.png）<br>
-    ※逆位置は画像を上下反転（180°回転）で表示するよ🐾
-  </p>
+<button onclick="drawCards(1)">1枚引き</button>
+<button onclick="drawCards(3)">3枚引き</button>
+<button onclick="resetCards()">リセット</button>
 
-  <footer>© Chappy & Sally Tarot</footer>
+<div class="cards-area" id="cards"></div>
 
-  <script>
-    // ====== カード一覧（ファイル名そのまま） ======
-    const cards = [
-      { file: "00_The_Fool.png", name: "0 愚者 / The Fool" },
-      { file: "01_The_Magician.png", name: "1 魔術師 / The Magician" },
-      { file: "02_The_High_Priestess.png", name: "2 女教皇 / The High Priestess" },
-      { file: "03_The_Empress.png", name: "3 女帝 / The Empress" },
-      { file: "04_The_Emperor.png", name: "4 皇帝 / The Emperor" },
-      { file: "05_The_Hierophant.png", name: "5 教皇 / The Hierophant" },
-      { file: "06_The_Lovers.png", name: "6 恋人 / The Lovers" },
-      { file: "07_The_Chariot.png", name: "7 戦車 / The Chariot" },
-      { file: "08_Strength.png", name: "8 力 / Strength" },
-      { file: "09_The_Hermit.png", name: "9 隠者 / The Hermit" },
-      { file: "10_Wheel_of_Fortune.png", name: "10 運命の輪 / Wheel of Fortune" },
-      { file: "11_Justice.png", name: "11 正義 / Justice" },
-      { file: "12_The_Hanged_Man.png", name: "12 吊された男 / The Hanged Man" },
-      { file: "13_Death.png", name: "13 死神 / Death" },
-      { file: "14_Temperance.png", name: "14 節制 / Temperance" },
-      { file: "15_The_Devil.png", name: "15 悪魔 / The Devil" },
-      { file: "16_The_Tower.png", name: "16 塔 / The Tower" },
-      { file: "17_The_Star.png", name: "17 星 / The Star" },
-      { file: "18_The_Moon.png", name: "18 月 / The Moon" },
-      { file: "19_The_Sun.png", name: "19 太陽 / The Sun" },
-      { file: "20_Judgement.png", name: "20 審判 / Judgement" },
-      { file: "21_The_World.png", name: "21 世界 / The World" },
-      { file: "22_Compass.png", name: "羅針盤 / Compass" }
-    ];
+<footer>
+© Chappy & Sally Tarot
+</footer>
 
-    const cardsArea = document.getElementById("cardsArea");
-    const oneBtn = document.getElementById("oneBtn");
-    const threeBtn = document.getElementById("threeBtn");
-    const resetBtn = document.getElementById("resetBtn");
+<script>
+const cardList = [
+  "00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
+  "03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
+  "06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
+  "09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
+  "12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
+  "15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
+  "18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
+  "21_The_World.png","22_Compass.png"
+];
 
-    function pickRandom(n){
-      const pool = [...cards];
-      const picked = [];
-      for(let i=0;i<n;i++){
-        const idx = Math.floor(Math.random()*pool.length);
-        picked.push(pool.splice(idx,1)[0]);
-      }
-      return picked;
-    }
+function drawCards(num) {
+  resetCards();
+  const area = document.getElementById("cards");
+  const shuffled = [...cardList].sort(() => 0.5 - Math.random());
 
-    function makeCardBox(card, index){
-      const wrap = document.createElement("div");
-      wrap.className = "card-box";
+  for (let i = 0; i < num; i++) {
+    const card = shuffled[i];
+    const reversed = Math.random() < 0.5;
 
-      const title = document.createElement("div");
-      title.className = "card-title";
-      title.textContent = (index !== null) ? `カード${index+1}` : "カード";
+    const box = document.createElement("div");
+    box.className = "card-box";
 
-      const img = document.createElement("img");
-      img.src = `cards/${card.file}`;
+    const img = document.createElement("img");
+    img.src = "cards/" + card;
+    if (reversed) img.classList.add("reversed");
 
-      const isReversed = Math.random() < 0.5;
-      if(isReversed) img.classList.add("reversed");
-
-      const name = document.createElement("div");
-      name.style.marginTop = "10px";
-      name.style.fontWeight = "700";
-      name.style.color = "#5a3a22";
-      name.textContent = card.name + (isReversed ? "（逆位置）" : "（正位置）");
-
-      const copyBtn = document.createElement("button");
-      copyBtn.className = "copy-btn";
-      copyBtn.textContent = "🐾";
-      copyBtn.title = "カード名をコピー";
-      copyBtn.addEventListener("click", async () => {
-        try{
-          await navigator.clipboard.writeText(name.textContent);
-          copyBtn.textContent = "✓";
-          setTimeout(()=>copyBtn.textContent="🐾", 700);
-        }catch(e){
-          alert("コピーできなかったよ🥲（ブラウザの制限かも）");
-        }
-      });
-
-      wrap.appendChild(title);
-      wrap.appendChild(img);
-      wrap.appendChild(copyBtn);
-      wrap.appendChild(name);
-      return wrap;
-    }
-
-    function showCards(n){
-      cardsArea.innerHTML = "";
-      const picked = pickRandom(n);
-      picked.forEach((c,i)=>cardsArea.appendChild(makeCardBox(c,i)));
-    }
-
-    oneBtn.addEventListener("click", ()=>showCards(1));
-    threeBtn.addEventListener("click", ()=>showCards(3));
-    resetBtn.addEventListener("click", ()=>cardsArea.innerHTML = "");
-  </script>
-</body>
-</html>
+    const btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.innerText = "🐾";
+    btn.onclick = () => navigator
