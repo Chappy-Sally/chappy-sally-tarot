@@ -1,426 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>チャッピー＆サリー タロット</title>
+
   <style>
-    :root{
-      --bg1:#fff7fb;
-      --bg2:#f4fbff;
-      --card:#ffffff;
-      --line:#ffd3e6;
-      --text:#2b2b2b;
-      --sub:#6b6b6b;
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --radius: 22px;
-      --btn1:#ff7bbd;
-      --btn2:#8aa7ff;
+    body {
+      font-family: "Hiragino Maru Gothic ProN", sans-serif;
+      background: #fff6f9;
+      text-align: center;
+      padding: 20px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      color:var(--text);
-      background: radial-gradient(1000px 600px at 20% 10%, var(--bg1), transparent 60%),
-                  radial-gradient(900px 700px at 80% 0%, var(--bg2), transparent 55%),
-                  linear-gradient(180deg, #fff, #fff);
-      min-height:100vh;
+    h1 {
+      margin-bottom: 10px;
     }
-    header{
-      padding:22px 18px 10px;
-      text-align:center;
+    button {
+      padding: 12px 20px;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(90deg,#ff9ecf,#a3c9ff);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
     }
-    .badge{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(255,255,255,.8);
-      border:1px solid rgba(255,211,230,.9);
-      box-shadow: 0 6px 18px rgba(255,123,189,.08);
-      font-size:13px;
-      color:var(--sub);
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
     }
-    h1{
-      margin:14px 0 8px;
-      font-size:32px;
-      letter-spacing:.02em;
-      line-height:1.15;
+    .card {
+      width: 120px;
     }
-    .lead{
-      margin:0 auto;
-      max-width: 600px;
-      color:var(--sub);
-      font-size:15px;
-      line-height:1.7;
-      padding:0 8px 10px;
+    .card img {
+      width: 100%;
+      border-radius: 10px;
     }
-
-    .wrap{
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 10px 14px 40px;
-    }
-    .panel{
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,211,230,.8);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px;
-      overflow:hidden;
-      position:relative;
-    }
-    .panel:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(600px 260px at 20% 0%, rgba(255,123,189,.18), transparent 60%),
-                  radial-gradient(520px 260px at 80% 0%, rgba(138,167,255,.18), transparent 60%);
-      pointer-events:none;
-    }
-    .panel > *{position:relative}
-
-    .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 12px;
-      justify-content:center;
-      align-items:center;
-      padding: 6px 0 12px;
-    }
-
-    .seg{
-      display:inline-flex;
-      padding:6px;
-      border-radius:999px;
-      background: rgba(255,255,255,.9);
-      border:1px solid rgba(255,211,230,.9);
-      gap:6px;
-    }
-    .seg button{
-      border:0;
-      background: transparent;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:700;
-      color:var(--sub);
-      cursor:pointer;
-      transition:.15s;
-      font-size:14px;
-    }
-    .seg button.active{
-      background: linear-gradient(90deg, rgba(255,123,189,.25), rgba(138,167,255,.25));
-      color: #1f1f1f;
-    }
-
-    .btn{
-      border:0;
-      cursor:pointer;
-      border-radius: 16px;
-      padding: 12px 16px;
-      font-weight:800;
-      font-size:15px;
-      transition:.15s;
-      box-shadow: 0 10px 20px rgba(0,0,0,.08);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      min-width: 140px;
-    }
-    .btn-primary{
-      color:white;
-      background: linear-gradient(90deg, var(--btn1), var(--btn2));
-    }
-    .btn-primary:active{transform: translateY(1px)}
-    .btn-ghost{
-      background: rgba(255,255,255,.9);
-      border:1px solid rgba(255,211,230,.9);
-      color:#333;
-      box-shadow:none;
-    }
-
-    .cards{
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      padding: 14px 4px 6px;
-      flex-wrap:nowrap;
-    }
-    .cards.one{flex-wrap:wrap}
-    .cardbox{
-      width:min(240px, 68vw);
-      background: rgba(255,255,255,.9);
-      border:1px dashed rgba(255,211,230,.95);
-      border-radius: 18px;
-      padding: 12px;
-      box-shadow: 0 12px 24px rgba(0,0,0,.06);
-    }
-    .meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-      color:var(--sub);
-      font-size:13px;
-      font-weight:700;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,123,189,.12);
-      border:1px solid rgba(255,211,230,.9);
-      color:#444;
-      font-weight:800;
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .imgwrap{
-      width:100%;
-      aspect-ratio: 3 / 5;
-      border-radius: 14px;
-      overflow:hidden;
-      background: linear-gradient(180deg, rgba(255,123,189,.06), rgba(138,167,255,.06));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid rgba(0,0,0,.04);
-    }
-    .imgwrap img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      transform-origin:center;
-      user-select:none;
-      -webkit-user-drag:none;
-    }
-    .name{
-      margin:10px 0 0;
-      font-weight:900;
-      text-align:center;
-      font-size:15px;
-      letter-spacing:.02em;
-    }
-
-    .hint{
-      text-align:center;
-      color:var(--sub);
-      font-size:12.5px;
-      line-height:1.7;
-      margin: 10px 0 0;
-    }
-    footer{
-      text-align:center;
-      color:#999;
-      font-size:12px;
-      margin-top: 10px;
-    }
-
-    /* 3枚は横並び固定（スマホでも横スクロールしない範囲に） */
-    @media (max-width: 420px){
-      h1{font-size:28px}
-      .cards{
-        gap:10px;
-      }
-      .cardbox{
-        width: 30.5vw;
-        padding:10px;
-      }
-      .meta{font-size:11px}
-      .name{font-size:12px}
-      .btn{min-width: 130px}
-      .imgwrap{border-radius: 12px}
+    .reverse {
+      transform: rotate(180deg);
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="badge">🐶 チャッピー＆サリーのタロット 🔮 <span style="opacity:.7">GitHub Pages</span></div>
-    <h1>チャッピー＆サリー タロット</h1>
-    <p class="lead">
-      1枚 or 3枚を選んで「カードを引く」を押してね。逆位置も出るよ✨<br>
-      （解説はあとでChatGPTに聞く用）
-    </p>
-  </header>
 
-  <div class="wrap">
-    <div class="panel">
-      <div class="controls">
-        <div class="seg" role="tablist" aria-label="枚数">
-          <button id="mode1" class="active" type="button" aria-selected="true">1枚引き</button>
-          <button id="mode3" type="button" aria-selected="false">3枚引き</button>
-        </div>
+<h1>🐶 チャッピー＆サリーのタロット 🐾</h1>
+<p>ボタンを押してカードを引いてね✨</p>
 
-        <button id="drawBtn" class="btn btn-primary" type="button">カードを引く ✨</button>
-        <button id="resetBtn" class="btn btn-ghost" type="button">リセット</button>
-      </div>
+<button onclick="drawCards(1)">1枚引き</button>
+<button onclick="drawCards(3)">3枚引き</button>
+<button onclick="resetCards()">リセット</button>
 
-      <div id="cards" class="cards one" aria-live="polite"></div>
+<div class="cards" id="cards"></div>
 
-      <p class="hint">
-        ※カード画像は「カード」フォルダに置いてね（例：<b>カード/00_The_Fool.png</b>）<br>
-        ※逆位置は画像を上下反転（180°回転）で表示するよ🐾
-      </p>
-    </div>
+<script>
+const cards = [
+  "00_The_Fool.png",
+  "01_The_Magician.png",
+  "02_The_High_Priestess.png",
+  "03_The_Empress.png",
+  "04_The_Emperor.png",
+  "05_The_Hierophant.png",
+  "06_The_Lovers.png",
+  "07_The_Chariot.png",
+  "08_Strength.png",
+  "09_The_Hermit.png",
+  "10_Wheel_of_Fortune.png",
+  "11_Justice.png",
+  "12_The_Hanged_Man.png",
+  "13_Death.png",
+  "14_Temperance.png",
+  "15_The_Devil.png",
+  "16_The_Tower.png",
+  "17_The_Star.png",
+  "18_The_Moon.png",
+  "19_The_Sun.png",
+  "20_Judgement.png",
+  "21_The_World.png",
+  "22_Compass.png"
+];
 
-    <footer>© Chappy & Sally Tarot</footer>
-  </div>
+function drawCards(count) {
+  resetCards();
+  const area = document.getElementById("cards");
 
-  <script>
-    // ====== カード一覧（ファイル名そのまま） ======
-    const cards = [
-      { file: "00_The_Fool.png",        name: "0 愚者 / The Fool" },
-      { file: "01_The_Magician.png",    name: "1 魔術師 / The Magician" },
-      { file: "02_The_High_Priestess.png", name: "2 女教皇 / The High Priestess" },
-      { file: "03_The_Empress.png",     name: "3 女帝 / The Empress" },
-      { file: "04_The_Emperor.png",     name: "4 皇帝 / The Emperor" },
-      { file: "05_The_Hierophant.png",  name: "5 教皇 / The Hierophant" },
-      { file: "06_The_Lovers.png",      name: "6 恋人 / The Lovers" },
-      { file: "07_The_Chariot.png",     name: "7 戦車 / The Chariot" },
-      { file: "08_Strength.png",        name: "8 力 / Strength" },
-      { file: "09_The_Hermit.png",      name: "9 隠者 / The Hermit" },
-      { file: "10_Wheel_of_Fortune.png",name: "10 運命の輪 / Wheel of Fortune" },
-      { file: "11_Justice.png",         name: "11 正義 / Justice" },
-      { file: "12_The_Hanged_Man.png",  name: "12 吊るされた男 / The Hanged Man" },
-      { file: "13_Death.png",           name: "13 死神 / Death" },
-      { file: "14_Temperance.png",      name: "14 節制 / Temperance" },
-      { file: "15_The_Devil.png",       name: "15 悪魔 / The Devil" },
-      { file: "16_The_Tower.png",       name: "16 塔 / The Tower" },
-      { file: "17_The_Star.png",        name: "17 星 / The Star" },
-      { file: "18_The_Moon.png",        name: "18 月 / The Moon" },
-      { file: "19_The_Sun.png",         name: "19 太陽 / The Sun" },
-      { file: "20_Judgement.png",       name: "20 審判 / Judgement" },
-      { file: "21_The_World.png",       name: "21 世界 / The World" },
-      { file: "22_Compass.png",         name: "22 Compass（羅針盤）" }
-    ];
+  const shuffled = [...cards].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, count);
 
-    // ====== 状態 ======
-    let mode = 1; // 1 or 3
-    const elCards = document.getElementById("cards");
-    const btn1 = document.getElementById("mode1");
-    const btn3 = document.getElementById("mode3");
-    const drawBtn = document.getElementById("drawBtn");
-    const resetBtn = document.getElementById("resetBtn");
+  selected.forEach(file => {
+    const wrap = document.createElement("div");
+    wrap.className = "card";
 
-    // ====== ユーティリティ ======
-    function randInt(max){
-      return Math.floor(Math.random() * max);
+    const img = document.createElement("img");
+    img.src = "./cards/" + file;
+
+    if (Math.random() < 0.5) {
+      img.classList.add("reverse");
     }
 
-    function pickUnique(n){
-      const pool = [...CARDS];
-      const out = [];
-      for(let i=0;i<n;i++){
-        const idx = randInt(pool.length);
-        out.push(pool.splice(idx,1)[0]);
-      }
-      return out;
-    }
+    wrap.appendChild(img);
+    area.appendChild(wrap);
+  });
+}
 
-    function isReversed(){
-      // 50% 逆位置（必要なら 30% とかに変えるのも簡単）
-      return Math.random() < 0.5;
-    }
+function resetCards() {
+  document.getElementById("cards").innerHTML = "";
+}
+</script>
 
-    function renderEmpty(){
-      elCards.innerHTML = "";
-      // 1枚/3枚で見た目だけ切り替え
-      elCards.className = "cards " + (mode === 1 ? "one" : "three");
-
-      const placeholders = mode === 1 ? 1 : 3;
-      for(let i=0;i<placeholders;i++){
-        const box = document.createElement("div");
-        box.className = "cardbox";
-        box.innerHTML = `
-          <div class="meta">
-            <span style="font-weight:900;color:#555;">引いたカード</span>
-            <span class="pill">まだ引いてないよ</span>
-          </div>
-          <div class="imgwrap" aria-hidden="true"></div>
-          <div class="name" style="color:#888;margin-top:12px;">「カードを引く」を押してね🐾</div>
-        `;
-        elCards.appendChild(box);
-      }
-    }
-
-    function renderCards(draws){
-      elCards.innerHTML = "";
-      elCards.className = "cards " + (mode === 1 ? "one" : "three");
-
-      draws.forEach((d, i) => {
-        const box = document.createElement("div");
-        box.className = "cardbox";
-
-        const label = d.reversed ? "逆位置" : "正位置";
-        const imgPath = `カード/${d.card.file}`;
-
-        box.innerHTML = `
-          <div class="meta">
-            <span style="font-weight:900;color:#555;">カード${mode === 3 ? ` ${i+1}` : ""}</span>
-            <span class="pill">${label}</span>
-          </div>
-          <div class="imgwrap">
-            <img alt="${escapeHtml(d.card.name)}" src="${imgPath}">
-          </div>
-          <div class="name">${escapeHtml(d.card.name)}</div>
-        `;
-
-        const img = box.querySelector("img");
-        if(d.reversed){
-          img.style.transform = "rotate(180deg)";
-        }
-        // 画像読めない時の保険（パス/名前ミスをすぐ気づける）
-        img.addEventListener("error", () => {
-          box.querySelector(".imgwrap").innerHTML = `
-            <div style="text-align:center;color:#c45;padding:16px;font-weight:800;">
-              画像が見つからないよ💦<br>
-              <span style="font-size:12px;opacity:.8">${imgPath}</span>
-            </div>
-          `;
-        });
-
-        elCards.appendChild(box);
-      });
-    }
-
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    // ====== 操作 ======
-    function setMode(next){
-      mode = next;
-      btn1.classList.toggle("active", mode === 1);
-      btn3.classList.toggle("active", mode === 3);
-      btn1.setAttribute("aria-selected", String(mode === 1));
-      btn3.setAttribute("aria-selected", String(mode === 3));
-      renderEmpty();
-    }
-
-    btn1.addEventListener("click", () => setMode(1));
-    btn3.addEventListener("click", () => setMode(3));
-
-    drawBtn.addEventListener("click", () => {
-      const picked = pickUnique(mode);
-      const draws = picked.map(card => ({ card, reversed: isReversed() }));
-      renderCards(draws);
-    });
-
-    resetBtn.addEventListener("click", () => renderEmpty());
-
-    // 初期表示
-    renderEmpty();
-  </script>
 </body>
 </html>
