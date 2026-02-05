@@ -6,201 +6,190 @@
 <title>チャッピー＆サリーのタロットカード</title>
 
 <style>
-  :root{
-    --bg:#fff0f5;
-    --choco:#5b3a1e;
-    --text:#6b6b6b;
-    --btnA:#f7c1cc;
-    --btnB:#c9b6ff;
-    --radius:22px;
-    --shadow:0 10px 24px rgba(0,0,0,0.12);
-    --softShadow:0 8px 18px rgba(0,0,0,0.10);
-  }
-  *{ box-sizing:border-box; }
 
-  body{
-    margin:0;
-    font-family:"Hiragino Kaku Gothic ProN", sans-serif;
-    text-align:center;
-    background:var(--bg);
-    color:#222;
-    overflow-x:hidden;
-  }
+body{
+margin:0;
+font-family:sans-serif;
+text-align:center;
+background:#fff0f5;
+}
 
-  .wrap{
-    max-width:760px;
-    margin:0 auto;
-    padding:18px 14px 40px;
-  }
+h1{
+font-size:28px;
+color:#5b3a1e;
+margin-top:20px;
+}
 
-  /* タイトル */
-  .title-area{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:14px;
-    margin-top:10px;
-    margin-bottom:10px;
-  }
-  .title-card{
-    width:64px;
-    height:auto;
-    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
-  }
-  h1{
-  margin:0;
-  color:var(--choco);
-  line-height:1.2;
-  font-size:28px;
-  font-weight:800;
-  }
-  
-  @media (max-width:420px){
-    h1{ font-size:28px; }
-    .title-card{ width:54px; }
-  }
+.header-img{
+width:260px;
+margin:15px auto;
+display:block;
+border-radius:20px;
+}
 
-  /* 表紙画像 */
-  .title-cover{
-    width:min(520px, 92vw);
-    margin:14px auto 12px;
-    border-radius:20px;
-    box-shadow:var(--shadow);
-    display:block;
-  }
+.side-img{
+width:70px;
+}
 
-  /* 質問入力 */
-  .question-box{
-    width:min(620px, 94vw);
-    margin:10px auto 6px;
-    padding:14px 16px;
-    border-radius:999px;
-    background:#fff7fb;
-    border:2px solid rgba(201,182,255,0.55);
-    box-shadow:0 10px 18px rgba(0,0,0,0.06);
-  }
-  .question-box input{
-    width:100%;
-    border:none;
-    outline:none;
-    background:transparent;
-    font-size:16px;
-    color:var(--choco);
-  }
-  .question-hint{
-    margin:8px 0 14px;
-    color:var(--text);
-  }
+.title-wrap{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+}
 
-  /* ボタン */
-  .btns{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    flex-wrap:wrap;
-    margin:10px 0 6px;
-  }
-  button{
-    font-size:16px;
-    padding:12px 22px;
-    border:none;
-    border-radius:999px;
-    cursor:pointer;
-    background:linear-gradient(135deg,var(--btnA),var(--btnB));
-    color:#fff;
-    box-shadow:var(--softShadow);
-    transition:transform .12s, box-shadow .12s;
-  }
-  button:active{
-    transform:scale(0.94);
-    box-shadow:0 4px 10px rgba(0,0,0,0.10);
-  }
-  .reset{
-    background:linear-gradient(135deg,#f3b7c6,#d7c8ff);
-  }
+input{
+width:80%;
+padding:12px;
+border-radius:20px;
+border:2px solid #d9b3ff;
+margin-top:15px;
+font-size:16px;
+}
 
-  /* カード表示 */
-  .cards-area{
-    display:flex;
-    justify-content:center;
-    gap:22px;
-    margin-top:22px;
-    flex-wrap:wrap;
-  }
-  .card-box{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:180px;
-  }
-  .label{
-    font-weight:800;
-    color:var(--choco);
-    margin-bottom:10px;
-  }
-  .card-img{
-    width:170px;
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    transition:transform .25s;
-    background:#fff;
-  }
-  .reversed{
-    transform:rotate(180deg);
-  }
+button{
+margin:10px;
+padding:12px 22px;
+border:none;
+border-radius:20px;
+background:linear-gradient(45deg,#f7c1cc,#c9b6ff);
+color:white;
+font-size:16px;
+}
 
-  .copy-row{
-    margin-top:10px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-  }
-  .copy-btn{
-    font-size:14px;
-    padding:9px 14px;
-    border-radius:999px;
-    background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-    color:#fff;
-    border:none;
-    cursor:pointer;
-    box-shadow:0 6px 14px rgba(0,0,0,0.12);
-  }
-  .small{
-    font-size:12px;
-    color:#888;
-  }
+.cards{
+margin-top:20px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:25px;
+}
 
-  footer{
-    margin-top:26px;
-    color:#888;
-    font-size:12px;
-  }
+.card{
+width:160px;
+}
+
+.card img{
+width:100%;
+border-radius:18px;
+box-shadow:0 6px 18px rgba(0,0,0,0.2);
+}
+
+.label{
+margin-top:6px;
+font-size:14px;
+color:#5b3a1e;
+}
+
 </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <div class="title-area">
-      <img src="cards/tarot_back.png" class="title-card" alt="tarot back">
-      <h1>チャッピー＆サリーの<br>タロットカード</h1>
-      <img src="cards/tarot_back.png" class="title-card" alt="tarot back">
-    </div>
+<div class="title-wrap">
+<img src="cards/tarot_back.jpg" class="side-img">
+<h1>チャッピー＆サリーのタロットカード</h1>
+<img src="cards/tarot_back.jpg" class="side-img">
+</div>
 
-    <img src="cards/CS_hyousi.jpg" class="title-cover" alt="cover">
+<img src="cards/CS_hyousi.jpg" class="header-img">
 
-    <div class="question-box">
-      <input id="questionInput" type="text" placeholder="今日の問いを入れてから引く">
-    </div>
-    <div class="question-hint">ボタンを押してカードを引いてね✨</div>
+<input id="question" placeholder="今日の問いを入れてから引く">
 
-    <div class="btns">
-      <button onclick="drawCards(1)">1枚引き</button>
-      <button onclick="drawCards(3)">3枚引き</button>
-      <button class="reset" onclick="resetCards()">リセット</button>
-    </div>
+<div>
+<button onclick="drawOne()">1枚引き</button>
+<button onclick="drawThree()">3枚引き</button>
+<button onclick="resetCards()">リセット</button>
+</div>
 
-    <div class="cards-area" id="cardsArea"></div>
+<div id="result" class="cards"></div>
 
-    <footer>© Chappy &
+<script>
+
+const cards = [
+"00_The_Fool.png",
+"01_The_Magician.png",
+"02_The_High_Priestess.png",
+"03_The_Empress.png",
+"04_The_Emperor.png",
+"05_The_Hierophant.png",
+"06_The_Lovers.png",
+"07_The_Chariot.png",
+"08_Strength.png",
+"09_The_Hermit.png",
+"10_Wheel_of_Fortune.png",
+"11_Justice.png",
+"12_The_Hanged_Man.png",
+"13_Death.png",
+"14_Temperance.png",
+"15_The_Devil.png",
+"16_The_Tower.png",
+"17_The_Star.png",
+"18_The_Moon.png",
+"19_The_Sun.png",
+"20_Judgement.png",
+"21_The_World.png",
+"22_Compass.png"
+];
+
+function shuffle(array){
+return array.sort(()=>Math.random()-0.5);
+}
+
+function drawOne(){
+
+let deck=[...cards];
+shuffle(deck);
+
+showCards([deck[0]]);
+}
+
+function drawThree(){
+
+let deck=[...cards];
+shuffle(deck);
+
+showCards([
+deck[0],
+deck[1],
+deck[2]
+],["過去","現在","未来"]);
+}
+
+function showCards(list,labels=[]){
+
+let area=document.getElementById("result");
+area.innerHTML="";
+
+list.forEach((card,i)=>{
+
+let div=document.createElement("div");
+div.className="card";
+
+let img=document.createElement("img");
+img.src="cards/"+card;
+
+div.appendChild(img);
+
+if(labels.length){
+let label=document.createElement("div");
+label.className="label";
+label.textContent=labels[i];
+div.appendChild(label);
+}
+
+area.appendChild(div);
+
+});
+
+}
+
+function resetCards(){
+document.getElementById("result").innerHTML="";
+document.getElementById("question").value="";
+}
+
+</script>
+
+</body>
+</html>
