@@ -3,82 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>チャッピー＆サリーのタロットカード</title>
 
 <style>
 
 body{
-margin:0;
-font-family:sans-serif;
-text-align:center;
-background:#fff0f5;
+  font-family:"Hiragino Kaku Gothic ProN";
+  text-align:center;
+  background:#fff0f5;
+  padding:20px;
 }
 
-h1{
-font-size:28px;
-color:#5b3a1e;
-margin-top:20px;
-}
-
-.header-img{
-width:260px;
-margin:15px auto;
-display:block;
-border-radius:20px;
+/* タイトル */
+.title-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
 }
 
 .side-img{
-width:70px;
+  width:70px;
 }
 
-.title-wrap{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:15px;
+h1{
+  color:#5b3a1e;
+  font-size:26px;
 }
 
+/* 表紙 */
+.header-img{
+  width:80%;
+  max-width:400px;
+  border-radius:20px;
+  margin:15px 0;
+}
+
+/* 入力欄 */
 input{
-width:80%;
-padding:12px;
-border-radius:20px;
-border:2px solid #d9b3ff;
-margin-top:15px;
-font-size:16px;
+  width:80%;
+  max-width:350px;
+  padding:12px;
+  border-radius:20px;
+  border:2px solid #d6b6ff;
+  margin-bottom:15px;
 }
 
+/* ボタン */
 button{
-margin:10px;
-padding:12px 22px;
-border:none;
-border-radius:20px;
-background:linear-gradient(45deg,#f7c1cc,#c9b6ff);
-color:white;
-font-size:16px;
+  padding:12px 22px;
+  margin:6px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.cards{
-margin-top:20px;
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:25px;
+/* カード表示 */
+.cards-area{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:25px;
 }
 
-.card{
-width:160px;
+.card-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.card img{
-width:100%;
-border-radius:18px;
-box-shadow:0 6px 18px rgba(0,0,0,0.2);
+.card-box img{
+  width:160px;
+  border-radius:12px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+/* ⭐逆位置 */
+.reversed{
+  transform:rotate(180deg);
 }
 
 .label{
-margin-top:6px;
-font-size:14px;
-color:#5b3a1e;
+  margin-top:6px;
+  font-size:14px;
+  color:#5b3a1e;
 }
 
 </style>
@@ -102,11 +116,11 @@ color:#5b3a1e;
 <button onclick="resetCards()">リセット</button>
 </div>
 
-<div id="result" class="cards"></div>
+<div class="cards-area" id="cards"></div>
 
 <script>
 
-const cards = [
+const cardFiles=[
 "00_The_Fool.png",
 "01_The_Magician.png",
 "02_The_High_Priestess.png",
@@ -132,61 +146,52 @@ const cards = [
 "22_Compass.png"
 ];
 
-function shuffle(array){
-return array.sort(()=>Math.random()-0.5);
+function getRandomCard(){
+  return cardFiles[Math.floor(Math.random()*cardFiles.length)];
+}
+
+function createCard(labelText){
+
+  const card=getRandomCard();
+
+  const box=document.createElement("div");
+  box.className="card-box";
+
+  const img=document.createElement("img");
+  img.src="cards/"+card;
+
+  // ⭐逆位置 50％
+  if(Math.random()<0.5){
+    img.classList.add("reversed");
+  }
+
+  const label=document.createElement("div");
+  label.className="label";
+  label.textContent=labelText;
+
+  box.appendChild(img);
+  box.appendChild(label);
+
+  return box;
 }
 
 function drawOne(){
-
-let deck=[...cards];
-shuffle(deck);
-
-showCards([deck[0]]);
+  const area=document.getElementById("cards");
+  area.innerHTML="";
+  area.appendChild(createCard(""));
 }
 
 function drawThree(){
+  const area=document.getElementById("cards");
+  area.innerHTML="";
 
-let deck=[...cards];
-shuffle(deck);
-
-showCards([
-deck[0],
-deck[1],
-deck[2]
-],["過去","現在","未来"]);
-}
-
-function showCards(list,labels=[]){
-
-let area=document.getElementById("result");
-area.innerHTML="";
-
-list.forEach((card,i)=>{
-
-let div=document.createElement("div");
-div.className="card";
-
-let img=document.createElement("img");
-img.src="cards/"+card;
-
-div.appendChild(img);
-
-if(labels.length){
-let label=document.createElement("div");
-label.className="label";
-label.textContent=labels[i];
-div.appendChild(label);
-}
-
-area.appendChild(div);
-
-});
-
+  area.appendChild(createCard("過去"));
+  area.appendChild(createCard("現在"));
+  area.appendChild(createCard("未来"));
 }
 
 function resetCards(){
-document.getElementById("result").innerHTML="";
-document.getElementById("question").value="";
+  document.getElementById("cards").innerHTML="";
 }
 
 </script>
