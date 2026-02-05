@@ -62,7 +62,7 @@ button{
   cursor:pointer;
 }
 
-/* カード表示 */
+/* カード */
 .cards-area{
   display:flex;
   justify-content:center;
@@ -81,7 +81,6 @@ button{
   width:160px;
   border-radius:12px;
   box-shadow:0 6px 14px rgba(0,0,0,0.2);
-  transition:0.3s;
 }
 
 /* ⭐逆位置 */
@@ -93,6 +92,19 @@ button{
   margin-top:6px;
   font-size:14px;
   color:#5b3a1e;
+}
+
+/* 🐾コピー */
+.copy-btn{
+  margin-top:8px;
+  font-size:22px;
+  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
+  color:white;
+  border:none;
+  border-radius:50%;
+  padding:10px 14px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(230,164,180,0.6);
 }
 
 </style>
@@ -160,10 +172,21 @@ function createCard(labelText){
   const img=document.createElement("img");
   img.src="cards/"+card;
 
-  // ⭐逆位置 50％
-  if(Math.random()<0.5){
-    img.classList.add("reversed");
-  }
+  // ⭐逆位置
+  const reversed=Math.random()<0.5;
+  if(reversed) img.classList.add("reversed");
+
+  // 🐾コピー内容
+  const copyText=card.replace(".png","")+
+  (reversed?"（逆位置）":"（正位置）");
+
+  const copyBtn=document.createElement("button");
+  copyBtn.className="copy-btn";
+  copyBtn.textContent="🐾";
+  copyBtn.onclick=()=>{
+    navigator.clipboard.writeText(copyText);
+    alert("コピーしたよ✨\n"+copyText);
+  };
 
   const label=document.createElement("div");
   label.className="label";
@@ -171,6 +194,7 @@ function createCard(labelText){
 
   box.appendChild(img);
   box.appendChild(label);
+  box.appendChild(copyBtn);
 
   return box;
 }
