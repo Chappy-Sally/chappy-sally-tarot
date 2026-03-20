@@ -2,775 +2,160 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>チャッピー＆サリーのタロットカード</title>
+<title>チャッピー＆サリーの対話ナビ</title>
 
 <style>
-body{
-  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
-  text-align:center;
-  background:#fff0f5;
-  padding:20px;
-  color:#5b3a1e;
-  margin:0;
+body {
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  background: #f4e9ec;
+  text-align: center;
+  padding: 20px;
 }
 
-.title-wrap{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  margin-top:10px;
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  max-width: 350px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.side-img{
-  width:58px;
+button {
+  border: none;
+  border-radius: 20px;
+  padding: 12px 18px;
+  margin: 5px;
+  font-size: 14px;
+  color: white;
 }
 
-h1{
-  font-size:25px;
-  line-height:1.5;
-  margin:0;
-  color:#6b4b2a;
+.btn1 { background: #f7a8b8; }
+.btn2 { background: #b9a4f4; }
+.btn3 { background: #6fc3a4; }
+.btn4 { background: #f4a261; }
+
+select, input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  width: 80%;
 }
 
-.header-img{
-  width:80%;
-  max-width:420px;
-  border-radius:22px;
-  margin:18px 0;
-  box-shadow:0 6px 14px rgba(0,0,0,0.12);
-}
-
-.desc{
-  font-size:16px;
-  color:#6b4b2a;
-  line-height:1.9;
-  margin:12px auto 20px;
-  width:92%;
-  max-width:560px;
-}
-
-.input-note{
-  font-size:15px;
-  color:#8a6a4a;
-  margin:10px 0 8px;
-}
-
-input, select{
-  width:84%;
-  max-width:420px;
-  padding:14px;
-  border-radius:24px;
-  border:2px solid #d6b6ff;
-  margin-bottom:12px;
-  font-size:16px;
-  box-sizing:border-box;
-  background:white;
-}
-
-button{
-  padding:13px 20px;
-  margin:6px;
-  border:none;
-  border-radius:30px;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.green-btn{
-  background:linear-gradient(135deg,#95d8b1,#71c89b,#7ed2c0);
-}
-
-.main-btn{
-  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
-}
-
-.copy-btn{
-  background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
-}
-
-.back-btn{
-  background:linear-gradient(135deg,#a89adb,#cdbff4);
-}
-
-.cards-area{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:20px;
-  margin-top:24px;
-  min-height:180px;
-}
-
-.card-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width:170px;
-}
-
-.card-box img{
-  width:160px;
-  border-radius:12px;
-  box-shadow:0 6px 14px rgba(0,0,0,0.2);
-  background:white;
-}
-
-.reversed{
-  transform:rotate(180deg);
-}
-
-.summary-box{
-  width:92%;
-  max-width:620px;
-  margin:22px auto 0;
-  padding:18px 16px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.82);
-  box-shadow:0 4px 10px rgba(0,0,0,0.06);
-}
-
-.summary-title{
-  font-size:20px;
-  font-weight:bold;
-  color:#6b4b2a;
-  margin-bottom:14px;
-}
-
-.summary-buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.mini-btn{
-  padding:12px 18px;
-  border:none;
-  border-radius:28px;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.mini-copy{
-  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-}
-
-.mini-ai{
-  background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
-}
-
-.next-box{
-  width:92%;
-  max-width:620px;
-  margin:18px auto 0;
-  padding:20px 16px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.82);
-  box-shadow:0 4px 10px rgba(0,0,0,0.06);
-}
-
-.next-message{
-  font-size:20px;
-  line-height:1.8;
-  color:#7a4d28;
-  white-space:pre-line;
-  margin-bottom:14px;
-}
-
-.next-btn{
-  background:linear-gradient(135deg,#ffcf7d,#ffb76b,#ff9f68);
-}
-
-.notice-box{
-  width:92%;
-  max-width:620px;
-  margin:18px auto 24px;
-  padding:16px 16px;
-  border-radius:22px;
-  background:rgba(255,255,255,0.78);
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
-  font-size:15px;
-  line-height:1.9;
-  color:#8a6a4a;
-}
-
-.question-result{
-  width:92%;
-  max-width:620px;
-  margin:12px auto 0;
-  padding:16px 16px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.8);
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
-  font-size:16px;
-  line-height:1.8;
-  color:#6b4b2a;
-  white-space:pre-line;
-}
-
-.hidden{
-  display:none;
-}
-
-@media (max-width: 480px){
-  .side-img{ width:46px; }
-  h1{ font-size:22px; }
-  .card-box{ width:150px; }
-  .card-box img{ width:140px; }
-  .mini-btn{ font-size:15px; }
+.message {
+  background: #f6f1f2;
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="title-wrap">
-  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
-  <h1>チャッピー＆サリーの<br>タロットカード</h1>
-  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
-</div>
+<h2>🐶 チャッピー＆サリーの対話ナビ 🌈</h2>
 
-<img src="cards/CS_hyousi.jpg" class="header-img" alt="表紙">
+<div class="card">
 
-<p class="desc">
-これは占いではなく、<br>
-今のあなたの気持ちや状態をやさしく整えるための対話です🌿
-</p>
+<p>これは占いではなく、<br>
+今のあなたの気持ちをやさしく整える対話です🌿</p>
 
-<div class="input-note">自分で聞きたいことがある人はこちら🐾</div>
-<input id="question" placeholder="今日の問いを入れてから引く">
+<input id="questionInput" placeholder="今日の問いを入れてね">
 
-<div class="input-note">問いが浮かばないときは、大きなカテゴリーを選んでね🌈</div>
-<select id="level-category" onchange="updateSubCategory()">
-  <option value="">初級・中級・上級を選ぶ</option>
-  <option value="beginner">初級</option>
-  <option value="middle">中級</option>
-  <option value="advanced">上級</option>
-</select>
+<br>
 
-<select id="sub-category">
-  <option value="">5項目から選ぶ</option>
+<select id="level">
+<option value="">初級・中級・上級を選ぶ</option>
+<option value="初級">初級</option>
+<option value="中級">中級</option>
+<option value="上級">上級</option>
 </select>
 
 <br>
-<button class="green-btn" onclick="showRandomQuestion()">質問をもらう🌿</button>
 
-<div id="question-result" class="question-result hidden"></div>
+<select id="sub">
+<option value="">5項目から選ぶ</option>
+</select>
 
-<div>
-  <button class="main-btn" onclick="drawOne()">1枚引き</button>
-  <button class="main-btn" onclick="drawThree()">3枚引き</button>
-  <button class="back-btn" onclick="resetAll()">リセット</button>
+<br>
+
+<button class="btn3" onclick="setQuestion()">質問をもらう🌿</button>
+
+<br><br>
+
+<button class="btn1" onclick="draw(1)">1枚引き</button>
+<button class="btn2" onclick="draw(3)">3枚引き</button>
+<button class="btn2" onclick="resetAll()">リセット</button>
+
 </div>
 
-<div class="cards-area" id="cards"></div>
-<div id="summary-area"></div>
-
-<div class="notice-box">
-  しっくりこなかったら、<br>
-  気がすむまで話しても大丈夫😊<br>
-  答えを出さなくてもいいし、<br>
-  途中でカードを引きなおしてもOKだよ🌈
-</div>
+<div id="result"></div>
 
 <script>
-const cardFiles = [
-  "00_The_Fool.png",
-  "01_The_Magician.png",
-  "02_The_High_Priestess.png",
-  "03_The_Empress.png",
-  "04_The_Emperor.png",
-  "05_The_Hierophant.png",
-  "06_The_Lovers.png",
-  "07_The_Chariot.png",
-  "08_Strength.png",
-  "09_The_Hermit.png",
-  "10_Wheel_of_Fortune.png",
-  "11_Justice.png",
-  "12_The_Hanged_Man.png",
-  "13_Death.png",
-  "14_Temperance.png",
-  "15_The_Devil.png",
-  "16_The_Tower.png",
-  "17_The_Star.png",
-  "18_The_Moon.png",
-  "19_The_Sun.png",
-  "20_Judgement.png",
-  "21_The_World.png",
-  "22_Compass.png"
-];
 
-const questionGroups = {
-  beginner: {
-    anshin: {
-      label: "安心",
-      items: [
-        "今の私は、何をそんなに心配しているんだろう？",
-        "本当は、もう大丈夫なことは何？",
-        "今ここで、力を抜いてもいい理由は？",
-        "私は今、誰かに証明しなくてもいい？",
-        "いちばん安心できる場所は、どこ？",
-        "今の私を、責めなくていいポイントは？",
-        "このカードは、私に『安心していいよ』と何を伝えている？",
-        "もし守られているとしたら、私は何を手放せる？",
-        "深呼吸するとしたら、どんな気持ちを吐き出したい？",
-        "今の私に必要なのは、答え？それとも休息？"
-      ]
-    },
-    kibun: {
-      label: "今の気分",
-      items: [
-        "私は今、本当はどんな気持ち？",
-        "表に出していない感情はある？",
-        "無視してきた小さな違和感は何？",
-        "『こう感じちゃダメ』と思っていることは？",
-        "今の気持ちに、名前をつけるとしたら？",
-        "このカードは、私の気持ちのどこを映している？",
-        "強がっている部分はどこ？",
-        "誰にも言っていない本音はある？",
-        "今の私の正直さは、何点くらい？",
-        "この気持ちは、何を守ろうとしている？"
-      ]
-    },
-    yurumeru: {
-      label: "ゆるめる",
-      items: [
-        "今の私は、どこで頑張りすぎている？",
-        "今日、やらなくてもいいことは何？",
-        "休むことを許していない理由は？",
-        "『ちゃんとしなきゃ』を外すと、何が起きる？",
-        "今の私に必要な休み方は？",
-        "このカードは、どこをゆるめてと言っている？",
-        "立ち止まることで守れるものは何？",
-        "今すぐできる小さな休息は？",
-        "何を後回しにしても大丈夫？",
-        "今日は何割の力で過ごしていい？"
-      ]
-    },
-    yasashiku: {
-      label: "自分にやさしく",
-      items: [
-        "私は自分に、どんな言葉をかけている？",
-        "親友だったら、今の私に何て言う？",
-        "責める代わりに、理解できるところは？",
-        "私は本当は、何を許してほしい？",
-        "このカードは、私のどこを認めている？",
-        "もう十分やってきたことは何？",
-        "比べなくていい理由は？",
-        "自分を大切にするとしたら、今日は何を選ぶ？",
-        "私は私に、どんな扱いをしてあげたい？",
-        "このままでも大丈夫な部分はどこ？"
-      ]
-    },
-    hitokoto: {
-      label: "今日のひとこと",
-      items: [
-        "今日の私へのメッセージは？",
-        "このカードを一言で表すと？",
-        "今日いちばん意識したいことは？",
-        "今日の私は、何を思い出せばいい？",
-        "今日、無理しなくていい合図は？",
-        "私は今日、何を受け取っていい？",
-        "今日の安心ワードは？",
-        "今日の私にとっての『正解』は何？",
-        "今日はどんな一日で十分？",
-        "最後に、私にかけてあげたい一言は？"
-      ]
-    }
-  },
-
-  middle: {
-    theme: {
-      label: "今のテーマ",
-      items: [
-        "このカードは、今の私のどんなテーマを映している？",
-        "私はいま、人生のどんな場面に立っている？",
-        "この状況で、いちばん大事にしたい軸は？",
-        "今の私が向き合っている課題は何？",
-        "このカードは、私に何を気づかせようとしている？",
-        "ここから流れが変わるポイントはどこ？",
-        "私は今、何を学んでいる途中？",
-        "このテーマは、いつ頃から続いている？",
-        "今の私は、変化のどの段階にいる？",
-        "このカードが出た必然は何？"
-      ]
-    },
-    block: {
-      label: "思い込み・ブロック",
-      items: [
-        "私が『当たり前』だと思い込んでいることは？",
-        "本当はもう手放していい考え方は何？",
-        "このカードは、どんな思い込みを照らしている？",
-        "私は何を怖がって、止まっている？",
-        "それは本当に今の私に必要？",
-        "誰かの価値観を背負っていない？",
-        "この思い込みを外したら、何が起きそう？",
-        "私はどこで自分を小さくしている？",
-        "そのブロックは、もともと誰のもの？",
-        "守るために持ってきた考えは何？"
-      ]
-    },
-    tebanashi: {
-      label: "手放し・切り替え",
-      items: [
-        "今の私が手放すと楽になるものは？",
-        "終わりにしていいパターンは何？",
-        "このカードは『もう十分』と言っている？",
-        "無意識に握りしめているものは？",
-        "手放した先に、どんな余白が生まれる？",
-        "私は何を完了させようとしている？",
-        "ここで区切りをつけても大丈夫な理由は？",
-        "役目を終えたものは何？",
-        "手放すこと＝失う、だと思っていない？",
-        "このカードが示す『切り替えの合図』は？"
-      ]
-    },
-    ippo: {
-      label: "次の一歩",
-      items: [
-        "今の流れに沿った一歩はどれ？",
-        "小さく始めていい行動は何？",
-        "無理せず進むとしたら、どう動く？",
-        "このカードは、どんな行動を後押ししている？",
-        "今すぐ結果を出さなくていい理由は？",
-        "一歩進むとしたら、何を選ぶ？",
-        "動く前に整えるべきことは？",
-        "私に合ったペースはどれくらい？",
-        "進むことで、何が自然に変わりそう？",
-        "今日できる『一番やさしい行動』は？"
-      ]
-    },
-    nagare: {
-      label: "流れに乗る",
-      items: [
-        "今の私は、どんな流れの中にいる？",
-        "抗わなくていいポイントはどこ？",
-        "このカードは、信頼していい流れを示している？",
-        "頑張るより、委ねた方がいい部分は？",
-        "私はどこで流れを止めている？",
-        "流れに乗るために必要な姿勢は？",
-        "すでにうまく進んでいるところは？",
-        "この流れのゴールは何を教えている？",
-        "今の私にとっての『ちょうどいい』は？",
-        "最後に、このカードが伝えたい統合メッセージは？"
-      ]
-    }
-  },
-
-  advanced: {
-    truth: {
-      label: "内側の真実",
-      items: [
-        "私が今、無意識に避けている『本当の願い』は何？",
-        "この状況が私に教えている、最も大切なことは？",
-        "私は何を『もう終わったこと』にしようとしている？",
-        "今の違和感は、どんな真実を守ろうとしている？",
-        "私が自分にまだ許していないことは？",
-        "私が本当は選びたかった道はどれ？",
-        "今の私が一番大切にしたい価値観は何？",
-        "私の中の『もう大丈夫だよ』という声は何て言ってる？",
-        "この問題の奥にある、私の本当のテーマは？",
-        "私が自分自身から隠してきた力は何？"
-      ]
-    },
-    integration: {
-      label: "手放し・統合",
-      items: [
-        "私がもう握りしめなくていい思い込みは？",
-        "今、感謝とともに手放せるものは何？",
-        "私が『怖い』と感じている正体は何？",
-        "この執着は、私をどう守ってきた？",
-        "私が終わらせてもいい役割は？",
-        "もう必要なくなった自分のパターンは？",
-        "私が自分に課しているルールは何？",
-        "手放したら、代わりに何が入ってくる？",
-        "私が過去の自分に伝えたい言葉は？",
-        "この手放しの先に待っている世界は？"
-      ]
-    },
-    soul: {
-      label: "魂の視点",
-      items: [
-        "魂の視点から見た今の私は、どんな状態？",
-        "この出来事は魂レベルで何を進めている？",
-        "私の魂が今世で大切にしたい学びは？",
-        "私の魂は、今どんなステージにいる？",
-        "今の私に必要な『信頼』は何？",
-        "魂が望む次の一歩は？",
-        "私の中で目覚め始めている資質は？",
-        "今の私に流れている宇宙のテーマは？",
-        "魂が『もう準備できたよ』と言っていることは？",
-        "私がこのタイミングで思い出すべき約束は？"
-      ]
-    },
-    action: {
-      label: "行動・現実への反映",
-      items: [
-        "私が今、現実で一番大切にすべき行動は？",
-        "小さく始められる『魂に沿った行動』は？",
-        "私が安心して一歩出るための鍵は？",
-        "今は『動く』？それとも『待つ』？",
-        "私が現実で受け取っていい豊かさは？",
-        "私が遠慮している理由は何？",
-        "私の存在が自然に役立つ場所は？",
-        "私が選ぶと流れが変わるポイントは？",
-        "今の私に合ったペースは？",
-        "この選択が未来の私に与える影響は？"
-      ]
-    },
-    message: {
-      label: "統合・メッセージ",
-      items: [
-        "今の私への最終メッセージは？",
-        "私が今日、思い出しておくといいことは？",
-        "私の中で既に完成しているものは？",
-        "この流れのゴールはどんな景色？",
-        "私が自分を信じるための一言は？",
-        "今の私に必要な祝福の言葉は？",
-        "私はどんな存在として世界に立っている？",
-        "この経験は、未来でどう生きる？",
-        "私が『もう大丈夫』と言える理由は？",
-        "今の私へのひとことは？"
-      ]
-    }
-  }
+const questions = {
+  "初級": ["安心", "今の気分", "ゆるめる", "自分にやさしく", "今日のひとこと"],
+  "中級": ["今のテーマ", "思い込み", "手放し", "次の一歩", "流れに乗る"],
+  "上級": ["内側の真実", "統合", "魂の視点", "行動", "メッセージ"]
 };
 
-let currentCards = [];
-let currentSelectedQuestion = "";
-let currentMainLabel = "";
-let currentSubLabel = "";
-
-function getRandomItem(list){
-  return list[Math.floor(Math.random() * list.length)];
-}
-
-function getRandomItemsNoRepeat(list, count){
-  const shuffled = [...list].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-}
-
-function formatCardName(fileName, reversed){
-  return fileName.replace(".png","") + "（" + (reversed ? "逆位置" : "正位置") + "）";
-}
-
-function getQuestionText(){
-  const manual = document.getElementById("question").value.trim();
-  if(manual) return manual;
-  return currentSelectedQuestion;
-}
-
-function copyToClipboard(text){
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨\n\n" + text);
-}
-
-function updateSubCategory(){
-  const level = document.getElementById("level-category").value;
-  const sub = document.getElementById("sub-category");
+document.getElementById("level").addEventListener("change", function() {
+  const sub = document.getElementById("sub");
   sub.innerHTML = '<option value="">5項目から選ぶ</option>';
-
-  if(!level || !questionGroups[level]) return;
-
-  const groups = questionGroups[level];
-  Object.keys(groups).forEach(key => {
-    const option = document.createElement("option");
-    option.value = key;
-    option.textContent = groups[key].label;
-    sub.appendChild(option);
-  });
-}
-
-function showRandomQuestion(){
-  const level = document.getElementById("level-category").value;
-  const subKey = document.getElementById("sub-category").value;
-  const area = document.getElementById("question-result");
-
-  if(!level){
-    area.classList.remove("hidden");
-    area.textContent = "まずは初級・中級・上級を選んでね🐾";
-    return;
-  }
-
-  if(!subKey){
-    area.classList.remove("hidden");
-    area.textContent = "つぎに5項目からひとつ選んでね🌈";
-    return;
-  }
-
-  const group = questionGroups[level][subKey];
-  currentSelectedQuestion = getRandomItem(group.items);
-
-  currentMainLabel =
-    level === "beginner" ? "初級" :
-    level === "middle" ? "中級" : "上級";
-
-  currentSubLabel = group.label;
-
-  area.classList.remove("hidden");
-  area.textContent =
-    "今のあなたにちょうどいい問いだよ🐾\n\n" +
-    "【" + currentMainLabel + "｜" + currentSubLabel + "】\n" +
-    currentSelectedQuestion;
-}
-
-function createCard(fileName, reversed){
-  const box = document.createElement("div");
-  box.className = "card-box";
-
-  const img = document.createElement("img");
-  img.src = "cards/" + fileName;
-  img.alt = fileName;
-
-  if(reversed){
-    img.classList.add("reversed");
-  }
-
-  box.appendChild(img);
-  return box;
-}
-
-function clearCards(){
-  document.getElementById("cards").innerHTML = "";
-  document.getElementById("summary-area").innerHTML = "";
-}
-
-function drawOne(){
-  clearCards();
-
-  const file = getRandomItem(cardFiles);
-  const reversed = Math.random() < 0.5;
-  currentCards = [{ file, reversed }];
-
-  const area = document.getElementById("cards");
-  area.appendChild(createCard(file, reversed));
-
-  showSummaryButtons(1);
-}
-
-function drawThree(){
-  clearCards();
-
-  const selected = getRandomItemsNoRepeat(cardFiles, 3);
-  currentCards = selected.map(file => ({
-    file,
-    reversed: Math.random() < 0.5
-  }));
-
-  const area = document.getElementById("cards");
-  currentCards.forEach(card => {
-    area.appendChild(createCard(card.file, card.reversed));
-  });
-
-  showSummaryButtons(3);
-}
-
-function buildSimpleCopyText(){
-  const question = getQuestionText();
-  let text = "";
-
-  if(question){
-    text += "質問：\n" + question + "\n\n";
-  }
-
-  if(currentCards.length === 1){
-    text += "カード：\n" + formatCardName(currentCards[0].file, currentCards[0].reversed);
-  } else {
-    currentCards.forEach((card, index) => {
-      text += (index + 1) + "枚目：\n" + formatCardName(card.file, card.reversed) + "\n";
+  if (questions[this.value]) {
+    questions[this.value].forEach(q => {
+      let opt = document.createElement("option");
+      opt.text = q;
+      sub.add(opt);
     });
   }
+});
 
-  return text.trim();
+function setQuestion(){
+  const sub = document.getElementById("sub").value;
+  if(sub){
+    document.getElementById("questionInput").value = sub;
+  }
 }
 
-function buildKizukiCopyText(){
-  return buildSimpleCopyText();
-}
+function draw(num){
+  let result = document.getElementById("result");
+  result.innerHTML = "";
 
-function saveFirstStepData(){
-  const payload = {
-    question: getQuestionText(),
-    cards: currentCards
-  };
-  sessionStorage.setItem("tarotFirstStep", JSON.stringify(payload));
-}
+  for(let i=0;i<num;i++){
+    let card = Math.floor(Math.random()*22);
+    let img = document.createElement("img");
+    img.src = "images/" + card + ".png";
+    img.style.width = "120px";
+    img.style.margin = "10px";
+    result.appendChild(img);
+  }
 
-function showSummaryButtons(cardCount){
-  const area = document.getElementById("summary-area");
-  area.innerHTML = "";
+  result.innerHTML += `
+  <div class="card">
+  <h3>✨ 気づきコピー</h3>
+  <button class="btn1">コピー🐾</button>
+  </div>
 
-  const box = document.createElement("div");
-  box.className = "summary-box";
+  <div class="card">
+  <button class="btn4" onclick="location.href='change.html'">
+  変化を見てみる🌈
+  </button>
+  </div>
 
-  const title = document.createElement("div");
-  title.className = "summary-title";
-  title.textContent = cardCount === 1 ? "✨ 1枚の対話ナビ" : "✨ 3枚の対話ナビ";
-
-  const buttons = document.createElement("div");
-  buttons.className = "summary-buttons";
-
-  const copyBtn = document.createElement("button");
-  copyBtn.className = "mini-btn mini-copy";
-  copyBtn.textContent = cardCount === 1 ? "1枚コピー🐾" : "3枚コピー🐾";
-  copyBtn.onclick = () => copyToClipboard(buildSimpleCopyText());
-
-  const kizukiBtn = document.createElement("button");
-  kizukiBtn.className = "mini-btn mini-ai";
-  kizukiBtn.textContent = "気づきコピー🤖";
-  kizukiBtn.onclick = () => copyToClipboard(buildKizukiCopyText());
-
-  buttons.appendChild(copyBtn);
-  buttons.appendChild(kizukiBtn);
-
-  box.appendChild(title);
-  box.appendChild(buttons);
-  area.appendChild(box);
-
-  const nextBox = document.createElement("div");
-  nextBox.className = "next-box";
-
-  const msg = document.createElement("div");
-  msg.className = "next-message";
-  msg.textContent =
-    "気がついたあなたは、\n" +
-    "もう大丈夫に向かってるよ😊\n\n" +
-    "そのまま少しゆるんだ状態で、\n" +
-    "もう一度カードを引いてみてね🌈";
-
-  const nextBtn = document.createElement("button");
-  nextBtn.className = "mini-btn next-btn";
-  nextBtn.textContent = "2回目のカードを引く🌈";
-  nextBtn.onclick = () => {
-    saveFirstStepData();
-    location.href = "change.html";
-  };
-
-  nextBox.appendChild(msg);
-  nextBox.appendChild(nextBtn);
-  area.appendChild(nextBox);
+  <div class="message">
+  しっくりこなかったら、<br>
+  気がすむまでAIと話しても大丈夫😊<br><br>
+  答えを出さなくてもいいし、<br>
+  そのまま対話しながらカードを引きなおしてもOKだよ🌈
+  </div>
+  `;
 }
 
 function resetAll(){
-  currentCards = [];
-  currentSelectedQuestion = "";
-  currentMainLabel = "";
-  currentSubLabel = "";
-
-  document.getElementById("question").value = "";
-  document.getElementById("level-category").value = "";
-  document.getElementById("sub-category").innerHTML = '<option value="">5項目から選ぶ</option>';
-  document.getElementById("question-result").innerHTML = "";
-  document.getElementById("question-result").classList.add("hidden");
-
-  clearCards();
-  sessionStorage.removeItem("tarotFirstStep");
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("questionInput").value = "";
 }
 </script>
 
