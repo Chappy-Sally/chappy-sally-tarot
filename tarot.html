@@ -3,223 +3,646 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>チャッピー＆サリーの対話ナビ</title>
 
 <style>
 body{
-  font-family:sans-serif;
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
   background:#fff0f5;
   text-align:center;
-  padding:20px;
+  margin:0;
+  padding:20px 14px 40px;
+  color:#6b4b2a;
+}
+
+.page-title{
+  font-size:28px;
+  font-weight:bold;
+  line-height:1.4;
+  margin:8px 0 18px;
 }
 
 .box{
-  background:white;
-  padding:18px;
+  width:92%;
+  max-width:640px;
+  margin:0 auto 18px;
+  background:rgba(255,255,255,0.9);
+  border-radius:28px;
+  padding:22px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.07);
+}
+
+.desc{
+  font-size:18px;
+  line-height:1.8;
+  margin:0 0 16px;
+}
+
+.label{
+  font-size:16px;
+  line-height:1.7;
+  color:#8a6a4a;
+  margin:8px 0 6px;
+}
+
+select, input, textarea{
+  width:92%;
+  max-width:500px;
+  box-sizing:border-box;
+  padding:14px 16px;
   border-radius:20px;
-  margin-bottom:15px;
+  border:2px solid #d8c0ff;
+  font-size:17px;
+  background:white;
+  margin:6px 0 10px;
+}
+
+textarea{
+  min-height:72px;
+  resize:vertical;
 }
 
 button{
-  padding:12px 16px;
-  margin:6px;
   border:none;
-  border-radius:20px;
+  border-radius:28px;
+  padding:14px 18px;
+  font-size:18px;
   color:white;
-  font-size:16px;
+  cursor:pointer;
+  margin:8px 6px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  transition:transform 0.15s ease, opacity 0.15s ease;
 }
 
-.btn-pink{background:#f7a8c4;}
-.btn-purple{background:#bba4ff;}
-.btn-orange{background:#ffb26b;}
-
-select,input{
-  padding:10px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  margin:6px;
-  width:80%;
+button:hover{
+  transform:translateY(-1px);
 }
 
-.cards{
+button:disabled{
+  opacity:0.45;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.btn-pink{
+  background:linear-gradient(135deg,#f6b1c7,#eab0f5);
+}
+
+.btn-purple{
+  background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
+}
+
+.btn-orange{
+  background:linear-gradient(135deg,#ffbe73,#f6a65d);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#75d7b5,#6bc3bb);
+}
+
+.level-row,
+.sub-row,
+.draw-row{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
   gap:10px;
+  margin-top:8px;
 }
 
-img{
-  width:120px;
-  border-radius:10px;
+.sub-row button{
+  min-width:110px;
 }
 
-.reversed{transform:rotate(180deg);}
+.selected-level,
+.selected-sub{
+  outline:4px solid rgba(255,255,255,0.9);
+  box-shadow:0 0 0 3px rgba(153,112,255,0.25), 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.question-box{
+  width:92%;
+  max-width:560px;
+  margin:14px auto 0;
+  padding:16px 14px;
+  background:#f6ecff;
+  border-radius:20px;
+  font-size:18px;
+  line-height:1.8;
+  white-space:pre-line;
+}
+
+.cards-area{
+  width:94%;
+  max-width:760px;
+  margin:0 auto 14px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+.card-box img{
+  width:180px;
+  max-width:28vw;
+  min-width:120px;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
+  background:white;
+}
+
+.reversed{
+  transform:rotate(180deg);
+}
 
 .notice{
+  font-size:20px;
+  line-height:1.9;
+  white-space:pre-line;
+}
+
+.hidden{
+  display:none;
+}
+
+.small-note{
   font-size:14px;
-  line-height:1.7;
+  color:#9b7c5c;
+  margin-top:4px;
+}
+
+@media (max-width: 480px){
+  .page-title{
+    font-size:24px;
+  }
+  .desc, .question-box, .notice{
+    font-size:16px;
+  }
+  button, input, textarea, select{
+    font-size:16px;
+  }
+  .card-box img{
+    width:150px;
+    max-width:40vw;
+    min-width:110px;
+  }
 }
 </style>
 </head>
-
 <body>
 
-<h2>🐶対話ナビ🌈</h2>
+<div class="page-title">🐶 チャッピー＆サリーの対話ナビ🌈</div>
 
 <div class="box">
+  <p class="desc">
+    これは占いではなく、<br>
+    今のあなたの気持ちをやさしく整える対話です🌿
+  </p>
 
-<div>今の気持ちを選んでね😊</div>
+  <div class="label">
+    今の気持ちを選んでね😊<br>
+    （よくわからない・もやっとしてる、でもOK）
+  </div>
 
-<select id="feelingSelect">
-<option value="">選択してください</option>
-<option>よくわからない</option>
-<option>もやっとしてる</option>
-<option>なんとなく不安</option>
-<option>少し安心してる</option>
-</select>
+  <select id="feelingSelect">
+    <option value="">選択してください</option>
+    <option value="よくわからない">よくわからない</option>
+    <option value="もやっとしてる">もやっとしてる</option>
+    <option value="なんとなく不安">なんとなく不安</option>
+    <option value="少し安心してる">少し安心してる</option>
+  </select>
 
-<div>ひとこと追加したいとき</div>
-<input id="feelingInput" placeholder="自由入力OK">
-
+  <div class="label">ひとこと追加したいとき</div>
+  <textarea id="feelingInput" placeholder="自由入力OK"></textarea>
 </div>
 
 <div class="box">
-<div>カテゴリ選択🌿</div>
+  <div class="label" style="font-size:18px; font-weight:bold; color:#6b4b2a;">カテゴリ選択🌿</div>
 
-<button class="btn-pink" onclick="setCategory('S')">初級</button>
-<button class="btn-purple" onclick="setCategory('C')">中級</button>
-<button class="btn-orange" onclick="setCategory('J')">上級</button>
+  <div class="level-row">
+    <button id="levelS" class="btn-pink" onclick="selectLevel('S')">初級</button>
+    <button id="levelC" class="btn-purple" onclick="selectLevel('C')">中級</button>
+    <button id="levelJ" class="btn-orange" onclick="selectLevel('J')">上級</button>
+  </div>
 
-<div id="sub"></div>
-<div id="question"></div>
+  <div id="subCategoryArea" class="sub-row"></div>
 
+  <div id="questionBox" class="question-box hidden"></div>
 </div>
 
 <div class="box">
-<button onclick="draw(1)">1枚引き</button>
-<button onclick="draw(3)">3枚引き</button>
+  <div class="draw-row">
+    <button id="draw1" class="btn-pink" onclick="drawCards(1)" disabled>1枚引き</button>
+    <button id="draw3" class="btn-purple" onclick="drawCards(3)" disabled>3枚引き</button>
+    <button class="btn-purple" onclick="resetAll()">リセット</button>
+  </div>
+  <div class="small-note">質問を選ぶとカードが引けるようになるよ🐾</div>
 </div>
 
-<div id="cards" class="cards"></div>
+<div id="cardsArea" class="cards-area"></div>
 
-<div class="box">
-<button class="btn-pink" onclick="copyMain()">対話スタートコピー🐾</button>
-<button class="btn-orange" onclick="copyExtra()">追加カードコピー🌈</button>
+<div id="copyArea" class="box hidden">
+  <div class="page-title" style="font-size:24px; margin:0 0 10px;">✨ 気づきコピー</div>
+  <button class="btn-pink" onclick="copyMain()">対話スタートコピー🐾</button>
+  <br>
+  <button class="btn-orange" onclick="copyExtra()">追加カードコピー🌈</button>
 </div>
 
-<div class="box notice">
-しっくりこなかったら、
+<div id="noticeArea" class="box hidden">
+  <div class="notice">しっくりこなかったら、
 気がすむまでAIと話しても大丈夫😊
 
 答えを出さなくてもいいし、
-カードを引きなおしてもOKだよ🌈
+そのまま対話しながらカードを引きなおしてもOKだよ🌈</div>
 </div>
 
 <script>
-
-const categoryMap={
-S:["安心","気分","ゆるめる","やさしさ","ひとこと"],
-C:["テーマ","思い込み","手放し","行動","流れ"],
-J:["真実","統合","魂","現実","最終"]
+const categoryMap = {
+  "S": ["安心", "今の気分", "ゆるめる", "自分にやさしく", "今日のひとこと"],
+  "C": ["今のテーマ", "思い込み・ブロック", "手放し・切り替え", "次の一歩", "流れに乗る"],
+  "J": ["内側の真実", "手放し・統合", "魂の視点", "行動・現実への反映", "統合・メッセージ"]
 };
 
-const questionMap={
-"安心":["今の私は何を心配している？","本当はもう大丈夫なことは？"],
-"気分":["私は今どんな気持ち？","本音は何？"],
-"ゆるめる":["どこで頑張りすぎてる？","やめてもいいことは？"],
-"やさしさ":["私は自分にどんな言葉をかける？"],
-"ひとこと":["今の私への一言は？"],
+const questionMap = {
+  "安心": [
+    "今の私は、何をそんなに心配しているんだろう？",
+    "本当は、もう大丈夫なことは何？",
+    "今ここで、力を抜いてもいい理由は？",
+    "私は今、誰かに証明しなくてもいい？",
+    "いちばん安心できる場所は、どこ？",
+    "今の私を、責めなくていいポイントは？",
+    "このカードは、私に『安心していいよ』と何を伝えている？",
+    "もし守られているとしたら、私は何を手放せる？",
+    "深呼吸するとしたら、どんな気持ちを吐き出したい？",
+    "今の私に必要なのは、答え？それとも休息？"
+  ],
+  "今の気分": [
+    "私は今、本当はどんな気持ち？",
+    "表に出していない感情はある？",
+    "無視してきた小さな違和感は何？",
+    "『こう感じちゃダメ』と思っていることは？",
+    "今の気持ちに、名前をつけるとしたら？",
+    "このカードは、私の気持ちのどこを映している？",
+    "強がっている部分はどこ？",
+    "誰にも言っていない本音はある？",
+    "今の私の正直さは、何点くらい？",
+    "この気持ちは、何を守ろうとしている？"
+  ],
+  "ゆるめる": [
+    "今の私は、どこで頑張りすぎている？",
+    "今日、やらなくてもいいことは何？",
+    "休むことを許していない理由は？",
+    "『ちゃんとしなきゃ』を外すと、何が起きる？",
+    "今の私に必要な休み方は？",
+    "このカードは、どこをゆるめてと言っている？",
+    "立ち止まることで守れるものは何？",
+    "今すぐできる小さな休息は？",
+    "何を後回しにしても大丈夫？",
+    "今日は何割の力で過ごしていい？"
+  ],
+  "自分にやさしく": [
+    "私は自分に、どんな言葉をかけている？",
+    "親友だったら、今の私に何て言う？",
+    "責める代わりに、理解できるところは？",
+    "私は本当は、何を許してほしい？",
+    "このカードは、私のどこを認めている？",
+    "もう十分やってきたことは何？",
+    "比べなくていい理由は？",
+    "自分を大切にするとしたら、今日は何を選ぶ？",
+    "私は私に、どんな扱いをしてあげたい？",
+    "このままでも大丈夫な部分はどこ？"
+  ],
+  "今日のひとこと": [
+    "今日の私へのメッセージは？",
+    "このカードを一言で表すと？",
+    "今日いちばん意識したいことは？",
+    "今日の私は、何を思い出せばいい？",
+    "今日、無理しなくていい合図は？",
+    "私は今日、何を受け取っていい？",
+    "今日の安心ワードは？",
+    "今日の私にとっての『正解』は何？",
+    "今日はどんな一日で十分？",
+    "最後に、私にかけてあげたい一言は？"
+  ],
 
-"テーマ":["今のテーマは？"],
-"思い込み":["手放す思い込みは？"],
-"手放し":["終わらせていいことは？"],
-"行動":["次の一歩は？"],
-"流れ":["今の流れは？"],
+  "今のテーマ": [
+    "このカードは、今の私のどんなテーマを映している？",
+    "私はいま、人生のどんな場面に立っている？",
+    "この状況で、いちばん大事にしたい軸は？",
+    "今の私が向き合っている課題は何？",
+    "このカードは、私に何を気づかせようとしている？",
+    "ここから流れが変わるポイントはどこ？",
+    "私は今、何を学んでいる途中？",
+    "このテーマは、いつ頃から続いている？",
+    "今の私は、変化のどの段階にいる？",
+    "このカードが出た必然は何？"
+  ],
+  "思い込み・ブロック": [
+    "私が『当たり前』だと思い込んでいることは？",
+    "本当はもう手放していい考え方は何？",
+    "このカードは、どんな思い込みを照らしている？",
+    "私は何を怖がって、止まっている？",
+    "それは本当に今の私に必要？",
+    "誰かの価値観を背負っていない？",
+    "この思い込みを外したら、何が起きそう？",
+    "私はどこで自分を小さくしている？",
+    "そのブロックは、もともと誰のもの？",
+    "守るために持ってきた考えは何？"
+  ],
+  "手放し・切り替え": [
+    "今の私が手放すと楽になるものは？",
+    "終わりにしていいパターンは何？",
+    "このカードは『もう十分』と言っている？",
+    "無意識に握りしめているものは？",
+    "手放した先に、どんな余白が生まれる？",
+    "私は何を完了させようとしている？",
+    "ここで区切りをつけても大丈夫な理由は？",
+    "役目を終えたものは何？",
+    "手放すこと＝失う、だと思っていない？",
+    "このカードが示す『切り替えの合図』は？"
+  ],
+  "次の一歩": [
+    "今の流れに沿った一歩はどれ？",
+    "小さく始めていい行動は何？",
+    "無理せず進むとしたら、どう動く？",
+    "このカードは、どんな行動を後押ししている？",
+    "今すぐ結果を出さなくていい理由は？",
+    "一歩進むとしたら、何を選ぶ？",
+    "動く前に整えるべきことは？",
+    "私に合ったペースはどれくらい？",
+    "進むことで、何が自然に変わりそう？",
+    "今日できる『一番やさしい行動』は？"
+  ],
+  "流れに乗る": [
+    "今の私は、どんな流れの中にいる？",
+    "抗わなくていいポイントはどこ？",
+    "このカードは、信頼していい流れを示している？",
+    "頑張るより、委ねた方がいい部分は？",
+    "私はどこで流れを止めている？",
+    "流れに乗るために必要な姿勢は？",
+    "すでにうまく進んでいるところは？",
+    "この流れのゴールは何を教えている？",
+    "今の私にとっての『ちょうどいい』は？",
+    "最後に、このカードが伝えたい統合メッセージは？"
+  ],
 
-"真実":["本当の願いは？"],
-"統合":["統合するものは？"],
-"魂":["魂の視点では？"],
-"現実":["現実で何する？"],
-"最終":["最終メッセージは？"]
+  "内側の真実": [
+    "私が今、無意識に避けている『本当の願い』は何？",
+    "この状況が私に教えている、最も大切なことは？",
+    "私は何を『もう終わったこと』にしようとしている？",
+    "今の違和感は、どんな真実を守ろうとしている？",
+    "私が自分にまだ許していないことは？",
+    "私が本当は選びたかった道はどれ？",
+    "今の私が一番大切にしたい価値観は何？",
+    "私の中の『もう大丈夫だよ』という声は何て言ってる？",
+    "この問題の奥にある、私の本当のテーマは？",
+    "私が自分自身から隠してきた力は何？"
+  ],
+  "手放し・統合": [
+    "私がもう握りしめなくていい思い込みは？",
+    "今、感謝とともに手放せるものは何？",
+    "私が『怖い』と感じている正体は何？",
+    "この執着は、私をどう守ってきた？",
+    "私が終わらせてもいい役割は？",
+    "もう必要なくなった自分のパターンは？",
+    "私が自分に課しているルールは何？",
+    "手放したら、代わりに何が入ってくる？",
+    "私が過去の自分に伝えたい言葉は？",
+    "この手放しの先に待っている世界は？"
+  ],
+  "魂の視点": [
+    "魂の視点から見た今の私は、どんな状態？",
+    "この出来事は魂レベルで何を進めている？",
+    "私の魂が今世で大切にしたい学びは？",
+    "私の魂は、今どんなステージにいる？",
+    "今の私に必要な『信頼』は何？",
+    "魂が望む次の一歩は？",
+    "私の中で目覚め始めている資質は？",
+    "今の私に流れている宇宙のテーマは？",
+    "魂が『もう準備できたよ』と言っていることは？",
+    "私がこのタイミングで思い出すべき約束は？"
+  ],
+  "行動・現実への反映": [
+    "私が今、現実で一番大切にすべき行動は？",
+    "小さく始められる『魂に沿った行動』は？",
+    "私が安心して一歩出るための鍵は？",
+    "今は『動く』？それとも『待つ』？",
+    "私が現実で受け取っていい豊かさは？",
+    "私が遠慮している理由は何？",
+    "私の存在が自然に役立つ場所は？",
+    "私が選ぶと流れが変わるポイントは？",
+    "今の私に合ったペースは？",
+    "この選択が未来の私に与える影響は？"
+  ],
+  "統合・メッセージ": [
+    "今の私への最終メッセージは？",
+    "私が今日、思い出しておくといいことは？",
+    "私の中で既に完成しているものは？",
+    "この流れのゴールはどんな景色？",
+    "私が自分を信じるための一言は？",
+    "今の私に必要な祝福の言葉は？",
+    "私はどんな存在として世界に立っている？",
+    "この経験は、未来でどう生きる？",
+    "私が『もう大丈夫』と言える理由は？",
+    "今の私へのひとことは？"
+  ]
 };
 
-let currentQ="";
-let drawn=[];
+const cardFiles = [
+  "00_The_Fool.png",
+  "01_The_Magician.png",
+  "02_The_High_Priestess.png",
+  "03_The_Empress.png",
+  "04_The_Emperor.png",
+  "05_The_Hierophant.png",
+  "06_The_Lovers.png",
+  "07_The_Chariot.png",
+  "08_Strength.png",
+  "09_The_Hermit.png",
+  "10_Wheel_of_Fortune.png",
+  "11_Justice.png",
+  "12_The_Hanged_Man.png",
+  "13_Death.png",
+  "14_Temperance.png",
+  "15_The_Devil.png",
+  "16_The_Tower.png",
+  "17_The_Star.png",
+  "18_The_Moon.png",
+  "19_The_Sun.png",
+  "20_Judgement.png",
+  "21_The_World.png",
+  "22_Compass.png"
+];
 
-function setCategory(type){
-  const area=document.getElementById("sub");
-  area.innerHTML="";
+let currentLevel = "";
+let currentQuestion = "";
+let currentCards = [];
+let currentSubCategory = "";
 
-  categoryMap[type].forEach(c=>{
-    const btn=document.createElement("button");
-    btn.textContent=c;
-    btn.onclick=()=>setQuestion(c);
+function selectLevel(level){
+  currentLevel = level;
+  currentQuestion = "";
+  currentSubCategory = "";
+  document.getElementById("questionBox").classList.add("hidden");
+  document.getElementById("questionBox").textContent = "";
+  disableDrawButtons();
+
+  document.getElementById("levelS").classList.remove("selected-level");
+  document.getElementById("levelC").classList.remove("selected-level");
+  document.getElementById("levelJ").classList.remove("selected-level");
+
+  document.getElementById("level" + level).classList.add("selected-level");
+
+  const area = document.getElementById("subCategoryArea");
+  area.innerHTML = "";
+
+  categoryMap[level].forEach(category => {
+    const btn = document.createElement("button");
+    btn.textContent = category;
+    btn.className = "btn-purple";
+    btn.onclick = () => selectCategory(category, btn);
     area.appendChild(btn);
   });
 }
 
-function setQuestion(cat){
-  const q=questionMap[cat];
-  currentQ=q[Math.floor(Math.random()*q.length)];
-  document.getElementById("question").innerText=currentQ;
+function selectCategory(category, clickedButton){
+  currentSubCategory = category;
+
+  document.querySelectorAll("#subCategoryArea button").forEach(btn => {
+    btn.classList.remove("selected-sub");
+  });
+  clickedButton.classList.add("selected-sub");
+
+  const list = questionMap[category];
+  currentQuestion = list[Math.floor(Math.random() * list.length)];
+
+  const box = document.getElementById("questionBox");
+  box.classList.remove("hidden");
+  box.textContent = currentQuestion;
+
+  enableDrawButtons();
 }
 
-const cards=[
-"00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
-"03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
-"06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
-"09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
-"12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
-"15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
-"18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
-"21_The_World.png","22_Compass.png"
-];
+function enableDrawButtons(){
+  document.getElementById("draw1").disabled = false;
+  document.getElementById("draw3").disabled = false;
+}
 
-function draw(n){
-  drawn=[];
-  let html="";
+function disableDrawButtons(){
+  document.getElementById("draw1").disabled = true;
+  document.getElementById("draw3").disabled = true;
+}
 
-  for(let i=0;i<n;i++){
-    let c=cards[Math.floor(Math.random()*cards.length)];
-    let rev=Math.random()<0.5;
-
-    drawn.push(c.replace(".png","")+(rev?"（逆位置）":"（正位置）"));
-
-    html+=`<img src="cards/${c}" class="${rev?'reversed':''}">`;
+function drawCards(count){
+  if(!currentQuestion){
+    alert("先に質問を選んでね🐾");
+    return;
   }
 
-  document.getElementById("cards").innerHTML=html;
+  const cardsArea = document.getElementById("cardsArea");
+  cardsArea.innerHTML = "";
+  currentCards = [];
+
+  const selected = [...cardFiles].sort(() => Math.random() - 0.5).slice(0, count);
+
+  selected.forEach(file => {
+    const reversed = Math.random() < 0.5;
+    const card = { file, reversed };
+    currentCards.push(card);
+
+    const box = document.createElement("div");
+    box.className = "card-box";
+
+    const img = document.createElement("img");
+    img.src = "cards/" + file;
+    img.alt = file;
+    if(reversed){
+      img.classList.add("reversed");
+    }
+
+    box.appendChild(img);
+    cardsArea.appendChild(box);
+  });
+
+  document.getElementById("copyArea").classList.remove("hidden");
+  document.getElementById("noticeArea").classList.remove("hidden");
+}
+
+function formatCard(card){
+  return `${card.file.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）`;
 }
 
 function getFeeling(){
-  const select=document.getElementById("feelingSelect").value;
-  const input=document.getElementById("feelingInput").value;
-  return input || select || "（特になし）";
+  const selected = document.getElementById("feelingSelect").value.trim();
+  const free = document.getElementById("feelingInput").value.trim();
+
+  if(free){
+    return free;
+  }
+  if(selected){
+    return selected;
+  }
+  return "（特になし）";
 }
 
 function copyMain(){
-  let text=`今の私の気持ち：
-${getFeeling()}
+  if(currentCards.length === 0){
+    alert("先にカードを引いてね🐾");
+    return;
+  }
 
-質問：
-${currentQ || "（直感）"}
+  let text = "";
 
-カード：
-${drawn.join("\n")}`;
+  text += `今の私の気持ち：\n${getFeeling()}\n\n`;
+  text += `質問：\n${currentQuestion || "（直感で引いた）"}\n\n`;
+  text += "カード：\n";
 
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨");
+  currentCards.forEach(card => {
+    text += `${formatCard(card)}\n`;
+  });
+
+  navigator.clipboard.writeText(text.trim());
+  alert("コピーしたよ🐾");
 }
 
 function copyExtra(){
-  let text=`追加カード：
-${drawn.join("\n")}`;
+  if(currentCards.length === 0){
+    alert("先にカードを引いてね🐾");
+    return;
+  }
 
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨");
+  let text = "追加カード：\n";
+  currentCards.forEach(card => {
+    text += `${formatCard(card)}\n`;
+  });
+
+  navigator.clipboard.writeText(text.trim());
+  alert("コピーしたよ🐾");
 }
 
+function resetAll(){
+  currentLevel = "";
+  currentQuestion = "";
+  currentSubCategory = "";
+  currentCards = [];
+
+  document.getElementById("feelingSelect").value = "";
+  document.getElementById("feelingInput").value = "";
+
+  document.getElementById("subCategoryArea").innerHTML = "";
+  document.getElementById("questionBox").classList.add("hidden");
+  document.getElementById("questionBox").textContent = "";
+
+  document.getElementById("cardsArea").innerHTML = "";
+  document.getElementById("copyArea").classList.add("hidden");
+  document.getElementById("noticeArea").classList.add("hidden");
+
+  document.getElementById("levelS").classList.remove("selected-level");
+  document.getElementById("levelC").classList.remove("selected-level");
+  document.getElementById("levelJ").classList.remove("selected-level");
+
+  disableDrawButtons();
+}
 </script>
 
 </body>
