@@ -8,109 +8,80 @@
 <style>
 body{
   font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  background:#fdf1f5;
   text-align:center;
-  background:#fff0f5;
-  padding:20px;
-  color:#5b3a1e;
   margin:0;
-}
-
-.title-wrap{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-  margin-top:10px;
-}
-
-.side-img{
-  width:58px;
-}
-
-h1{
-  font-size:24px;
-  line-height:1.5;
-  margin:0;
+  padding:20px 16px 40px;
   color:#6b4b2a;
 }
 
-.header-img{
-  width:80%;
-  max-width:420px;
-  border-radius:22px;
-  margin:18px 0;
-  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+.page-title{
+  font-size:28px;
+  font-weight:bold;
+  margin:10px 0 18px;
+  line-height:1.4;
 }
 
-.message-box,
-.summary-box,
-.first-info{
+.box{
   width:92%;
-  max-width:620px;
-  margin:18px auto 0;
-  padding:18px 16px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.82);
-  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+  max-width:560px;
+  margin:0 auto 20px;
+  background:rgba(255,255,255,0.9);
+  border-radius:28px;
+  padding:22px 16px 24px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
 .message{
-  font-size:20px;
-  line-height:1.8;
-  color:#7a4d28;
+  font-size:22px;
+  line-height:1.9;
   white-space:pre-line;
 }
 
-.first-info{
-  font-size:15px;
-  line-height:1.8;
-  color:#7a5a38;
+.info{
+  font-size:18px;
+  line-height:1.9;
   white-space:pre-line;
 }
 
 button{
-  padding:13px 20px;
-  margin:6px;
   border:none;
-  border-radius:30px;
+  border-radius:28px;
+  padding:14px 18px;
+  font-size:18px;
   color:white;
-  font-size:17px;
   cursor:pointer;
+  margin:8px 6px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-.main-btn{
-  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
+.btn-pink{
+  background:linear-gradient(135deg,#f6b1c7,#eab0f5);
 }
 
-.change-btn{
-  background:linear-gradient(135deg,#ffcf7d,#ffb76b,#ff9f68);
+.btn-purple{
+  background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
 }
 
-.back-btn{
-  background:linear-gradient(135deg,#a89adb,#cdbff4);
+.btn-orange{
+  background:linear-gradient(135deg,#ffbe73,#f6a65d);
 }
 
 .cards-area{
+  width:92%;
+  max-width:700px;
+  margin:0 auto;
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
   gap:20px;
-  margin-top:24px;
-  min-height:180px;
-}
-
-.card-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  width:170px;
 }
 
 .card-box img{
-  width:160px;
-  border-radius:12px;
-  box-shadow:0 6px 14px rgba(0,0,0,0.2);
+  width:170px;
+  max-width:42vw;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
   background:white;
 }
 
@@ -118,281 +89,159 @@ button{
   transform:rotate(180deg);
 }
 
-.summary-title{
-  font-size:20px;
-  font-weight:bold;
-  color:#6b4b2a;
-  margin-bottom:12px;
+.hidden{
+  display:none;
 }
 
-.summary-buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.mini-btn{
-  padding:12px 18px;
-  border:none;
-  border-radius:28px;
-  color:white;
-  font-size:17px;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.notice-box{
-  width:92%;
-  max-width:620px;
-  margin:18px auto 24px;
-  padding:16px 16px;
-  border-radius:22px;
-  background:rgba(255,255,255,0.78);
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
-  font-size:15px;
-  line-height:1.9;
-  color:#8a6a4a;
-}
-
-@media (max-width: 480px){
-  .side-img{ width:46px; }
-  h1{ font-size:22px; }
-  .card-box{ width:150px; }
-  .card-box img{ width:140px; }
-  .mini-btn{ font-size:15px; }
+@media (max-width:480px){
+  .page-title{
+    font-size:24px;
+  }
+  .message, .info{
+    font-size:17px;
+  }
+  button{
+    font-size:17px;
+  }
 }
 </style>
 </head>
-
 <body>
 
-<div class="title-wrap">
-  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
-  <h1>2回目の対話🌈</h1>
-  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
-</div>
+<div class="page-title">🌈 2回目の対話</div>
 
-<img src="cards/CS_hyousi.jpg" class="header-img" alt="表紙">
-
-<div class="message-box">
-  <div class="message">
-気がついたあなたは、
+<div class="box">
+  <div class="message">気がついたあなたは、
 もう大丈夫に向かってるよ😊
 
 そのまま少しゆるんだ状態で、
-もう一度カードを引いてみてね🌈
-  </div>
+もう一度カードを引いてみてね🌈</div>
 </div>
 
-<div id="first-info" class="first-info"></div>
+<div id="firstInfo" class="box info"></div>
 
-<div>
-  <button class="main-btn" onclick="drawOne()">1枚引き</button>
-  <button class="main-btn" onclick="drawThree()">3枚引き</button>
-  <button class="back-btn" onclick="location.href='tarot.html'">1回目に戻る</button>
+<div class="box">
+  <button class="btn-pink" onclick="drawCards(1)">1枚引き</button>
+  <button class="btn-purple" onclick="drawCards(3)">3枚引き</button>
+  <button class="btn-purple" onclick="location.href='tarot.html'">1回目に戻る</button>
 </div>
 
-<div class="cards-area" id="cards"></div>
-<div id="summary-area"></div>
+<div id="cardsArea" class="cards-area"></div>
 
-<div class="notice-box">
-  しっくりこなかったら、<br>
-  気がすむまで話しても大丈夫😊<br>
-  答えを出さなくてもいいし、<br>
-  途中でカードを引きなおしてもOKだよ🌈
+<div id="changeCopyArea" class="box hidden">
+  <button class="btn-orange" onclick="copyChange()">変化をみる🌈</button>
+</div>
+
+<div class="box info">
+  しっくりこなかったら、
+  気がすむまでAIと話しても大丈夫😊
+
+  答えを出さなくてもいいし、
+  そのまま対話しながらカードを引きなおしてもOKだよ🌈
 </div>
 
 <script>
 const cardFiles = [
-  "00_The_Fool.png",
-  "01_The_Magician.png",
-  "02_The_High_Priestess.png",
-  "03_The_Empress.png",
-  "04_The_Emperor.png",
-  "05_The_Hierophant.png",
-  "06_The_Lovers.png",
-  "07_The_Chariot.png",
-  "08_Strength.png",
-  "09_The_Hermit.png",
-  "10_Wheel_of_Fortune.png",
-  "11_Justice.png",
-  "12_The_Hanged_Man.png",
-  "13_Death.png",
-  "14_Temperance.png",
-  "15_The_Devil.png",
-  "16_The_Tower.png",
-  "17_The_Star.png",
-  "18_The_Moon.png",
-  "19_The_Sun.png",
-  "20_Judgement.png",
-  "21_The_World.png",
-  "22_Compass.png"
+  "00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
+  "03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
+  "06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
+  "09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
+  "12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
+  "15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
+  "18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
+  "21_The_World.png","22_Compass.png"
 ];
 
 let currentCards = [];
-let firstStepData = null;
+let firstReading = null;
 
-function getRandomItem(list){
-  return list[Math.floor(Math.random() * list.length)];
+function formatCardName(card){
+  const name = card.file.replace(".png", "");
+  return `${name}（${card.reversed ? "逆位置" : "正位置"}）`;
 }
 
-function getRandomItemsNoRepeat(list, count){
-  const shuffled = [...list].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-}
-
-function formatCardName(fileName, reversed){
-  return fileName.replace(".png","") + "（" + (reversed ? "逆位置" : "正位置") + "）";
-}
-
-function copyToClipboard(text){
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨\n\n" + text);
-}
-
-function createCard(fileName, reversed){
-  const box = document.createElement("div");
-  box.className = "card-box";
-
-  const img = document.createElement("img");
-  img.src = "cards/" + fileName;
-  img.alt = fileName;
-
-  if(reversed){
-    img.classList.add("reversed");
-  }
-
-  box.appendChild(img);
-  return box;
-}
-
-function loadFirstStep(){
-  const saved = sessionStorage.getItem("tarotFirstStep");
-  const info = document.getElementById("first-info");
+function loadFirstReading(){
+  const saved = sessionStorage.getItem("firstReading");
+  const firstInfo = document.getElementById("firstInfo");
 
   if(saved){
-    firstStepData = JSON.parse(saved);
+    firstReading = JSON.parse(saved);
+    let text = "1回目の対話をふまえて進むよ🐾";
 
-    let text = "1回目の対話をふまえて進むよ🐾\n\n";
-
-    if(firstStepData.question){
-      text += "最初の質問：\n" + firstStepData.question + "\n\n";
+    if(firstReading.question){
+      text += `\n\n最初の質問：\n${firstReading.question}`;
     }
 
-    if(firstStepData.cards && firstStepData.cards.length > 0){
-      if(firstStepData.cards.length === 1){
-        text += "1回目のカード：\n";
-        text += formatCardName(firstStepData.cards[0].file, firstStepData.cards[0].reversed);
-      } else {
-        text += "1回目のカード：\n";
-        firstStepData.cards.forEach((card, index) => {
-          text += (index + 1) + "枚目 " + formatCardName(card.file, card.reversed) + "\n";
-        });
-      }
-    }
-
-    info.textContent = text.trim();
+    firstInfo.textContent = text;
   } else {
-    info.textContent = "1回目の情報がないときは、先に1回目の対話をしてから来てね🌿";
+    firstInfo.textContent = "先に1回目の対話をしてから来てね🐾";
   }
 }
 
-function clearCards(){
-  document.getElementById("cards").innerHTML = "";
-  document.getElementById("summary-area").innerHTML = "";
-}
+function drawCards(count){
+  const cardsArea = document.getElementById("cardsArea");
+  cardsArea.innerHTML = "";
+  currentCards = [];
 
-function drawOne(){
-  clearCards();
+  let shuffled = [...cardFiles].sort(() => Math.random() - 0.5).slice(0, count);
 
-  const file = getRandomItem(cardFiles);
-  const reversed = Math.random() < 0.5;
+  shuffled.forEach(file => {
+    const reversed = Math.random() < 0.5;
+    currentCards.push({
+      file: file,
+      reversed: reversed
+    });
 
-  currentCards = [{ file, reversed }];
+    const box = document.createElement("div");
+    box.className = "card-box";
 
-  document.getElementById("cards").appendChild(createCard(file, reversed));
-  showSummaryButtons(1);
-}
+    const img = document.createElement("img");
+    img.src = "cards/" + file;
+    if(reversed) img.classList.add("reversed");
 
-function drawThree(){
-  clearCards();
-
-  const selected = getRandomItemsNoRepeat(cardFiles, 3);
-  currentCards = selected.map(file => ({
-    file,
-    reversed: Math.random() < 0.5
-  }));
-
-  currentCards.forEach(card => {
-    document.getElementById("cards").appendChild(createCard(card.file, card.reversed));
+    box.appendChild(img);
+    cardsArea.appendChild(box);
   });
 
-  showSummaryButtons(3);
+  document.getElementById("changeCopyArea").classList.remove("hidden");
 }
 
-function buildChangeText(){
+function copyChange(){
   let text = "さきほどの対話の続きです🌈\n\n";
 
-  if(firstStepData && firstStepData.question){
-    text += "最初の質問：\n" + firstStepData.question + "\n\n";
+  if(firstReading && firstReading.question){
+    text += `最初の質問：\n${firstReading.question}\n\n`;
   }
 
   if(currentCards.length === 1){
-    text += "カード：\n" + formatCardName(currentCards[0].file, currentCards[0].reversed) + "\n\n";
+    text += `カード：\n${formatCardName(currentCards[0])}\n\n`;
   } else {
-    currentCards.forEach((card, index) => {
-      text += (index + 1) + "枚目：\n" + formatCardName(card.file, card.reversed) + "\n";
+    currentCards.forEach((card, i) => {
+      text += `${i + 1}枚目：\n${formatCardName(card)}\n`;
     });
     text += "\n";
   }
 
-  text += "思い込みやブロックに気づいたあとの、\n";
-  text += "やさしい変化や流れを読み解いてください🌈\n\n";
-  text += "当てたり正解を出したりしなくて大丈夫です。\n";
-  text += "やさしく安心を大切にしながら、\n\n";
-  text += "変化してきた今の私の状態を、\n";
-  text += "やさしくシンプルに伝えてください。\n\n";
+  text += `思い込みやブロックに気づいたあとの、
+やさしい変化や流れを読み解いてください🌈
 
-  if(currentCards.length > 1){
-    text += "カードの意味はそれぞれ簡潔に、\n";
-    text += "今の私に必要なことだけをやさしく伝えてください。\n\n";
-  }
+当てたり正解を出したりしなくて大丈夫です。
+やさしく安心を大切にしながら、
 
-  text += "必要以上に深掘りせず、\n";
-  text += "今ここで受け取れる範囲で大丈夫です。\n\n";
-  text += "可能であれば、\n";
-  text += "やさしい問いをひとつ添えてください。";
+変化してきた今の私の状態を、
+やさしくシンプルに伝えてください。
 
-  return text;
+必要以上に深掘りせず、
+今ここで受け取れる範囲で大丈夫です。
+
+可能であれば、
+やさしい問いをひとつ添えてください。`;
+
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ🌈");
 }
 
-function showSummaryButtons(cardCount){
-  const area = document.getElementById("summary-area");
-  area.innerHTML = "";
-
-  const box = document.createElement("div");
-  box.className = "summary-box";
-
-  const title = document.createElement("div");
-  title.className = "summary-title";
-  title.textContent = cardCount === 1 ? "🌈 1枚の変化" : "🌈 3枚の変化";
-
-  const buttons = document.createElement("div");
-  buttons.className = "summary-buttons";
-
-  const changeBtn = document.createElement("button");
-  changeBtn.className = "mini-btn change-btn";
-  changeBtn.textContent = "変化をみる🌈";
-  changeBtn.onclick = () => copyToClipboard(buildChangeText());
-
-  buttons.appendChild(changeBtn);
-  box.appendChild(title);
-  box.appendChild(buttons);
-  area.appendChild(box);
-}
-
-loadFirstStep();
+loadFirstReading();
 </script>
 
 </body>
