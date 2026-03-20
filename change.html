@@ -3,84 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2回目の対話</title>
 
 <style>
-body{font-family:sans-serif;background:#fff0f5;text-align:center;padding:20px;}
-.box{background:white;padding:15px;border-radius:15px;margin-bottom:15px;}
-button{padding:12px;margin:5px;border:none;border-radius:20px;color:white;}
-.btn-pink{background:#ff9bb3;}
-.btn-purple{background:#b89cff;}
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  background:#fdf1f5;
+  text-align:center;
+  margin:0;
+  padding:20px 16px 40px;
+  color:#6b4b2a;
+}
+
+.page-title{
+  font-size:28px;
+  font-weight:bold;
+  margin:10px 0 18px;
+  line-height:1.4;
+}
+
+.box{
+  width:92%;
+  max-width:560px;
+  margin:0 auto 20px;
+  background:rgba(255,255,255,0.9);
+  border-radius:28px;
+  padding:22px 16px 24px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+.message{
+  font-size:22px;
+  line-height:1.9;
+  white-space:pre-line;
+}
+
+.info{
+  font-size:18px;
+  line-height:1.9;
+  white-space:pre-line;
+}
+
+button{
+  border:none;
+  border-radius:28px;
+  padding:14px 18px;
+  font-size:18px;
+  color:white;
+  cursor:pointer;
+  margin:8px 6px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.btn-pink{
+  background:linear-gradient(135deg,#f6b1c7,#eab0f5);
+}
+
+.btn-purple{
+  background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
+}
+
+.btn-orange{
+  background:linear-gradient(135deg,#ffbe73,#f6a65d);
+}
+
+.cards-area{
+  width:92%;
+  max-width:700px;
+  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.card-box img{
+  width:170px;
+  max-width:42vw;
+  border-radius:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
+  background:white;
+}
+
+.reversed{
+  transform:rotate(180deg);
+}
+
+.hidden{
+  display:none;
+}
+
+@media (max-width:480px){
+  .page-title{
+    font-size:24px;
+  }
+  .message, .info{
+    font-size:17px;
+  }
+  button{
+    font-size:17px;
+  }
+}
 </style>
 </head>
-
 <body>
 
+<div class="page-title">🌈 2回目の対話</div>
+
 <div class="box">
-気がついたあなたは、
+  <div class="message">気がついたあなたは、
 もう大丈夫に向かってるよ😊
 
 そのまま少しゆるんだ状態で、
-もう一度カードを引いてみてね🌈
+もう一度カードを引いてみてね🌈</div>
 </div>
 
+<div id="firstInfo" class="box info"></div>
+
 <div class="box">
-<button class="btn-pink" onclick="draw(1)">1枚引き</button>
-<button class="btn-purple" onclick="draw(3)">3枚引き</button>
+  <button class="btn-pink" onclick="drawCards(1)">1枚引き</button>
+  <button class="btn-purple" onclick="drawCards(3)">3枚引き</button>
+  <button class="btn-purple" onclick="location.href='tarot.html'">1回目に戻る</button>
 </div>
 
-<div id="cards"></div>
+<div id="cardsArea" class="cards-area"></div>
 
-<div class="box">
-<button class="btn-pink" onclick="copySecond()">変化コピー</button>
-<button class="btn-purple" onclick="location.href='tarot.html'">新しい問いを選ぶ🌿</button>
+<div id="changeCopyArea" class="box hidden">
+  <button class="btn-orange" onclick="copyChange()">変化をみる🌈</button>
 </div>
 
-<div class="box">
-しっくりこなかったら、
-気がすむまでカードを引きなおして大丈夫😊
+<div class="box info">
+  しっくりこなかったら、
+  気がすむまでAIと話しても大丈夫😊
 
-答えを出さなくてもいいよ🌈
+  答えを出さなくてもいいし、
+  そのまま対話しながらカードを引きなおしてもOKだよ🌈
 </div>
 
 <script>
-
-const cards=[
-"00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
-"03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
-"06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
-"09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
-"12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
-"15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
-"18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
-"21_The_World.png","22_Compass.png"
+const cardFiles = [
+  "00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
+  "03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
+  "06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
+  "09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
+  "12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
+  "15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
+  "18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
+  "21_The_World.png","22_Compass.png"
 ];
 
-let drawn=[];
+let currentCards = [];
+let firstReading = null;
 
-function draw(num){
-  drawn=[];
-  let html="";
-  for(let i=0;i<num;i++){
-    let c=cards[Math.floor(Math.random()*cards.length)];
-    let rev=Math.random()<0.5;
-    drawn.push(c+(rev?"（逆位置）":"（正位置）"));
-    html+=`<img src="cards/${c}" width="100">`;
-  }
-  document.getElementById("cards").innerHTML=html;
+function formatCardName(card){
+  const name = card.file.replace(".png", "");
+  return `${name}（${card.reversed ? "逆位置" : "正位置"}）`;
 }
 
-function copySecond(){
-  let q=localStorage.getItem("q");
+function loadFirstReading(){
+  const saved = sessionStorage.getItem("firstReading");
+  const firstInfo = document.getElementById("firstInfo");
 
-  let text=`さきほどの対話の続きです🌈
+  if(saved){
+    firstReading = JSON.parse(saved);
+    let text = "1回目の対話をふまえて進むよ🐾";
 
-最初の質問：
-${q}
+    if(firstReading.question){
+      text += `\n\n最初の質問：\n${firstReading.question}`;
+    }
 
-カード：
-${drawn.join("\n")}
+    firstInfo.textContent = text;
+  } else {
+    firstInfo.textContent = "先に1回目の対話をしてから来てね🐾";
+  }
+}
 
-思い込みやブロックに気づいたあとの、
+function drawCards(count){
+  const cardsArea = document.getElementById("cardsArea");
+  cardsArea.innerHTML = "";
+  currentCards = [];
+
+  let shuffled = [...cardFiles].sort(() => Math.random() - 0.5).slice(0, count);
+
+  shuffled.forEach(file => {
+    const reversed = Math.random() < 0.5;
+    currentCards.push({
+      file: file,
+      reversed: reversed
+    });
+
+    const box = document.createElement("div");
+    box.className = "card-box";
+
+    const img = document.createElement("img");
+    img.src = "cards/" + file;
+    if(reversed) img.classList.add("reversed");
+
+    box.appendChild(img);
+    cardsArea.appendChild(box);
+  });
+
+  document.getElementById("changeCopyArea").classList.remove("hidden");
+}
+
+function copyChange(){
+  let text = "さきほどの対話の続きです🌈\n\n";
+
+  if(firstReading && firstReading.question){
+    text += `最初の質問：\n${firstReading.question}\n\n`;
+  }
+
+  if(currentCards.length === 1){
+    text += `カード：\n${formatCardName(currentCards[0])}\n\n`;
+  } else {
+    currentCards.forEach((card, i) => {
+      text += `${i + 1}枚目：\n${formatCardName(card)}\n`;
+    });
+    text += "\n";
+  }
+
+  text += `思い込みやブロックに気づいたあとの、
 やさしい変化や流れを読み解いてください🌈
 
 当てたり正解を出したりしなくて大丈夫です。
@@ -96,9 +238,10 @@ ${drawn.join("\n")}
 やさしい問いをひとつ添えてください。`;
 
   navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨");
+  alert("コピーしたよ🌈");
 }
 
+loadFirstReading();
 </script>
 
 </body>
