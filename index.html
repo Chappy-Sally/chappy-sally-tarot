@@ -3,108 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>私に戻る対話ナビ🌈</title>
 
 <style>
-
 body{
-  font-family:"Hiragino Kaku Gothic ProN";
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
   text-align:center;
   background:#fff0f5;
-  padding:30px;
+  padding:30px 20px;
+  margin:0;
+  color:#5b3a1e;
 }
 
-/* カード風ボックス */
 .container{
-  background:white;
-  border-radius:25px;
-  padding:25px;
-  max-width:420px;
+  background:rgba(255,255,255,0.82);
+  border-radius:28px;
+  padding:26px 20px 30px;
+  max-width:520px;
   margin:auto;
-  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* 画像 */
 .main-img{
   width:100%;
-  border-radius:20px;
-  margin-bottom:20px;
+  max-width:420px;
+  border-radius:22px;
+  margin-bottom:22px;
 }
 
-/* タイトル */
 h1{
-  color:#5b3a1e;
-  font-size:22px;
-  margin-bottom:15px;
-}
-
-/* 説明文 */
-.desc{
+  font-size:24px;
+  line-height:1.5;
+  margin:0 0 16px;
   color:#6b4b2a;
-  font-size:15px;
-  line-height:1.8;
-  margin-bottom:20px;
 }
 
-/* ボタン */
+.desc{
+  font-size:16px;
+  line-height:1.9;
+  color:#7a5a38;
+  margin:0 0 24px;
+}
+
+.steps{
+  font-size:15px;
+  line-height:2;
+  color:#7a5a38;
+  margin:0 0 24px;
+}
+
 button{
   width:100%;
-  padding:14px;
+  max-width:420px;
+  padding:16px;
   margin:10px 0;
   border:none;
-  border-radius:30px;
-  font-size:16px;
+  border-radius:34px;
+  font-size:18px;
   cursor:pointer;
   color:white;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* コピー */
 .copy-btn{
-  background:linear-gradient(135deg,#f7c1cc,#e6a4b4);
+  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
 }
 
-/* スタート */
 .start-btn{
-  background:linear-gradient(135deg,#89a8ff,#c9b6ff);
+  background:linear-gradient(135deg,#8bb7ff,#9b97ff,#c9b6ff);
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="container">
+  <img src="cards/CS_hyousi.jpg" class="main-img" alt="表紙">
 
-<img src="cards/CS_hyousi.jpg" class="main-img">
+  <h1>私に戻る対話ナビ🌈</h1>
 
-<h1>私に戻る対話ナビ🌈</h1>
+  <p class="desc">
+    これは占いではなく、<br>
+    今のあなたの気持ちや状態をやさしく整えるための対話です🌿
+  </p>
 
-<div class="desc">
-これは占いではなく、<br>
-今のあなたの気持ちや状態をやさしく整えるための対話です🌿<br><br>
+  <div class="steps">
+    ① プロンプトをコピーしてAIへ送る<br>
+    ② タロットカードを引く<br>
+    ③ やさしく対話する
+  </div>
 
-① プロンプトをコピーしてAIへ送る<br>
-② タロットカードを引く<br>
-③ やさしく対話する<br>
-</div>
-
-<button class="copy-btn" onclick="copyPrompt()">
-✨プロンプトをコピー🐾
-</button>
-
-<button class="start-btn" onclick="goToTarot()">
-🔮タロットを引く
-</button>
-
+  <button class="copy-btn" onclick="copyPrompt()">✨プロンプトをコピー🐾</button>
+  <button class="start-btn" onclick="location.href='tarot.html'">🔮タロットを引く</button>
 </div>
 
 <script>
-
-// 🌿最初のプロンプト
 function copyPrompt(){
-
-const text = `これからカードを引いて対話します❣
+  const text = `これからカードを引いて対話します❣
 
 これは占いではなく、
 今のあなたの気持ちや状態をやさしく整理するための対話です🌿
@@ -125,15 +120,9 @@ const text = `これからカードを引いて対話します❣
 私が「もう十分」と感じたら
 ありがとうで終わります。`;
 
-navigator.clipboard.writeText(text);
-alert("コピーしたよ🐾✨");
+  navigator.clipboard.writeText(text);
+  alert("プロンプトをコピーしたよ🐾✨");
 }
-
-// 🔮タロット画面へ（あとでURL変更OK）
-function goToTarot(){
-  window.location.href = "tarot.html";
-}
-
 </script>
 
 </body>
