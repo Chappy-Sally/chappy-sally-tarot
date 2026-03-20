@@ -1,1 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>チャッピー＆サリーのタロットカード</title>
+
+<style>
+
+body{
+  font-family:"Hiragino Kaku Gothic ProN";
+  text-align:center;
+  background:#fff0f5;
+  padding:20px;
+}
+
+/* タイトル */
+.title-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+}
+
+.side-img{
+  width:70px;
+}
+
+h1{
+  color:#5b3a1e;
+  font-size:26px;
+}
+
+/* 表紙 */
+.header-img{
+  width:80%;
+  max-width:400px;
+  border-radius:20px;
+  margin:15px 0;
+}
+
+/* 入力欄 */
+input{
+  width:80%;
+  max-width:350px;
+  padding:12px;
+  border-radius:20px;
+  border:2px solid #d6b6ff;
+  margin-bottom:15px;
+}
+
+/* ボタン */
+button{
+  padding:12px 22px;
+  margin:6px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* カード */
+.cards-area{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:25px;
+}
+
+.card-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.card-box img{
+  width:160px;
+  border-radius:12px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* ⭐逆位置 */
+.reversed{
+  transform:rotate(180deg);
+}
+
+.label{
+  margin-top:6px;
+  font-size:14px;
+  color:#5b3a1e;
+}
+
+/* 🐾コピー */
+.copy-btn{
+  margin-top:8px;
+  font-size:22px;
+  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
+  color:white;
+  border:none;
+  border-radius:50%;
+  padding:10px 14px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(230,164,180,0.6);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title-wrap">
+<img src="cards/tarot_back.png" class="side-img">
+<h1>チャッピー＆サリーのタロットカード</h1>
+<img src="cards/tarot_back.png" class="side-img">
+</div>
+
+<img src="cards/CS_hyousi.jpg" class="header-img">
+
+<input id="question" placeholder="今日の問いを入れてから引く">
+
+<div>
+<button onclick="drawOne()">1枚引き</button>
+<button onclick="drawThree()">3枚引き</button>
+<button onclick="resetCards()">リセット</button>
+</div>
+
+<div class="cards-area" id="cards"></div>
+
+<script>
+
+const cardFiles=[
+"00_The_Fool.png",
+"01_The_Magician.png",
+"02_The_High_Priestess.png",
+"03_The_Empress.png",
+"04_The_Emperor.png",
+"05_The_Hierophant.png",
+"06_The_Lovers.png",
+"07_The_Chariot.png",
+"08_Strength.png",
+"09_The_Hermit.png",
+"10_Wheel_of_Fortune.png",
+"11_Justice.png",
+"12_The_Hanged_Man.png",
+"13_Death.png",
+"14_Temperance.png",
+"15_The_Devil.png",
+"16_The_Tower.png",
+"17_The_Star.png",
+"18_The_Moon.png",
+"19_The_Sun.png",
+"20_Judgement.png",
+"21_The_World.png",
+"22_Compass.png"
+];
+
+function getRandomCard(){
+  return cardFiles[Math.floor(Math.random()*cardFiles.length)];
+}
+
+function createCard(labelText){
+
+  const card=getRandomCard();
+
+  const box=document.createElement("div");
+  box.className="card-box";
+
+  const img=document.createElement("img");
+  img.src="cards/"+card;
+
+  // ⭐逆位置
+  const reversed=Math.random()<0.5;
+  if(reversed) img.classList.add("reversed");
+
+  // 🐾コピー内容
+  const copyText=card.replace(".png","")+
+  (reversed?"（逆位置）":"（正位置）");
+
+  const copyBtn=document.createElement("button");
+  copyBtn.className="copy-btn";
+  copyBtn.textContent="🐾";
+  copyBtn.onclick=()=>{
+    navigator.clipboard.writeText(copyText);
+    alert("コピーしたよ✨\n"+copyText);
+  };
+
+  const label=document.createElement("div");
+  label.className="label";
+  label.textContent=labelText;
+
+  box.appendChild(img);
+  box.appendChild(label);
+  box.appendChild(copyBtn);
+
+  return box;
+}
+
+function drawOne(){
+  const area=document.getElementById("cards");
+  area.innerHTML="";
+  area.appendChild(createCard(""));
+}
+
+function drawThree(){
+  const area=document.getElementById("cards");
+  area.innerHTML="";
+
+  area.appendChild(createCard(""));
+  area.appendChild(createCard(""));
+  area.appendChild(createCard(""));
+}
+
+function resetCards(){
+  document.getElementById("cards").innerHTML="";
+  document.getElementById("question").value=""; // ←★質問もクリア！
+}
+
+</script>
+
+</body>
+</html>
