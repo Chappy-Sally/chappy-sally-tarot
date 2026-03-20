@@ -7,20 +7,25 @@
 <title>チャッピー＆サリーのタロットカード</title>
 
 <style>
-
 body{
-  font-family:"Hiragino Kaku Gothic ProN";
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
   text-align:center;
   background:#fff0f5;
   padding:20px;
+  color:#5b3a1e;
+  margin:0;
 }
 
-/* タイトル */
+.hidden{
+  display:none;
+}
+
 .title-wrap{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:15px;
+  margin-top:10px;
 }
 
 .side-img{
@@ -30,195 +35,581 @@ body{
 h1{
   color:#5b3a1e;
   font-size:26px;
+  line-height:1.4;
+  margin:0;
 }
 
-/* 表紙 */
 .header-img{
   width:80%;
   max-width:400px;
   border-radius:20px;
-  margin:15px 0;
+  margin:18px 0;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
 }
 
-/* 入力欄 */
-input{
-  width:80%;
-  max-width:350px;
-  padding:12px;
-  border-radius:20px;
+.desc{
+  font-size:16px;
+  color:#6b4b2a;
+  margin:12px auto 16px;
+  line-height:1.8;
+  width:90%;
+  max-width:520px;
+}
+
+.notice-box{
+  width:90%;
+  max-width:560px;
+  margin:16px auto 0;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.78);
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  font-size:15px;
+  line-height:1.8;
+  color:#8a6a4a;
+}
+
+.input-note{
+  font-size:14px;
+  color:#8a6a4a;
+  margin:12px 0 8px;
+}
+
+input, select{
+  width:82%;
+  max-width:380px;
+  padding:14px;
+  border-radius:22px;
   border:2px solid #d6b6ff;
-  margin-bottom:15px;
+  margin-bottom:12px;
+  font-size:16px;
+  box-sizing:border-box;
+  background:white;
 }
 
-/* ボタン */
 button{
-  padding:12px 22px;
+  padding:13px 20px;
   margin:6px;
   border:none;
   border-radius:30px;
-  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
   color:white;
   font-size:16px;
   cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* カード */
+.draw-btn{
+  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
+}
+
+.copy-btn{
+  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
+}
+
+.kizuki-btn{
+  background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
+}
+
+.change-btn{
+  background:linear-gradient(135deg,#ffcf7d,#ffb76b,#ff9f68);
+}
+
+.back-btn{
+  background:linear-gradient(135deg,#a89adb,#cdbff4);
+}
+
+.question-btn{
+  background:linear-gradient(135deg,#95d8b1,#71c89b,#7ed2c0);
+}
+
 .cards-area{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
   gap:20px;
-  margin-top:25px;
+  margin-top:24px;
+  min-height:180px;
 }
 
 .card-box{
   display:flex;
   flex-direction:column;
   align-items:center;
+  width:170px;
 }
 
 .card-box img{
   width:160px;
   border-radius:12px;
   box-shadow:0 6px 14px rgba(0,0,0,0.2);
+  background:white;
 }
 
-/* ⭐逆位置 */
 .reversed{
   transform:rotate(180deg);
 }
 
 .label{
-  margin-top:6px;
-  font-size:14px;
+  margin-top:10px;
+  font-size:15px;
   color:#5b3a1e;
+  line-height:1.5;
+  min-height:24px;
 }
 
-/* 🐾コピー */
-.copy-btn{
-  margin-top:8px;
-  font-size:22px;
-  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-  color:white;
+.summary-box{
+  width:92%;
+  max-width:600px;
+  margin:22px auto 0;
+  padding:18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.82);
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.summary-title{
+  font-size:20px;
+  font-weight:bold;
+  color:#6b4b2a;
+  margin-bottom:12px;
+}
+
+.summary-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.mini-btn{
+  padding:12px 18px;
   border:none;
-  border-radius:50%;
-  padding:10px 14px;
+  border-radius:26px;
+  color:white;
+  font-size:17px;
   cursor:pointer;
-  box-shadow:0 4px 10px rgba(230,164,180,0.6);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
+.mini-copy{
+  background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
+}
+
+.mini-ai{
+  background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
+}
+
+.mini-change{
+  background:linear-gradient(135deg,#ffcf7d,#ffb76b,#ff9f68);
+}
+
+.change-guide{
+  width:92%;
+  max-width:560px;
+  margin:18px auto 0;
+  padding:16px 16px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.82);
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  font-size:18px;
+  color:#7a4d28;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+.question-result{
+  width:90%;
+  max-width:560px;
+  margin:10px auto 0;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.78);
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  font-size:16px;
+  color:#6b4b2a;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+@media (max-width: 480px){
+  .side-img{
+    width:54px;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  .card-box{
+    width:150px;
+  }
+
+  .card-box img{
+    width:140px;
+  }
+
+  .mini-btn{
+    font-size:15px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <div class="title-wrap">
-<img src="cards/tarot_back.png" class="side-img">
-<h1>チャッピー＆サリーのタロットカード</h1>
-<img src="cards/tarot_back.png" class="side-img">
+  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
+  <h1>チャッピー＆サリーの<br>タロットカード</h1>
+  <img src="cards/tarot_back.png" class="side-img" alt="カード裏">
 </div>
 
-<img src="cards/CS_hyousi.jpg" class="header-img">
+<img src="cards/CS_hyousi.jpg" class="header-img" alt="表紙">
 
+<p class="desc">
+これは占いではなく、<br>
+今のあなたの気持ちや状態をやさしく整えるための対話です🌿
+</p>
+
+<div class="input-note">自分で聞きたいことがある人はこちら🐾</div>
 <input id="question" placeholder="今日の問いを入れてから引く">
 
+<div class="input-note">問いが浮かばないときは、カテゴリーを選んでね🌈</div>
+<select id="question-category">
+  <option value="">カテゴリーを選ぶ</option>
+  <option value="S">初級（安心に戻る）</option>
+  <option value="C">中級（気づきを深める）</option>
+  <option value="J">上級（内側を見つめる）</option>
+</select>
+<br>
+<button class="question-btn" onclick="showRandomQuestion()">質問をもらう🌿</button>
+
+<div id="question-result" class="question-result hidden"></div>
+
 <div>
-<button onclick="drawOne()">1枚引き</button>
-<button onclick="drawThree()">3枚引き</button>
-<button onclick="resetCards()">リセット</button>
+  <button class="draw-btn" onclick="drawOne()">1枚引き</button>
+  <button class="draw-btn" onclick="drawThree()">3枚引き</button>
+  <button class="back-btn" onclick="resetCards()">リセット</button>
 </div>
 
 <div class="cards-area" id="cards"></div>
 
-<script>
+<div id="summary-area"></div>
 
-const cardFiles=[
-"00_The_Fool.png",
-"01_The_Magician.png",
-"02_The_High_Priestess.png",
-"03_The_Empress.png",
-"04_The_Emperor.png",
-"05_The_Hierophant.png",
-"06_The_Lovers.png",
-"07_The_Chariot.png",
-"08_Strength.png",
-"09_The_Hermit.png",
-"10_Wheel_of_Fortune.png",
-"11_Justice.png",
-"12_The_Hanged_Man.png",
-"13_Death.png",
-"14_Temperance.png",
-"15_The_Devil.png",
-"16_The_Tower.png",
-"17_The_Star.png",
-"18_The_Moon.png",
-"19_The_Sun.png",
-"20_Judgement.png",
-"21_The_World.png",
-"22_Compass.png"
+<div class="notice-box">
+  しっくりこなかったら、<br>
+  気がすむまで話しても大丈夫😊<br>
+  答えを出さなくてもいいし、<br>
+  途中でカードを引きなおしてもOKだよ🌈
+</div>
+
+<script>
+const cardFiles = [
+  "00_The_Fool.png",
+  "01_The_Magician.png",
+  "02_The_High_Priestess.png",
+  "03_The_Empress.png",
+  "04_The_Emperor.png",
+  "05_The_Hierophant.png",
+  "06_The_Lovers.png",
+  "07_The_Chariot.png",
+  "08_Strength.png",
+  "09_The_Hermit.png",
+  "10_Wheel_of_Fortune.png",
+  "11_Justice.png",
+  "12_The_Hanged_Man.png",
+  "13_Death.png",
+  "14_Temperance.png",
+  "15_The_Devil.png",
+  "16_The_Tower.png",
+  "17_The_Star.png",
+  "18_The_Moon.png",
+  "19_The_Sun.png",
+  "20_Judgement.png",
+  "21_The_World.png",
+  "22_Compass.png"
 ];
 
-function getRandomCard(){
-  return cardFiles[Math.floor(Math.random()*cardFiles.length)];
+const S_questions = [
+  "今の私は、何をそんなに心配しているんだろう？",
+  "本当は、もう大丈夫なことは何？",
+  "今ここで、力を抜いてもいい理由は？",
+  "私は今、誰かに証明しなくてもいい？",
+  "いちばん安心できる考え方は何？"
+];
+
+const C_questions = [
+  "このカードは、今の私のどんなテーマを映している？",
+  "今の私に必要な気づきは何？",
+  "私は何を見ないようにしている？",
+  "今のモヤモヤの正体は何？",
+  "ここから流れを変える鍵は何？"
+];
+
+const J_questions = [
+  "私が今、無意識に避けている「本当の願い」は何？",
+  "この状況が私に教えている、最も大切なことは？",
+  "私は何を「もう終わったこと」にしようとしている？",
+  "今の違和感は、どんな真実を守ろうとしている？",
+  "私が自分にまだ許していないことは？"
+];
+
+let currentCards = [];
+let currentQuestionMode = "";
+let currentSelectedQuestion = "";
+
+function getQuestionText(){
+  const manual = document.getElementById("question").value.trim();
+  if(manual){
+    return manual;
+  }
+  return currentSelectedQuestion;
 }
 
-function createCard(labelText){
+function getRandomItem(list){
+  return list[Math.floor(Math.random() * list.length)];
+}
 
-  const card=getRandomCard();
+function getRandomItemsNoRepeat(list, count){
+  const shuffled = [...list].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
 
-  const box=document.createElement("div");
-  box.className="card-box";
+function formatCardName(fileName, reversed){
+  return fileName.replace(".png","") + "（" + (reversed ? "逆位置" : "正位置") + "）";
+}
 
-  const img=document.createElement("img");
-  img.src="cards/"+card;
+function copyToClipboard(text){
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ✨\n\n" + text);
+}
 
-  // ⭐逆位置
-  const reversed=Math.random()<0.5;
-  if(reversed) img.classList.add("reversed");
+function createCard(fileName, reversed, labelText = ""){
+  const box = document.createElement("div");
+  box.className = "card-box";
 
-  // 🐾コピー内容
-  const copyText=card.replace(".png","")+
-  (reversed?"（逆位置）":"（正位置）");
+  const img = document.createElement("img");
+  img.src = "cards/" + fileName;
+  img.alt = fileName;
 
-  const copyBtn=document.createElement("button");
-  copyBtn.className="copy-btn";
-  copyBtn.textContent="🐾";
-  copyBtn.onclick=()=>{
-    navigator.clipboard.writeText(copyText);
-    alert("コピーしたよ✨\n"+copyText);
-  };
+  if(reversed){
+    img.classList.add("reversed");
+  }
 
-  const label=document.createElement("div");
-  label.className="label";
-  label.textContent=labelText;
+  const label = document.createElement("div");
+  label.className = "label";
+  label.textContent = labelText;
 
   box.appendChild(img);
   box.appendChild(label);
-  box.appendChild(copyBtn);
 
   return box;
 }
 
+function clearResultArea(){
+  document.getElementById("cards").innerHTML = "";
+  document.getElementById("summary-area").innerHTML = "";
+}
+
 function drawOne(){
-  const area=document.getElementById("cards");
-  area.innerHTML="";
-  area.appendChild(createCard(""));
+  clearResultArea();
+
+  const file = getRandomItem(cardFiles);
+  const reversed = Math.random() < 0.5;
+
+  currentCards = [
+    { file, reversed }
+  ];
+
+  const area = document.getElementById("cards");
+  area.appendChild(createCard(file, reversed, ""));
+  showSummaryButtons(1);
 }
 
 function drawThree(){
-  const area=document.getElementById("cards");
-  area.innerHTML="";
+  clearResultArea();
 
-  area.appendChild(createCard(""));
-  area.appendChild(createCard(""));
-  area.appendChild(createCard(""));
+  const selected = getRandomItemsNoRepeat(cardFiles, 3);
+  currentCards = selected.map(file => ({
+    file,
+    reversed: Math.random() < 0.5
+  }));
+
+  const area = document.getElementById("cards");
+  currentCards.forEach(card => {
+    area.appendChild(createCard(card.file, card.reversed, ""));
+  });
+
+  showSummaryButtons(3);
+}
+
+function buildCopyText(){
+  const question = getQuestionText();
+  let text = "";
+
+  if(question){
+    text += "質問：\n" + question + "\n\n";
+  }
+
+  if(currentCards.length === 1){
+    text += "カード：\n" + formatCardName(currentCards[0].file, currentCards[0].reversed);
+  } else {
+    currentCards.forEach((card, index) => {
+      text += (index + 1) + "枚目：\n" + formatCardName(card.file, card.reversed) + "\n";
+    });
+  }
+
+  return text.trim();
+}
+
+function buildKizukiText(){
+  return buildCopyText();
+}
+
+function buildChangeText(){
+  const question = getQuestionText();
+  let text = "さきほどの対話の続きです🌈\n\n";
+
+  if(question){
+    text += "最初の質問：\n" + question + "\n\n";
+  }
+
+  if(currentCards.length === 1){
+    text += "カード：\n" + formatCardName(currentCards[0].file, currentCards[0].reversed) + "\n\n";
+    text += "思い込みやブロックに気づいたあとの、\n";
+    text += "やさしい変化や流れを読み解いてください🌈\n\n";
+    text += "当てたり正解を出したりしなくて大丈夫です。\n";
+    text += "やさしく安心を大切にしながら、\n\n";
+    text += "変化してきた今の私の状態を、\n";
+    text += "やさしくシンプルに伝えてください。\n\n";
+    text += "必要以上に深掘りせず、\n";
+    text += "今ここで受け取れる範囲で大丈夫です。\n\n";
+    text += "可能であれば、\n";
+    text += "やさしい問いをひとつ添えてください。";
+  } else {
+    currentCards.forEach((card, index) => {
+      text += (index + 1) + "枚目：\n" + formatCardName(card.file, card.reversed) + "\n";
+    });
+    text += "\n思い込みやブロックに気づいたあとの、\n";
+    text += "やさしい変化や流れを読み解いてください🌈\n\n";
+    text += "当てたり正解を出したりしなくて大丈夫です。\n";
+    text += "やさしく安心を大切にしながら、\n\n";
+    text += "変化してきた今の私の状態を、\n";
+    text += "やさしくシンプルに伝えてください。\n\n";
+    text += "カードの意味はそれぞれ簡潔に、\n";
+    text += "今の私に必要なことだけをやさしく伝えてください。\n\n";
+    text += "必要以上に深掘りせず、\n";
+    text += "今ここで受け取れる範囲で大丈夫です。\n\n";
+    text += "可能であれば、\n";
+    text += "やさしい問いをひとつ添えてください。";
+  }
+
+  return text;
+}
+
+function showSummaryButtons(cardCount){
+  const area = document.getElementById("summary-area");
+  area.innerHTML = "";
+
+  const box = document.createElement("div");
+  box.className = "summary-box";
+
+  const title = document.createElement("div");
+  title.className = "summary-title";
+  title.textContent = cardCount === 1 ? "✨ 1枚の対話ナビ" : "✨ 3枚の対話ナビ";
+
+  const buttons = document.createElement("div");
+  buttons.className = "summary-buttons";
+
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "mini-btn mini-copy";
+  copyBtn.textContent = cardCount === 1 ? "1枚コピー🐾" : "3枚コピー🐾";
+  copyBtn.onclick = () => copyToClipboard(buildCopyText());
+
+  const kizukiBtn = document.createElement("button");
+  kizukiBtn.className = "mini-btn mini-ai";
+  kizukiBtn.textContent = "気づきコピー🤖";
+  kizukiBtn.onclick = () => copyToClipboard(buildKizukiText());
+
+  buttons.appendChild(copyBtn);
+  buttons.appendChild(kizukiBtn);
+
+  box.appendChild(title);
+  box.appendChild(buttons);
+  area.appendChild(box);
+
+  const guide = document.createElement("div");
+  guide.className = "change-guide";
+  guide.textContent =
+    "気がついたあなたは、\n" +
+    "もう大丈夫に向かってるよ😊\n\n" +
+    "そのまま少しゆるんだ状態で、\n" +
+    "もう一度カードを引いてみてね🌈";
+
+  area.appendChild(guide);
+
+  const changeBox = document.createElement("div");
+  changeBox.className = "summary-box";
+
+  const changeTitle = document.createElement("div");
+  changeTitle.className = "summary-title";
+  changeTitle.textContent = "🌈 2回目の対話";
+
+  const changeButtons = document.createElement("div");
+  changeButtons.className = "summary-buttons";
+
+  const changeBtn = document.createElement("button");
+  changeBtn.className = "mini-btn mini-change";
+  changeBtn.textContent = "変化をみる🌈";
+  changeBtn.onclick = () => copyToClipboard(buildChangeText());
+
+  changeButtons.appendChild(changeBtn);
+  changeBox.appendChild(changeTitle);
+  changeBox.appendChild(changeButtons);
+  area.appendChild(changeBox);
+}
+
+function showRandomQuestion(){
+  const category = document.getElementById("question-category").value;
+  const area = document.getElementById("question-result");
+
+  let question = "";
+  let code = "";
+
+  if(category === "S"){
+    question = getRandomItem(S_questions);
+    code = "S";
+  } else if(category === "C"){
+    question = getRandomItem(C_questions);
+    code = "C";
+  } else if(category === "J"){
+    question = getRandomItem(J_questions);
+    code = "J";
+  } else {
+    area.classList.remove("hidden");
+    area.textContent = "先にカテゴリーを選んでね🐾";
+    return;
+  }
+
+  currentSelectedQuestion = question;
+  currentQuestionMode = code;
+
+  area.classList.remove("hidden");
+  area.textContent =
+    "今のあなたにちょうどいい問いだよ🐾\n\n" + question;
 }
 
 function resetCards(){
-  document.getElementById("cards").innerHTML="";
-  document.getElementById("question").value=""; // ←★質問もクリア！
+  currentCards = [];
+  currentQuestionMode = "";
+  currentSelectedQuestion = "";
+  document.getElementById("cards").innerHTML = "";
+  document.getElementById("summary-area").innerHTML = "";
+  document.getElementById("question").value = "";
+  document.getElementById("question-category").value = "";
+  document.getElementById("question-result").innerHTML = "";
+  document.getElementById("question-result").classList.add("hidden");
 }
-
 </script>
 
 </body>
