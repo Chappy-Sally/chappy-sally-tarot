@@ -1,254 +1,141 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>チャッピー＆サリーの対話ナビ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      font-family:"Hiragino Kaku Gothic ProN", sans-serif;
-      text-align:center;
-      background:#fff0f5;
-      padding:20px 14px 40px;
-      color:#5b3a1e;
-      margin:0;
-    }
+<title>チャッピー＆サリーの対話ナビ</title>
 
-    .main-card{
-      width:92%;
-      max-width:620px;
-      margin:0 auto;
-      background:rgba(255,255,255,0.88);
-      border-radius:28px;
-      padding:24px 16px 28px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.08);
-    }
+<style>
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  text-align:center;
+  background:#fff0f5;
+  padding:20px;
+  margin:0;
+}
 
-    .title-wrap{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    }
+.card{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
 
-    .title-icon{
-      font-size:28px;
-    }
+h1{
+  font-size:26px;
+  margin-bottom:10px;
+}
 
-    h1{
-      font-size:30px;
-      line-height:1.4;
-      margin:0;
-      color:#6b4b2a;
-    }
+img{
+  width:90%;
+  border-radius:20px;
+  margin:15px 0;
+}
 
-    .hero-img{
-      width:88%;
-      max-width:460px;
-      border-radius:22px;
-      margin:18px 0 20px;
-      box-shadow:0 8px 18px rgba(0,0,0,0.12);
-    }
+.desc{
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:20px;
+}
 
-    .desc{
-      font-size:18px;
-      line-height:1.9;
-      margin:0 0 18px;
-      color:#7b5b39;
-      white-space:pre-line;
-    }
+.input-box{
+  margin-bottom:15px;
+}
 
-    .nickname-box{
-      width:92%;
-      max-width:500px;
-      margin:0 auto 18px;
-      padding:18px 14px;
-      background:#fff8fc;
-      border-radius:22px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.05);
-    }
+input{
+  width:80%;
+  padding:12px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
 
-    .nickname-label{
-      font-size:18px;
-      color:#6b4b2a;
-      margin-bottom:6px;
-      font-weight:bold;
-    }
+button{
+  padding:12px 18px;
+  margin:8px;
+  border:none;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
+}
 
-    .nickname-note{
-      font-size:14px;
-      color:#9a7b5d;
-      line-height:1.7;
-      margin-bottom:12px;
-      white-space:pre-line;
-    }
-
-    input{
-      width:92%;
-      max-width:380px;
-      padding:14px 16px;
-      border-radius:20px;
-      border:2px solid #d8c0ff;
-      font-size:17px;
-      box-sizing:border-box;
-      background:white;
-      margin-bottom:10px;
-    }
-
-    button{
-      padding:14px 22px;
-      margin:8px 6px;
-      border:none;
-      border-radius:28px;
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .btn-pink{
-      background:linear-gradient(135deg,#f6b1c7,#eab0f5);
-    }
-
-    .btn-purple{
-      background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
-    }
-
-    .btn-orange{
-      background:linear-gradient(135deg,#ffbe73,#f6a65d);
-    }
-
-    .saved-name{
-      font-size:15px;
-      color:#8a6a4a;
-      margin-top:8px;
-      min-height:24px;
-    }
-
-    .guide-box{
-      width:92%;
-      max-width:500px;
-      margin:18px auto 0;
-      padding:18px 14px;
-      background:#fffdf8;
-      border-radius:22px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .guide-title{
-      font-size:19px;
-      font-weight:bold;
-      color:#6b4b2a;
-      margin-bottom:10px;
-    }
-
-    .guide-text{
-      font-size:16px;
-      line-height:1.9;
-      color:#7b5b39;
-      white-space:pre-line;
-    }
-
-    @media (max-width:480px){
-      h1{
-        font-size:25px;
-      }
-      .desc,.guide-text{
-        font-size:15px;
-      }
-      .nickname-label{
-        font-size:16px;
-      }
-      button,input{
-        font-size:16px;
-      }
-    }
-  </style>
+.btn-pink{background:#f7a8c4;}
+.btn-purple{background:#bba4ff;}
+.btn-orange{background:#ffb26b;}
+</style>
 </head>
 
 <body>
 
-  <div class="main-card">
-    <div class="title-wrap">
-      <div class="title-icon">🐶</div>
-      <h1>チャッピー＆サリーの<br>対話ナビ🌈</h1>
-      <div class="title-icon">💖</div>
-    </div>
+<div class="card">
 
-    <img src="cards/22_Compass.png" class="hero-img" alt="羅針盤">
+<h1>🐶対話ナビ🌈</h1>
 
-    <p class="desc">これは占いではなく、
-今のあなたの気持ちや状態を
-やさしく整えるための対話です🌿
+<img src="CS_hyousi.jpg">
 
-AIはあなたの相棒として、
-そっと寄り添いながら一緒に整理していきます😊</p>
+<div class="desc">
+これは占いではなく、<br>
+今のあなたの気持ちをやさしく整える対話です🌿<br><br>
 
-    <div class="nickname-box">
-      <div class="nickname-label">相棒のニックネームをつけてね😊</div>
-      <div class="nickname-note">あとから変えてもOKだよ🌈
-呼びやすい名前をつけてみてね🐾</div>
+AIはあなたの相棒として、<br>
+やさしく寄り添いながら一緒に整理していきます😊
+</div>
 
-      <input id="partnerName" placeholder="例：チャッピー、サリー、ぽんた">
-      <br>
-      <button class="btn-pink" onclick="savePartnerName()">相棒名を保存🐾</button>
-      <div id="savedName" class="saved-name"></div>
-    </div>
+<!-- あなたの名前 -->
+<div class="input-box">
+<div>あなたの名前😊</div>
+<input id="userName" placeholder="例：さちよ">
+</div>
 
-    <div>
-      <button class="btn-orange" onclick="copyPrompt()">プロンプトをコピー🐾</button>
-      <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
-    </div>
+<!-- 相棒の名前 -->
+<div class="input-box">
+<div>相棒のニックネーム🐾</div>
+<input id="partnerName" placeholder="例：チャッピー">
+</div>
 
-    <div class="guide-box">
-      <div class="guide-title">使い方🌿</div>
-      <div class="guide-text">① 相棒の名前をつける
-② プロンプトをコピーしてAIへ送る
-③ 気持ちや質問を選んでカードを引く
-④ やさしく対話する</div>
-    </div>
-  </div>
+<button class="btn-pink" onclick="saveNames()">名前を保存✨</button>
 
-  <script>
-    function savePartnerName(){
-      const name = document.getElementById("partnerName").value.trim();
-      localStorage.setItem("partnerName", name);
+<br>
 
-      const savedName = document.getElementById("savedName");
-      if(name){
-        savedName.textContent = `相棒の名前は「${name}」だよ😊`;
-      }else{
-        savedName.textContent = "相棒の名前を空にしたよ😊";
-      }
-    }
+<button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
+<button class="btn-purple" onclick="location.href='tarot.html'">対話ナビへ🔮</button>
 
-    function loadPartnerName(){
-      const saved = localStorage.getItem("partnerName") || "";
-      document.getElementById("partnerName").value = saved;
+</div>
 
-      const savedName = document.getElementById("savedName");
-      if(saved){
-        savedName.textContent = `相棒の名前は「${saved}」だよ😊`;
-      }else{
-        savedName.textContent = "";
-      }
-    }
+<script>
 
-    function copyPrompt(){
-      const partnerName = localStorage.getItem("partnerName") || "相棒";
+function saveNames(){
+  const user = document.getElementById("userName").value;
+  const partner = document.getElementById("partnerName").value;
 
-      const text = `これからカードを引いて対話します❣
+  localStorage.setItem("userName", user);
+  localStorage.setItem("partnerName", partner);
 
-あなたは私の相棒「${partnerName}」として、
+  alert("保存したよ😊");
+}
+
+function loadNames(){
+  document.getElementById("userName").value = localStorage.getItem("userName") || "";
+  document.getElementById("partnerName").value = localStorage.getItem("partnerName") || "";
+}
+
+function copyPrompt(){
+
+  const user = localStorage.getItem("userName") || "私";
+  const partner = localStorage.getItem("partnerName") || "相棒";
+
+  const text = `私は「${user}」です。
+
+あなたは私の相棒「${partner}」として、
 やさしく安心を大切にしながら
 今の私の気持ちを一緒に整理してください😊
 
 これは占いではなく、
-今の私の気持ちや状態をやさしく整理するための対話です🌿
+今の私の気持ちや状態をやさしく整える対話です🌿
 
-当てたり正解を出したりしなくて大丈夫です☝️
+当てたり正解を出したりしなくて大丈夫です。
 
 カードの意味はそれぞれ簡潔に、
 今の私に必要なことだけをやさしく伝えてください。
@@ -256,18 +143,16 @@ AIはあなたの相棒として、
 必要以上に深掘りせず、
 今ここで受け取れる範囲で大丈夫です。
 
-まずはやさしく短く伝えてください。
-そのあと、やさしい質問をひとつください。
+やさしく短く伝えてください。
+そのあと、やさしい問いをひとつ添えてください。`;
 
-私が「もう十分」と感じたら
-ありがとうで終わります。`;
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ🐾");
+}
 
-      navigator.clipboard.writeText(text);
-      alert("プロンプトをコピーしたよ🐾✨");
-    }
+window.onload = loadNames;
 
-    window.addEventListener("DOMContentLoaded", loadPartnerName);
-  </script>
+</script>
 
 </body>
 </html>
