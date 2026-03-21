@@ -45,7 +45,7 @@ body{
   margin:8px 0 6px;
 }
 
-select, input, textarea{
+select, textarea{
   width:92%;
   max-width:500px;
   box-sizing:border-box;
@@ -94,10 +94,6 @@ button:disabled{
 
 .btn-orange{
   background:linear-gradient(135deg,#ffbe73,#f6a65d);
-}
-
-.btn-green{
-  background:linear-gradient(135deg,#75d7b5,#6bc3bb);
 }
 
 .level-row,
@@ -178,7 +174,7 @@ button:disabled{
   .desc, .question-box, .notice{
     font-size:16px;
   }
-  button, input, textarea, select{
+  button, textarea, select{
     font-size:16px;
   }
   .card-box img{
@@ -490,7 +486,6 @@ function selectLevel(level){
   document.getElementById("levelS").classList.remove("selected-level");
   document.getElementById("levelC").classList.remove("selected-level");
   document.getElementById("levelJ").classList.remove("selected-level");
-
   document.getElementById("level" + level).classList.add("selected-level");
 
   const area = document.getElementById("subCategoryArea");
@@ -576,13 +571,17 @@ function getFeeling(){
   const selected = document.getElementById("feelingSelect").value.trim();
   const free = document.getElementById("feelingInput").value.trim();
 
-  if(free){
-    return free;
-  }
-  if(selected){
-    return selected;
-  }
+  if(free) return free;
+  if(selected) return selected;
   return "（特になし）";
+}
+
+function getUserName(){
+  return localStorage.getItem("userName") || "あなた";
+}
+
+function getPartnerName(){
+  return localStorage.getItem("partnerName") || "相棒";
 }
 
 function copyMain(){
@@ -591,8 +590,12 @@ function copyMain(){
     return;
   }
 
-  let text = "";
+  const userName = getUserName();
+  const partnerName = getPartnerName();
 
+  let text = "";
+  text += `${userName}へ🌿\n\n`;
+  text += `${partnerName}より😊\n\n`;
   text += `今の私の気持ち：\n${getFeeling()}\n\n`;
   text += `質問：\n${currentQuestion || "（直感で引いた）"}\n\n`;
   text += "カード：\n";
@@ -611,7 +614,14 @@ function copyExtra(){
     return;
   }
 
-  let text = "追加カード：\n";
+  const userName = getUserName();
+  const partnerName = getPartnerName();
+
+  let text = "";
+  text += `${userName}へ🌈\n\n`;
+  text += `${partnerName}より😊\n\n`;
+  text += "追加カード：\n";
+
   currentCards.forEach(card => {
     text += `${formatCard(card)}\n`;
   });
