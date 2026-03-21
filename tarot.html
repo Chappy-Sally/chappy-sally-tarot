@@ -158,13 +158,42 @@ button:disabled{
 }
 
 .hidden{
-  display:none;
+  display:none !important;
 }
 
 .small-note{
   font-size:14px;
   color:#9b7c5c;
   margin-top:4px;
+}
+
+#welcomeScreen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  animation:fadeIn 0.8s ease;
+}
+
+#welcomeScreen img{
+  width:84%;
+  max-width:420px;
+  border-radius:24px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+#welcomeText{
+  margin-top:18px;
+  font-size:28px;
+  color:#6b4b2a;
+  line-height:1.6;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
 @media (max-width: 480px){
@@ -182,74 +211,81 @@ button:disabled{
     max-width:40vw;
     min-width:110px;
   }
+  #welcomeText{
+    font-size:24px;
+  }
 }
 </style>
 </head>
 <body>
 
-<div class="page-title">🐶 チャッピー＆サリーの対話ナビ🌈</div>
+<div id="mainContent">
+  <div class="page-title">🐶 チャッピー＆サリーの対話ナビ🌈</div>
 
-<div class="box">
-  <p class="desc">
-    これは占いではなく、<br>
-    今のあなたの気持ちをやさしく整える対話です🌿
-  </p>
+  <div class="box">
+    <p class="desc">
+      これは占いではなく、<br>
+      今のあなたの気持ちをやさしく整える対話です🌿
+    </p>
 
-  <div class="label">
-    今の気持ちを選んでね😊<br>
-    （よくわからない・もやっとしてる、でもOK）
+    <div class="label">今の気持ちを選んでね😊</div>
+
+    <select id="feelingSelect">
+      <option value="">選択してください</option>
+      <option value="よくわからない">よくわからない</option>
+      <option value="もやっとしてる">もやっとしてる</option>
+      <option value="なんとなく不安">なんとなく不安</option>
+      <option value="少し安心してる">少し安心してる</option>
+    </select>
+
+    <div class="label">ひとこと追加したいとき</div>
+    <textarea id="feelingInput" placeholder="自由入力OK"></textarea>
   </div>
 
-  <select id="feelingSelect">
-    <option value="">選択してください</option>
-    <option value="よくわからない">よくわからない</option>
-    <option value="もやっとしてる">もやっとしてる</option>
-    <option value="なんとなく不安">なんとなく不安</option>
-    <option value="少し安心してる">少し安心してる</option>
-  </select>
+  <div class="box">
+    <div class="label" style="font-size:18px; font-weight:bold; color:#6b4b2a;">カテゴリ選択🌿</div>
 
-  <div class="label">ひとこと追加したいとき</div>
-  <textarea id="feelingInput" placeholder="自由入力OK"></textarea>
-</div>
+    <div class="level-row">
+      <button id="levelS" class="btn-pink" onclick="selectLevel('S')">初級</button>
+      <button id="levelC" class="btn-purple" onclick="selectLevel('C')">中級</button>
+      <button id="levelJ" class="btn-orange" onclick="selectLevel('J')">上級</button>
+    </div>
 
-<div class="box">
-  <div class="label" style="font-size:18px; font-weight:bold; color:#6b4b2a;">カテゴリ選択🌿</div>
+    <div id="subCategoryArea" class="sub-row"></div>
 
-  <div class="level-row">
-    <button id="levelS" class="btn-pink" onclick="selectLevel('S')">初級</button>
-    <button id="levelC" class="btn-purple" onclick="selectLevel('C')">中級</button>
-    <button id="levelJ" class="btn-orange" onclick="selectLevel('J')">上級</button>
+    <div id="questionBox" class="question-box hidden"></div>
   </div>
 
-  <div id="subCategoryArea" class="sub-row"></div>
-
-  <div id="questionBox" class="question-box hidden"></div>
-</div>
-
-<div class="box">
-  <div class="draw-row">
-    <button id="draw1" class="btn-pink" onclick="drawCards(1)" disabled>1枚引き</button>
-    <button id="draw3" class="btn-purple" onclick="drawCards(3)" disabled>3枚引き</button>
-    <button class="btn-purple" onclick="resetAll()">リセット</button>
+  <div class="box">
+    <div class="draw-row">
+      <button id="draw1" class="btn-pink" onclick="drawCards(1)" disabled>1枚引き</button>
+      <button id="draw3" class="btn-purple" onclick="drawCards(3)" disabled>3枚引き</button>
+      <button class="btn-orange" onclick="goHome()">HOMEへ戻る</button>
+    </div>
+    <div class="small-note">質問を選ぶとカードが引けるようになるよ🐾</div>
   </div>
-  <div class="small-note">質問を選ぶとカードが引けるようになるよ🐾</div>
-</div>
 
-<div id="cardsArea" class="cards-area"></div>
+  <div id="cardsArea" class="cards-area"></div>
 
-<div id="copyArea" class="box hidden">
-  <div class="page-title" style="font-size:24px; margin:0 0 10px;">✨ 気づきコピー</div>
-  <button class="btn-pink" onclick="copyMain()">対話スタートコピー🐾</button>
-  <br>
-  <button class="btn-orange" onclick="copyExtra()">追加カードコピー🌈</button>
-</div>
+  <div id="copyArea" class="box hidden">
+    <div class="page-title" style="font-size:24px; margin:0 0 10px;">✨ 気づきコピー</div>
+    <button class="btn-pink" onclick="copyMain()">対話スタートコピー🐾</button>
+    <br>
+    <button class="btn-orange" onclick="copyExtra()">追加カードコピー🌈</button>
+  </div>
 
-<div id="noticeArea" class="box hidden">
-  <div class="notice">しっくりこなかったら、
+  <div id="noticeArea" class="box hidden">
+    <div class="notice">しっくりこなかったら、
 気がすむまでAIと話しても大丈夫😊
 
 答えを出さなくてもいいし、
 そのまま対話しながらカードを引きなおしてもOKだよ🌈</div>
+  </div>
+</div>
+
+<div id="welcomeScreen" class="hidden">
+  <img src="cards/cs_ufufu.png" alt="おかえり">
+  <div id="welcomeText"></div>
 </div>
 
 <script>
@@ -630,28 +666,18 @@ function copyExtra(){
   alert("コピーしたよ🐾");
 }
 
-function resetAll(){
-  currentLevel = "";
-  currentQuestion = "";
-  currentSubCategory = "";
-  currentCards = [];
+function goHome(){
+  const main = document.getElementById("mainContent");
+  const welcome = document.getElementById("welcomeScreen");
+  const name = getUserName();
 
-  document.getElementById("feelingSelect").value = "";
-  document.getElementById("feelingInput").value = "";
+  main.classList.add("hidden");
+  welcome.classList.remove("hidden");
+  document.getElementById("welcomeText").textContent = `🌈おかえり ${name}`;
 
-  document.getElementById("subCategoryArea").innerHTML = "";
-  document.getElementById("questionBox").classList.add("hidden");
-  document.getElementById("questionBox").textContent = "";
-
-  document.getElementById("cardsArea").innerHTML = "";
-  document.getElementById("copyArea").classList.add("hidden");
-  document.getElementById("noticeArea").classList.add("hidden");
-
-  document.getElementById("levelS").classList.remove("selected-level");
-  document.getElementById("levelC").classList.remove("selected-level");
-  document.getElementById("levelJ").classList.remove("selected-level");
-
-  disableDrawButtons();
+  setTimeout(() => {
+    location.href = "index.html";
+  }, 5000);
 }
 </script>
 
