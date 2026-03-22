@@ -241,11 +241,11 @@ button:disabled{
 
   <div class="box">
     <div class="label" style="font-size:18px; font-weight:bold; color:#6b4b2a;">
-      いまの感覚でテーマを選んでね😊
+      テーマを選んでね😊
     </div>
 
     <select id="roleSelect" onchange="selectRole()">
-      <option value="">テーマを選んでね😊</option>
+      <option value="">テーマを選ぶ</option>
       <option value="yasashiku">🌿 安心に戻る</option>
       <option value="kizuki">🌈 気づきをえる</option>
       <option value="modoru">✨ 本来の私に戻る</option>
@@ -260,7 +260,7 @@ button:disabled{
     <div class="draw-row">
       <button id="draw1" class="btn-pink" onclick="drawCards(1)" disabled>1枚引き</button>
       <button id="draw3" class="btn-purple" onclick="drawCards(3)" disabled>3枚引き</button>
-      <button class="btn-orange" onclick="goHome()">HOMEへ戻る</button>
+      <button class="btn-orange" onclick="goHome()">入口へ戻る</button>
     </div>
     <div class="small-note">カテゴリーを選ぶとカードが引けるようになるよ🐾</div>
   </div>
@@ -676,8 +676,15 @@ function goHome(){
   welcome.classList.remove("hidden");
   document.getElementById("welcomeText").textContent = `🌈おかえり ${name}`;
 
+  const returnTo = localStorage.getItem("fromBoss") === "1"
+    ? "boss_index.html"
+    : "index.html";
+
   setTimeout(() => {
-    location.href = "index.html";
+    if(localStorage.getItem("fromBoss") === "1"){
+      localStorage.removeItem("fromBoss");
+    }
+    location.href = returnTo;
   }, 5000);
 }
 </script>
