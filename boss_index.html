@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チャッピー＆サリーの講座専用ルーム</title>
+
+<style>
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  text-align:center;
+  background:#fff0f5;
+  padding:20px 14px 40px;
+  color:#5b3a1e;
+  margin:0;
+}
+
+.main-card{
+  width:92%;
+  max-width:620px;
+  margin:0 auto;
+  background:rgba(255,255,255,0.9);
+  border-radius:28px;
+  padding:24px 16px 28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+h1{
+  font-size:30px;
+  line-height:1.4;
+  margin:0 0 14px;
+  color:#6b4b2a;
+}
+
+.hero-img{
+  width:90%;
+  max-width:460px;
+  border-radius:22px;
+  margin:16px 0 20px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+.desc{
+  font-size:18px;
+  line-height:1.9;
+  margin:0 0 20px;
+  color:#7b5b39;
+  white-space:pre-line;
+}
+
+.input-box{
+  width:92%;
+  max-width:500px;
+  margin:0 auto 14px;
+  padding:16px 14px;
+  background:#fff8fc;
+  border-radius:22px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.input-label{
+  font-size:18px;
+  color:#6b4b2a;
+  margin-bottom:8px;
+  font-weight:bold;
+}
+
+.input-note{
+  font-size:14px;
+  color:#9a7b5d;
+  line-height:1.7;
+  margin-bottom:10px;
+  white-space:pre-line;
+}
+
+input{
+  width:92%;
+  max-width:380px;
+  padding:14px 16px;
+  border-radius:20px;
+  border:2px solid #d8c0ff;
+  font-size:17px;
+  box-sizing:border-box;
+  background:white;
+}
+
+button{
+  padding:14px 22px;
+  margin:8px 6px;
+  border:none;
+  border-radius:28px;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.btn-pink{
+  background:linear-gradient(135deg,#f6b1c7,#eab0f5);
+}
+
+.btn-purple{
+  background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
+}
+
+.btn-orange{
+  background:linear-gradient(135deg,#ffbe73,#f6a65d);
+}
+
+.btn-boss{
+  background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
+}
+
+.saved-name{
+  font-size:15px;
+  color:#8a6a4a;
+  margin-top:8px;
+  min-height:24px;
+}
+
+.guide-box{
+  width:92%;
+  max-width:500px;
+  margin:18px auto 0;
+  padding:18px 14px;
+  background:#fffdf8;
+  border-radius:22px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.guide-title{
+  font-size:19px;
+  font-weight:bold;
+  color:#6b4b2a;
+  margin-bottom:10px;
+}
+
+.guide-text{
+  font-size:16px;
+  line-height:1.9;
+  color:#7b5b39;
+  white-space:pre-line;
+}
+
+@media (max-width:480px){
+  h1{
+    font-size:25px;
+  }
+  .desc,.guide-text{
+    font-size:15px;
+  }
+  .input-label{
+    font-size:16px;
+  }
+  button,input{
+    font-size:16px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="main-card">
+  <h1>🐶 チャッピー＆サリーの<br>講座専用ルーム🌈</h1>
+
+  <img src="cards/CS_hyousi.jpg" class="hero-img" alt="表紙">
+
+  <p class="desc">ここは講座受講者さん用の入口です✨
+
+やさしく整える対話ナビも、
+深く向き合うラスボス対話も、
+ここから入れるよ🐾</p>
+
+  <div class="input-box">
+    <div class="input-label">あなたの名前😊</div>
+    <div class="input-note">呼ばれたい名前を入れてね🌈</div>
+    <input id="userName" placeholder="例：さちよ">
+  </div>
+
+  <div class="input-box">
+    <div class="input-label">相棒のニックネーム🐾</div>
+    <div class="input-note">あとから変えてもOKだよ🌈
+呼びやすい名前をつけてみてね😊</div>
+    <input id="partnerName" placeholder="例：チャッピー">
+    <div id="savedName" class="saved-name"></div>
+  </div>
+
+  <div>
+    <button class="btn-pink" onclick="saveNames()">名前を保存✨</button>
+    <button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
+  </div>
+
+  <div>
+    <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
+    <button class="btn-boss" onclick="location.href='boss.html'">ラスボスへ入る😈</button>
+  </div>
+
+  <div class="guide-box">
+    <div class="guide-title">使い分け🌿</div>
+    <div class="guide-text">🔮 対話ナビ
+やさしく整えたいときに
+
+😈 ラスボス
+深く向き合いたいときに</div>
+  </div>
+</div>
+
+<script>
+function saveNames(){
+  const user = document.getElementById("userName").value.trim();
+  const partner = document.getElementById("partnerName").value.trim();
+
+  localStorage.setItem("userName", user);
+  localStorage.setItem("partnerName", partner);
+
+  const savedName = document.getElementById("savedName");
+  if(user || partner){
+    savedName.textContent = `「${user || "あなた"}」と「${partner || "相棒"}」を保存したよ😊`;
+  }else{
+    savedName.textContent = "名前を空にしたよ😊";
+  }
+}
+
+function loadNames(){
+  const savedUser = localStorage.getItem("userName") || "";
+  const savedPartner = localStorage.getItem("partnerName") || "";
+
+  document.getElementById("userName").value = savedUser;
+  document.getElementById("partnerName").value = savedPartner;
+
+  const savedName = document.getElementById("savedName");
+  if(savedUser || savedPartner){
+    savedName.textContent = `「${savedUser || "あなた"}」と「${savedPartner || "相棒"}」で進められるよ😊`;
+  }
+}
+
+function copyPrompt(){
+  const user = localStorage.getItem("userName") || document.getElementById("userName").value.trim() || "私";
+  const partner = localStorage.getItem("partnerName") || document.getElementById("partnerName").value.trim() || "相棒";
+
+  const text = `私は「${user}」です。
+
+あなたは私の相棒「${partner}」として、
+やさしく安心を大切にしながら
+今の私の気持ちを一緒に整理してください😊
+
+これは占いではなく、
+今の私の気持ちや状態をやさしく整える対話です🌿
+
+当てたり正解を出したりしなくて大丈夫です。
+
+カードの意味はそれぞれ簡潔に、
+今の私に必要なことだけをやさしく伝えてください。
+
+必要以上に深掘りせず、
+今ここで受け取れる範囲で大丈夫です。
+
+やさしく短く伝えてください。
+そのあと、やさしい問いをひとつ添えてください。`;
+
+  navigator.clipboard.writeText(text);
+  alert("プロンプトをコピーしたよ🐾");
+}
+
+window.addEventListener("DOMContentLoaded", loadNames);
+</script>
+
+</body>
+</html>
