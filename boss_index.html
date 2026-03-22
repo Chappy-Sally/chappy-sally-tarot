@@ -191,8 +191,8 @@ button{
   </div>
 
   <div>
-    <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
-    <button class="btn-boss" onclick="location.href='boss.html'">ラスボスへ入る😈</button>
+    <button class="btn-purple" onclick="goTarotFromBoss()">対話ナビをひらく🔮</button>
+    <button class="btn-boss" onclick="goBossApp()">ラスボスへ入る😈</button>
   </div>
 
   <div class="guide-box">
@@ -260,6 +260,16 @@ function copyPrompt(){
 
   navigator.clipboard.writeText(text);
   alert("プロンプトをコピーしたよ🐾");
+}
+
+function goTarotFromBoss(){
+  localStorage.setItem("fromBoss", "1");
+  location.href = "tarot.html";
+}
+
+function goBossApp(){
+  localStorage.setItem("fromBoss", "1");
+  location.href = "boss.html";
 }
 
 window.addEventListener("DOMContentLoaded", loadNames);
