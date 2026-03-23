@@ -1,219 +1,280 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ラスボスアプリ</title>
-  <style>
-    body{
-      font-family:"Hiragino Kaku Gothic ProN", sans-serif;
-      text-align:center;
-      background:#fff0f5;
-      color:#5b3a1e;
-      margin:0;
-      padding:20px;
-    }
-    .box{
-      width:92%;
-      max-width:560px;
-      margin:20px auto;
-      padding:20px 16px;
-      border-radius:22px;
-      background:rgba(255,255,255,0.85);
-      box-shadow:0 4px 10px rgba(0,0,0,0.06);
-    }
-    h1{
-      font-size:28px;
-      margin:10px 0 20px;
-    }
-    .img{
-      width:80%;
-      max-width:380px;
-      border-radius:20px;
-      margin:10px 0 20px;
-      box-shadow:0 6px 14px rgba(0,0,0,0.12);
-    }
-    input{
-      width:82%;
-      max-width:360px;
-      padding:14px;
-      border-radius:22px;
-      border:2px solid #d6b6ff;
-      margin-bottom:12px;
-      font-size:17px;
-      box-sizing:border-box;
-      background:white;
-    }
-    button{
-      padding:14px 22px;
-      margin:6px;
-      border:none;
-      border-radius:30px;
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-    .boss-btn{
-      background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
-    }
-    .back-btn{
-      background:linear-gradient(135deg,#a89adb,#cdbff4);
-    }
-    .return-btn{
-      background:linear-gradient(135deg,#f7c97d,#f2a86b,#ec8fd0);
-    }
-    .cards{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:18px;
-      margin-top:20px;
-    }
-    .cards img{
-      width:150px;
-      border-radius:14px;
-      box-shadow:0 6px 14px rgba(0,0,0,0.18);
-      background:white;
-    }
-    .hidden{
-      display:none;
-    }
-    .msg{
-      white-space:pre-line;
-      line-height:1.9;
-      font-size:20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ラスボスアプリ</title>
+
+<style>
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  text-align:center;
+  background:#fff0f5;
+  color:#5b3a1e;
+  margin:0;
+  padding:20px;
+}
+
+.hidden{display:none;}
+
+h1{
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+.box{
+  width:92%;
+  max-width:560px;
+  margin:20px auto;
+  padding:20px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.85);
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+input{
+  width:82%;
+  max-width:360px;
+  padding:14px;
+  border-radius:22px;
+  border:2px solid #d6b6ff;
+  margin-bottom:12px;
+  font-size:17px;
+}
+
+button{
+  padding:14px 22px;
+  margin:6px;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.boss-btn{
+  background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
+}
+
+.back-btn{
+  background:linear-gradient(135deg,#a89adb,#cdbff4);
+}
+
+.return-btn{
+  background:linear-gradient(135deg,#f7c97d,#f2a86b,#ec8fd0);
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:20px;
+}
+
+.cards img{
+  width:150px;
+  border-radius:14px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.18);
+}
+
+.summary{
+  margin-top:20px;
+}
+
+.msg{
+  white-space:pre-line;
+  line-height:1.8;
+  font-size:18px;
+}
+</style>
 </head>
+
 <body>
 
 <div id="mainScreen">
-  <h1>😈 ラスボスをみつける 🌈</h1>
 
-  <div class="box">
-    <img src="images/boss_hyousi.png" class="img" alt="ラスボス表紙"
-         onerror="this.src='images/CS_hyousi.jpg'">
+<h1>😈 ラスボスをみつける 🌈</h1>
 
-    <input id="userName" placeholder="あなたの名前">
-    <br>
-    <input id="partnerName" placeholder="相棒の名前">
-    <br>
-    <input id="clientName" placeholder="クライアント名（空欄OK）">
-    <br>
-    <input id="question" placeholder="今日の問いを入れてから引く">
+<div class="box">
+<input id="userName" placeholder="あなたの名前">
+<br>
+<input id="partnerName" placeholder="相棒の名前">
+<br>
+<input id="clientName" placeholder="クライアント名（空欄OK）">
+<br>
+<input id="question" placeholder="今日の問いを入れてから引く">
 
-    <div>
-      <button class="boss-btn" onclick="drawBoss(1)">1枚引き</button>
-      <button class="boss-btn" onclick="drawBoss(3)">3枚引き</button>
-      <button class="back-btn" onclick="goToTarot()">タロットへ戻る</button>
-      <button class="back-btn" onclick="location.href='boss_index.html'">🏠 HOME</button>
-    </div>
-  </div>
+<div>
+<button class="boss-btn" onclick="drawBoss(1)">1枚引き</button>
+<button class="boss-btn" onclick="drawBoss(3)">3枚引き</button>
+<br>
+<button class="back-btn" onclick="goToTarot()">タロットへ戻る</button>
+<button class="back-btn" onclick="location.href='boss_index.html'">🏠 HOME</button>
+</div>
+</div>
 
-  <div class="cards" id="cards"></div>
+<div id="cards" class="cards"></div>
+<div id="summary" class="summary"></div>
 
-  <div class="box hidden" id="afterBox">
-    <div class="msg">ラスボスは、
-あなたを守るために現れた
-守神様
-
-気づいたあなたはもう大丈夫🌈
-
-いまのあなたで
-もう一度カードを引いてみよう🐾</div>
-
-    <button class="return-btn" onclick="showKami()">もう一度タロットを引く🔮</button>
-  </div>
 </div>
 
 <div id="kamiScreen" class="hidden">
-  <div class="box">
-    <img src="images/boss_kami.png" class="img" alt="神様化"
-         onerror="this.src='images/CS_hyousi.jpg'">
-    <div class="msg">ラスボスは、
+<div class="box">
+
+<div class="msg">
+ラスボスは、
 あなたを守るために現れた
 守神様
 
 気づいたあなたはもう大丈夫🌈
 
 いまのあなたで
-もう一度カードを引いてみよう🐾</div>
+もう一度カードを引いてみよう🐾
+</div>
 
-    <p>10秒後にタロット画面へ移動します✨</p>
-    <button class="return-btn" onclick="skipToTarot()">🐾スキップ🐾</button>
-  </div>
+<p>10秒後にタロットへ戻る✨</p>
+
+<button class="return-btn" onclick="skipToTarot()">🐾スキップ🐾</button>
+
+</div>
 </div>
 
 <script>
-const bossFiles = [
-  "boss_people_eyes.png",
-  "boss_perfection.png",
-  "boss_fear_of_failure.png",
-  "boss_low_confidence.png",
-  "boss_comparison.png",
-  "boss_impatience.png",
-  "boss_anxiety.png",
-  "boss_attachment.png",
-  "boss_past.png",
-  "boss_future_worry.png",
-  "boss_money.png",
-  "boss_overwork.png",
-  "boss_guilt.png",
-  "boss_give_up.png",
-  "boss_endurance.png",
-  "boss_obligation.png",
-  "boss_hesitation.png",
-  "boss_return_to_self.png"
+  const bossFiles = [
+"boss_people_eyes.png",
+"boss_perfection.png",
+"boss_fear_of_failure.png",
+"boss_low_confidence.png",
+"boss_comparison.png",
+"boss_impatience.png",
+"boss_anxiety.png",
+"boss_attachment.png",
+"boss_past.png",
+"boss_future_worry.png",
+"boss_money.png",
+"boss_overwork.png",
+"boss_guilt.png",
+"boss_give_up.png",
+"boss_endurance.png",
+"boss_obligation.png",
+"boss_hesitation.png",
+"boss_return_to_self.png"
 ];
 
-let timer = null;
+const bossNames = {
+boss_people_eyes:"人の目が気になる",
+boss_perfection:"完璧にしなきゃ",
+boss_fear_of_failure:"失敗したくない",
+boss_low_confidence:"自信のなさ",
+boss_comparison:"比べてしまう気持ち",
+boss_impatience:"焦り",
+boss_anxiety:"不安",
+boss_attachment:"執着",
+boss_past:"過去へのとらわれ",
+boss_future_worry:"未来への不安",
+boss_money:"お金の不安",
+boss_overwork:"がんばりすぎ",
+boss_guilt:"罪悪感",
+boss_give_up:"あきらめ",
+boss_endurance:"我慢ぐせ",
+boss_obligation:"〜しなきゃ",
+boss_hesitation:"迷い",
+boss_return_to_self:"私に戻りたい気持ち"
+};
+
+let timer;
 
 function loadNames(){
-  document.getElementById("userName").value = localStorage.getItem("userName") || "";
-  document.getElementById("partnerName").value = localStorage.getItem("partnerName") || "";
+document.getElementById("userName").value = localStorage.getItem("userName")||"";
+document.getElementById("partnerName").value = localStorage.getItem("partnerName")||"";
 }
 
-function getRandomItems(list, count){
-  const shuffled = [...list].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+function getRandom(list,count){
+return [...list].sort(()=>Math.random()-0.5).slice(0,count);
+}
+
+function getName(){
+return document.getElementById("userName").value||"あなた";
+}
+
+function getPartner(){
+return document.getElementById("partnerName").value||"相棒";
+}
+
+function getQuestion(){
+return document.getElementById("question").value;
 }
 
 function drawBoss(count){
-  const cards = document.getElementById("cards");
-  cards.innerHTML = "";
-  document.getElementById("afterBox").classList.remove("hidden");
 
-  const picked = getRandomItems(bossFiles, count);
-  picked.forEach(file => {
-    const img = document.createElement("img");
-    img.src = "images/" + file;
-    img.alt = file;
-    cards.appendChild(img);
-  });
+const cards = document.getElementById("cards");
+const summary = document.getElementById("summary");
+
+cards.innerHTML="";
+summary.innerHTML="";
+
+const picked = getRandom(bossFiles,count);
+
+let text = getName()+"へ🌿\n\n"+getPartner()+"より😊\n\n";
+
+if(getQuestion()){
+text+="質問：\n"+getQuestion()+"\n\n";
 }
 
-function goToTarot(){
-  localStorage.setItem("fromBoss", "1");
-  location.href = "tarot.html";
-}
+picked.forEach(file=>{
+const img=document.createElement("img");
+img.src="images/"+file;
+cards.appendChild(img);
 
-function showKami(){
-  document.getElementById("mainScreen").classList.add("hidden");
-  document.getElementById("kamiScreen").classList.remove("hidden");
-  timer = setTimeout(() => {
-    goToTarot();
-  }, 10000);
+const key=file.replace(".png","");
+text+=bossNames[key]+"\n";
+});
+
+const btnCopy=document.createElement("button");
+btnCopy.textContent="コピー🐾";
+btnCopy.onclick=()=>navigator.clipboard.writeText(text);
+
+const btnAI=document.createElement("button");
+btnAI.textContent="AI用コピー🤖";
+btnAI.onclick=()=>navigator.clipboard.writeText(text);
+
+summary.appendChild(btnCopy);
+summary.appendChild(btnAI);
+
+const msg=document.createElement("div");
+msg.className="msg";
+msg.textContent="ラスボスは守神様だよ🌈";
+
+summary.appendChild(msg);
+
+const btnNext=document.createElement("button");
+btnNext.className="return-btn";
+btnNext.textContent="もう一度タロット🔮";
+btnNext.onclick=showKami;
+
+summary.appendChild(btnNext);
+}
+  function showKami(){
+document.getElementById("mainScreen").classList.add("hidden");
+document.getElementById("kamiScreen").classList.remove("hidden");
+
+timer=setTimeout(()=>{
+goToTarot();
+},10000);
 }
 
 function skipToTarot(){
-  if(timer){
-    clearTimeout(timer);
-  }
-  goToTarot();
+clearTimeout(timer);
+goToTarot();
 }
 
-window.addEventListener("DOMContentLoaded", loadNames);
+function goToTarot(){
+localStorage.setItem("fromBoss","1");
+location.href="tarot.html";
+}
+
+window.addEventListener("DOMContentLoaded",loadNames);
 </script>
 
 </body>
