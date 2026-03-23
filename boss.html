@@ -97,6 +97,10 @@ button{
 <h1>😈 ラスボスをみつける 🌈</h1>
 
 <div class="box">
+
+<img src="cards/boss_hyousi.png" style="width:80%;max-width:380px;border-radius:20px;margin-bottom:15px;"
+onerror="this.src='cards/CS_hyousi.jpg'">
+
 <input id="userName" placeholder="あなたの名前">
 <br>
 <input id="partnerName" placeholder="相棒の名前">
@@ -112,6 +116,7 @@ button{
 <button class="back-btn" onclick="goToTarot()">タロットへ戻る</button>
 <button class="back-btn" onclick="location.href='boss_index.html'">🏠 HOME</button>
 </div>
+
 </div>
 
 <div id="cards" class="cards"></div>
@@ -120,7 +125,11 @@ button{
 </div>
 
 <div id="kamiScreen" class="hidden">
+
 <div class="box">
+
+<img src="cards/boss_kami.png" style="width:80%;max-width:380px;border-radius:20px;margin-bottom:15px;"
+onerror="this.src='cards/CS_hyousi.jpg'">
 
 <div class="msg">
 ラスボスは、
@@ -138,6 +147,7 @@ button{
 <button class="return-btn" onclick="skipToTarot()">🐾スキップ🐾</button>
 
 </div>
+
 </div>
 
 <script>
@@ -224,7 +234,7 @@ text+="質問：\n"+getQuestion()+"\n\n";
 
 picked.forEach(file=>{
 const img=document.createElement("img");
-img.src="images/"+file;
+img.src="cards/"+file;
 cards.appendChild(img);
 
 const key=file.replace(".png","");
@@ -255,7 +265,8 @@ btnNext.onclick=showKami;
 
 summary.appendChild(btnNext);
 }
-  function showKami(){
+
+function showKami(){
 document.getElementById("mainScreen").classList.add("hidden");
 document.getElementById("kamiScreen").classList.remove("hidden");
 
