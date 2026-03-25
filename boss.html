@@ -258,8 +258,8 @@
     <input id="question" placeholder="今日の問いを入れてから引く">
 
     <div class="button-group">
-      <button class="main-btn" onclick="drawTarotOne()">1枚引き</button>
-      <button class="main-btn" onclick="drawTarotThree()">3枚引き</button>
+      <button class="main-btn" onclick="saveQuestion(); drawTarotOne()">1枚引き</button>
+　　　 <button class="main-btn" onclick="saveQuestion(); drawTarotThree()">3枚引き</button>
       <button class="back-btn" onclick="resetAll()">🚪ROOMに戻る</button>
     </div>
 
@@ -814,6 +814,18 @@
     function goBossHome(){
       location.href = "https://chappy-sally.github.io/chappy-sally-tarot/boss_index.html";
     }
+
+    function saveQuestion() {
+  const q = document.getElementById("question").value;
+  localStorage.setItem("question", q);
+}
+
+window.addEventListener("load", function () {
+  const savedQuestion = localStorage.getItem("question");
+  if (savedQuestion) {
+    document.getElementById("question").value = savedQuestion;
+  }
+});
   </script>
 
 </body>
