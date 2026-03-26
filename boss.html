@@ -803,14 +803,15 @@
     }
 
     function resetAll(){
-      clearKamiTimer();
-      clearCards();
-      document.getElementById("question").value = "";
-      document.getElementById("username").value = "";
-      hideAllScreens();
-      document.getElementById("welcome-screen").classList.remove("hidden");
-    }
-
+  localStorage.clear();  // ←これ追加✨
+  clearKamiTimer();
+  clearCards();
+  document.getElementById("question").value = "";
+  document.getElementById("username").value = "";
+  hideAllScreens();
+  document.getElementById("welcome-screen").classList.remove("hidden");
+}
+    
     function goBossHome(){
       location.href = "https://chappy-sally.github.io/chappy-sally-tarot/boss_index.html";
     }
