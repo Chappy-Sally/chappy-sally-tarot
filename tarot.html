@@ -45,7 +45,7 @@ body{
   margin:8px 0 6px;
 }
 
-select, textarea{
+input, select, textarea{
   width:92%;
   max-width:520px;
   box-sizing:border-box;
@@ -96,8 +96,13 @@ button:disabled{
   background:linear-gradient(135deg,#ffbe73,#f6a65d);
 }
 
+.btn-gray{
+  background:linear-gradient(135deg,#cfcfcf,#a8a8a8);
+}
+
 .draw-row,
-.sub-row{
+.sub-row,
+.start-row{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
@@ -165,6 +170,28 @@ button:disabled{
   margin-top:4px;
 }
 
+.prompt-box{
+  width:92%;
+  max-width:560px;
+  margin:14px auto 0;
+  padding:16px 14px;
+  background:#f6ecff;
+  border-radius:20px;
+  font-size:16px;
+  line-height:1.8;
+  white-space:pre-line;
+  text-align:left;
+}
+
+#startScreen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:18px 0 30px;
+  animation:fadeIn 0.8s ease;
+}
+
 #welcomeScreen{
   min-height:100vh;
   display:flex;
@@ -201,7 +228,7 @@ button:disabled{
   .desc, .question-box, .notice{
     font-size:16px;
   }
-  button, textarea, select{
+  button, textarea, select, input{
     font-size:16px;
   }
   .card-box img{
@@ -217,7 +244,47 @@ button:disabled{
 </head>
 <body>
 
-<div id="mainContent">
+<!-- 0画面 -->
+<div id="startScreen" class="hidden">
+  <div class="page-title">🐶 はじめに<br>相棒をつくろう 🌈</div>
+
+  <div class="box">
+    <p class="desc">
+      最初だけ、あなたとAIの呼び名を決めてね😊<br>
+      やさしい会話の入り口になるよ🌿
+    </p>
+
+    <div class="label">あなたの名前（呼ばれたい名前）</div>
+    <input type="text" id="userNameInput" placeholder="例：さちよ">
+
+    <div class="label">AIの呼び名</div>
+    <input type="text" id="partnerNameInput" placeholder="例：チャッピー">
+
+    <div class="small-note">あとから変えても大丈夫だよ🐾</div>
+  </div>
+
+  <div class="box">
+    <div class="label" style="font-size:18px; font-weight:bold; color:#6b4b2a;">
+      まずはAIにこんなふうに話してみてね😊
+    </div>
+
+    <div id="introPromptBox" class="prompt-box"></div>
+
+    <div class="start-row">
+      <button class="btn-pink" onclick="copyIntroPrompt()">自己紹介をコピー🐾</button>
+      <button class="btn-purple" onclick="startApp()">はじめる🌈</button>
+      <button class="btn-gray" onclick="skipStart()">あとでやる</button>
+    </div>
+
+    <div class="small-note">
+      AIが質問してくれたら、そのまま答えていけばOKだよ😊<br>
+      会話の最後に「ありがと〜！」もおすすめ🌸
+    </div>
+  </div>
+</div>
+
+<!-- メイン画面 -->
+<div id="mainContent" class="hidden">
   <div class="page-title">🐶 チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間⏳️</div>
 
   <div class="box">
@@ -516,6 +583,85 @@ let currentRole = "";
 let currentQuestion = "";
 let currentCards = [];
 
+function getUserName(){
+  return localStorage.getItem("userName") || "あなた";
+}
+
+function getPartnerName(){
+  return localStorage.getItem("partnerName") || "相棒";
+}
+
+function updateIntroPrompt(){
+  const userName = document.getElementById("userNameInput").value.trim() || "〇〇";
+  const partnerName = document.getElementById("partnerNameInput").value.trim() || "〇〇";
+
+  const text = `${partnerName}へ😊
+
+私は${userName}です
+
+あなたのことは
+${partnerName}って呼ぶね
+
+私は〇〇が好きです
+私は〇〇が好きです
+
+これからいろいろ話したいです
+よろしくね🌈
+
+最後は
+ありがと〜！って伝えるね🌸`;
+
+  document.getElementById("introPromptBox").textContent = text;
+}
+
+function copyIntroPrompt(){
+  const text = document.getElementById("introPromptBox").textContent;
+  navigator.clipboard.writeText(text);
+  alert("自己紹介をコピーしたよ🐾");
+}
+
+function startApp(){
+  const userName = document.getElementById("userNameInput").value.trim();
+  const partnerName = document.getElementById("partnerNameInput").value.trim();
+
+  if(userName){
+    localStorage.setItem("userName", userName);
+  }
+  if(partnerName){
+    localStorage.setItem("partnerName", partnerName);
+  }
+
+  localStorage.setItem("introDone", "1");
+
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("mainContent").classList.remove("hidden");
+}
+
+function skipStart(){
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("mainContent").classList.remove("hidden");
+}
+
+function initApp(){
+  const savedUser = localStorage.getItem("userName") || "";
+  const savedPartner = localStorage.getItem("partnerName") || "";
+
+  document.getElementById("userNameInput").value = savedUser;
+  document.getElementById("partnerNameInput").value = savedPartner;
+  updateIntroPrompt();
+
+  const introDone = localStorage.getItem("introDone");
+
+  if(introDone === "1"){
+    document.getElementById("mainContent").classList.remove("hidden");
+  }else{
+    document.getElementById("startScreen").classList.remove("hidden");
+  }
+
+  document.getElementById("userNameInput").addEventListener("input", updateIntroPrompt);
+  document.getElementById("partnerNameInput").addEventListener("input", updateIntroPrompt);
+}
+
 function selectRole(){
   currentRole = document.getElementById("roleSelect").value;
   currentQuestion = "";
@@ -613,14 +759,6 @@ function getFeeling(){
   return "（特になし）";
 }
 
-function getUserName(){
-  return localStorage.getItem("userName") || "あなた";
-}
-
-function getPartnerName(){
-  return localStorage.getItem("partnerName") || "相棒";
-}
-
 function copyMain(){
   if(currentCards.length === 0){
     alert("先にカードを引いてね🐾");
@@ -687,6 +825,8 @@ function goHome(){
     location.href = returnTo;
   }, 5000);
 }
+
+window.addEventListener("DOMContentLoaded", initApp);
 </script>
 
 </body>
