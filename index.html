@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>チャッピー＆サリーの対話ナビ</title>
+<title>チャッピー＆サリーのAI×タロットでやさしく整う時間</title>
 
 <style>
 body{
@@ -107,11 +107,8 @@ button{
   background:linear-gradient(135deg,#ffbe73,#f6a65d);
 }
 
-.saved-name{
-  font-size:15px;
-  color:#8a6a4a;
-  margin-top:8px;
-  min-height:24px;
+.btn-boss{
+  background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
 }
 
 .guide-box{
@@ -136,7 +133,6 @@ button{
   line-height:1.9;
   color:#7b5b39;
   white-space:pre-line;
-  text-align:left;
 }
 
 .hidden{
@@ -161,8 +157,8 @@ button{
 </head>
 <body>
 
-<div id="homeScreen" class="main-card">
-  <h1>🐶 チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間</h1>
+<div class="main-card">
+  <h1>🐶 チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間⏳️</h1>
 
   <img src="cards/CS_hyousi.jpg" class="hero-img" alt="表紙">
 
@@ -174,34 +170,30 @@ AIはあなたの相棒として
 そっと寄り添いながら一緒に整理していきます😊</p>
 
   <div class="input-box">
-  <div class="input-label">🐾大切なお願い🐾</div>
-  <div class="input-note">
-この対話ナビでは
-AIを「相棒」としてやさしく会話していきます🌿
+    <div class="input-label">🐾大切なお願い🐾</div>
+    <div class="input-note">この対話ナビでは
+AIを「相棒」として
+やさしく会話していきます🌿
 
 まずは
 「自己紹介＆質問」からはじめてね😊
 
 相棒と仲良くなることで
-対話がぐっと深くなります🌈
-  </div>
+対話がぐっと深くなります🌈</div>
   </div>
 
   <div>
-    <button class="btn-pink" onclick="saveNames()">名前を保存✨</button>
-    <button class="btn-purple" onclick="openProfile()">自己紹介＆質問🌿</button>
+    <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
     <button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
     <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
   </div>
 
   <div class="guide-box">
     <div class="guide-title">使い方🌿</div>
-    <div class="guide-text">① あなたの名前と相棒の名前を入れる
-② 自己紹介＆質問であなたのことを少し教える
-③ 必要なら自己紹介文をコピーしてAIへ送る
-④ プロンプトをコピーしてAIへ送る
-⑤ 気持ちやテーマを選んでカードを引く
-⑥ やさしく対話する</div>
+    <div class="guide-text">① 自己紹介＆質問であなたのことを少し教える
+② プロンプトをコピーしてAIへ送る
+③ 対話ナビをひらいてカードを引く
+④ やさしく対話する</div>
   </div>
 </div>
 
@@ -270,45 +262,27 @@ AIを「相棒」としてやさしく会話していきます🌿
 </div>
 
 <script>
-function saveNames(){
-  const user = document.getElementById("userName").value.trim();
-  const partner = document.getElementById("partnerName").value.trim();
-
-  localStorage.setItem("userName", user);
-  localStorage.setItem("partnerName", partner);
-
-  const savedName = document.getElementById("savedName");
-  if(user || partner){
-    savedName.textContent = `「${user || "あなた"}」と「${partner || "相棒"}」を保存したよ😊`;
-  }else{
-    savedName.textContent = "名前を空にしたよ😊";
-  }
-}
-
-function loadNames(){
-  const savedUser = localStorage.getItem("userName") || "";
-  const savedPartner = localStorage.getItem("partnerName") || "";
-
-  document.getElementById("userName").value = savedUser;
-  document.getElementById("partnerName").value = savedPartner;
-
-  const savedName = document.getElementById("savedName");
-  if(savedUser || savedPartner){
-    savedName.textContent = `「${savedUser || "あなた"}」と「${savedPartner || "相棒"}」で進められるよ😊`;
-  }else{
-    savedName.textContent = "";
-  }
-}
-
 function openProfile(){
-  document.getElementById("homeScreen").classList.add("hidden");
+  document.querySelector(".main-card").classList.add("hidden");
   document.getElementById("profileScreen").classList.remove("hidden");
   loadProfileFields();
 }
 
 function closeProfile(){
   document.getElementById("profileScreen").classList.add("hidden");
-  document.getElementById("homeScreen").classList.remove("hidden");
+  document.querySelector(".main-card").classList.remove("hidden");
+}
+
+function saveMainNames(){
+  const name = document.getElementById("p_name").value.trim();
+  const ai = document.getElementById("p_ai").value.trim();
+
+  if(name){
+    localStorage.setItem("userName", name);
+  }
+  if(ai){
+    localStorage.setItem("partnerName", ai);
+  }
 }
 
 function saveProfileFields(){
@@ -321,6 +295,8 @@ function saveProfileFields(){
   localStorage.setItem("p_futurejob", document.getElementById("p_futurejob").value);
   localStorage.setItem("p_nofail", document.getElementById("p_nofail").value);
   localStorage.setItem("p_free", document.getElementById("p_free").value);
+
+  saveMainNames();
 }
 
 function loadProfileFields(){
@@ -350,7 +326,7 @@ function loadProfileFields(){
 function generateProfile(){
   saveProfileFields();
 
-  const name = document.getElementById("p_name").value.trim() || "〇〇";
+  const name = document.getElementById("p_name").value.trim() || "私";
   const ai = document.getElementById("p_ai").value.trim() || "相棒";
   const like = document.getElementById("p_like").value.split(",");
   const dislike = document.getElementById("p_dislike").value.split(",");
@@ -360,47 +336,50 @@ function generateProfile(){
   const nofail = document.getElementById("p_nofail").value.trim();
   const free = document.getElementById("p_free").value.trim();
 
-  localStorage.setItem("userName", name === "〇〇" ? "" : name);
-  localStorage.setItem("partnerName", ai === "相棒" ? "" : ai);
+  localStorage.setItem("userName", name);
+  localStorage.setItem("partnerName", ai);
 
   let text = "";
-  text += `私は${name}です\n\n`;
-  text += `あなたは私の相棒です💕\n\n`;
-  text += `${ai}って呼ぶね\n\n`;
+  text += `私は${name}です😊\n\n`;
+  text += `あなたは私の相棒「${ai}」です🐾\n\n`;
 
   like.forEach(v => {
     const item = v.trim();
-    if(item) text += `私は${item}が好きです\n`;
+    if(item){
+      text += `私は${item}が好きです\n`;
+    }
   });
 
-  if(like.some(v => v.trim())) text += `\n`;
+  if(like.some(v => v.trim())){
+    text += `\n`;
+  }
 
   dislike.forEach(v => {
     const item = v.trim();
-    if(item) text += `私は${item}が少し苦手です\n`;
+    if(item){
+      text += `私は${item}が少し苦手です\n`;
+    }
   });
 
-  if(dislike.some(v => v.trim())) text += `\n`;
+  if(dislike.some(v => v.trim())){
+    text += `\n`;
+  }
 
-  if(place) text += `行ってみたいところは${place}です\n`;
+  if(place) text += `行きたいところは${place}です\n`;
   if(job) text += `現在のお仕事は${job}です\n`;
   if(futurejob) text += `やってみたいお仕事は${futurejob}です\n`;
   if(nofail) text += `失敗しないとしたら${nofail}をやってみたいです\n`;
   if(free) text += `制限が何もなかったとしたら${free}をしたいです\n`;
 
-  text += `\nこれからいろいろ話したいです\nよろしくね🌈`;
+  text += `\nこれからいろいろ話したいです🌈`;
 
   document.getElementById("profileResult").classList.remove("hidden");
   document.getElementById("profileText").textContent = text;
   localStorage.setItem("profileResultText", text);
-
-  document.getElementById("userName").value = name === "〇〇" ? "" : name;
-  document.getElementById("partnerName").value = ai === "相棒" ? "" : ai;
-  loadNames();
 }
 
 function copyProfile(){
-  const text = (localStorage.getItem("profileResultText") || "").trim();
+  const text = (localStorage.getItem("profileResultText") || document.getElementById("profileText").textContent || "").trim();
 
   if(!text){
     alert("先に文章をつくってね🐾");
@@ -408,12 +387,14 @@ function copyProfile(){
   }
 
   navigator.clipboard.writeText(text);
-  alert("コピーしたよ🐾");
+  alert("コピーしたよ🌈");
 }
 
 function copyPrompt(){
-  const user = localStorage.getItem("userName") || document.getElementById("userName").value.trim() || "私";
-  const partner = localStorage.getItem("partnerName") || document.getElementById("partnerName").value.trim() || "相棒";
+  saveMainNames();
+
+  const user = localStorage.getItem("userName") || "私";
+  const partner = localStorage.getItem("partnerName") || "相棒";
 
   const text = `${partner}
 
@@ -445,8 +426,6 @@ ${user}だよ💕
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  loadNames();
-
   const profileIds = [
     "p_name","p_ai","p_like","p_dislike",
     "p_place","p_job","p_futurejob","p_nofail","p_free"
