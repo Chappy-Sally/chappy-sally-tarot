@@ -53,6 +53,7 @@
       color:#6b4b2a;
       margin:14px 0 20px;
       line-height:1.8;
+      white-space:pre-line;
     }
 
     input{
@@ -135,6 +136,7 @@
       color:#5b3a1e;
       line-height:1.5;
       min-height:24px;
+      white-space:pre-line;
     }
 
     .button-group{
@@ -210,6 +212,16 @@
       margin-top:8px;
       margin-bottom:8px;
     }
+
+    .name-note{
+      font-size:14px;
+      color:#9a7b5d;
+      line-height:1.7;
+      margin:0 auto 14px;
+      white-space:pre-line;
+      width:82%;
+      max-width:360px;
+    }
   </style>
 </head>
 
@@ -253,13 +265,14 @@
 
     <img src="images/CS_hyousi.jpg" class="header-img" alt="表紙">
 
-    <input id="username" placeholder="お名前・ニックネーム（セッション用にも使える）">
+    <div class="name-note">自分のお名前は保存済みでOK🐾<br>セッションのときは今回のお相手のお名前を入れてね</div>
+    <input id="clientName" placeholder="今回のお相手のお名前（任意）">
     <br>
     <input id="question" placeholder="今日の問いを入れてから引く">
 
     <div class="button-group">
-      <button class="main-btn" onclick="saveQuestion(); drawTarotOne()">1枚引き</button>
-　　　 <button class="main-btn" onclick="saveQuestion(); drawTarotThree()">3枚引き</button>
+      <button class="main-btn" onclick="saveSessionInputs(); drawTarotOne()">1枚引き</button>
+      <button class="main-btn" onclick="saveSessionInputs(); drawTarotThree()">3枚引き</button>
       <button class="back-btn" onclick="resetAll()">🚪ROOMに戻る</button>
     </div>
 
@@ -285,8 +298,8 @@
     </p>
 
     <div class="button-group">
-      <button class="boss-btn" onclick="drawBossOne()">1枚引き</button>
-      <button class="boss-btn" onclick="drawBossThree()">3枚引き</button>
+      <button class="boss-btn" onclick="saveSessionInputs(); drawBossOne()">1枚引き</button>
+      <button class="boss-btn" onclick="saveSessionInputs(); drawBossThree()">3枚引き</button>
     </div>
   </div>
 
@@ -403,8 +416,20 @@
       return shuffled.slice(0, count);
     }
 
-    function getUserName(){
-      return document.getElementById("username").value.trim();
+    function getSelfName(){
+      return localStorage.getItem("userName") || "私";
+    }
+
+    function getPartnerName(){
+      return localStorage.getItem("partnerName") || "相棒";
+    }
+
+    function getClientName(){
+      return document.getElementById("clientName").value.trim();
+    }
+
+    function getTargetName(){
+      return getClientName() || getSelfName();
     }
 
     function getQuestion(){
@@ -418,7 +443,7 @@
 
     function copyToClipboard(text){
       navigator.clipboard.writeText(text);
-      alert("コピーしたよ✨\n" + text);
+      alert("コピーしたよ✨");
     }
 
     function clearCards(){
@@ -445,6 +470,7 @@
       hideAllScreens();
       document.getElementById("tarot-screen").classList.remove("hidden");
       clearCards();
+      restoreSessionInputs();
     }
 
     function showBossScreen(){
@@ -470,13 +496,25 @@
       showTarotScreen();
     }
 
-    function makeHeaderText(){
-      const name = getUserName();
-      return name ? (name + " の結果") : "私の結果";
+    function saveSessionInputs(){
+      localStorage.setItem("clientName", getClientName());
+      localStorage.setItem("question", getQuestion());
+    }
+
+    function restoreSessionInputs(){
+      const savedClient = localStorage.getItem("clientName") || "";
+      const savedQuestion = localStorage.getItem("question") || "";
+      document.getElementById("clientName").value = savedClient;
+      document.getElementById("question").value = savedQuestion;
     }
 
     function getBasePrompt(){
+      const selfName = getSelfName();
+      const partnerName = getPartnerName();
       return [
+        `${partnerName}`,
+        `${selfName}だよ💕`,
+        "",
         "これからカードを引いて対話します❣",
         "当てたり 正解を出したりしなくて大丈夫です☝️",
         "やさしく 安心を大切にしながら",
@@ -496,30 +534,6 @@
 
     function copyBasePrompt(){
       copyToClipboard(getBasePrompt());
-    }
-
-    function makeTarotResultText(cardName, reversed, withHeader = false, withQuestion = false){
-      let text = "";
-      if(withHeader){
-        text += makeHeaderText() + "\n";
-      }
-      if(withQuestion && getQuestion()){
-        text += "質問：\n" + getQuestion() + "\n\n";
-      }
-      text += cardName.replace(".png","") + "（" + (reversed ? "逆位置" : "正位置") + "）";
-      return text;
-    }
-
-    function makeBossResultText(labelText, bossName, withHeader = false, withQuestion = false){
-      let text = "";
-      if(withHeader){
-        text += makeHeaderText() + "\n";
-      }
-      if(withQuestion && getQuestion()){
-        text += "質問：\n" + getQuestion() + "\n\n";
-      }
-      text += labelText + "\n" + bossToJapanese(bossName);
-      return text;
     }
 
     function createTarotCard(labelText = "", forcedCard = null, forcedReversed = null){
@@ -567,6 +581,79 @@
       box.appendChild(label);
 
       return { element: box, name: boss, label: labelText };
+    }
+
+    function makeTarotCopyText(cards){
+      const partner = getPartnerName();
+      const selfName = getSelfName();
+      const target = getTargetName();
+      const count = cards.length;
+
+      let text = `${partner}\n`;
+      text += `${selfName}だよ💕\n`;
+      text += `${target}のタロット${count}枚引いたよ！\n`;
+
+      cards.forEach(card => {
+        text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
+      });
+
+      text += `だったよ！`;
+      return text;
+    }
+
+    function makeBossCopyText(cards){
+      const partner = getPartnerName();
+      const selfName = getSelfName();
+      const target = getTargetName();
+
+      let text = `${partner}\n`;
+      text += `${selfName}だよ💕\n`;
+      text += `${target}のラスボス引いたよ！\n`;
+
+      cards.forEach(card => {
+        text += `${bossToJapanese(card.name)}\n`;
+      });
+
+      text += `だったよ！`;
+      return text;
+    }
+
+    function makeTarotAiNowText(cards){
+      let text = "";
+      if(getQuestion()){
+        text += "質問：\n" + getQuestion() + "\n\n";
+      }
+      cards.forEach((card, index) => {
+        text += (index + 1) + "枚目："
+          + card.name.replace(".png","")
+          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
+      });
+      return text.trim();
+    }
+
+    function makeTarotAiAfterText(cards){
+      let text = "気づきを受け取ったあと、今のあなたへのやさしいメッセージです🌈\n\n";
+      if(getQuestion()){
+        text += "質問：\n" + getQuestion() + "\n\n";
+      }
+      cards.forEach((card, index) => {
+        text += (index + 1) + "枚目："
+          + card.name.replace(".png","")
+          + "（" + (card.reversed ? "逆位置" : "正位置"}）\n";
+      });
+      return text.trim();
+    }
+
+    function makeBossAiText(cards){
+      let text = "気づいた存在です🌈\n";
+      text += "ラスボスは、あなたを守るために現れた守り神様✨\n\n";
+      if(getQuestion()){
+        text += "質問：\n" + getQuestion() + "\n\n";
+      }
+      cards.forEach(card => {
+        text += `${card.label}\n${bossToJapanese(card.name)}\n\n`;
+      });
+      return text.trim();
     }
 
     function showTarotSummaryBox(copyText, aiNowText, aiAfterText, titleText = "✨ 3枚まとめ"){
@@ -670,21 +757,13 @@
       const cardObj = createTarotCard("");
       document.getElementById("cards").appendChild(cardObj.element);
 
-      let copyText = makeHeaderText() + "\n";
-      copyText += cardObj.name.replace(".png","") + "（" + (cardObj.reversed ? "逆位置" : "正位置") + "）";
+      const cards = [
+        { name: cardObj.name, reversed: cardObj.reversed }
+      ];
 
-      let aiNowText = "";
-      if(getQuestion()){
-        aiNowText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      aiNowText += cardObj.name.replace(".png","") + "（" + (cardObj.reversed ? "逆位置" : "正位置") + "）";
-
-      let aiAfterText = "";
-      aiAfterText += "気づきを受け取ったあと、今のあなたへのやさしいメッセージです🌈\n\n";
-      if(getQuestion()){
-        aiAfterText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      aiAfterText += cardObj.name.replace(".png","") + "（" + (cardObj.reversed ? "逆位置" : "正位置") + "）";
+      const copyText = makeTarotCopyText(cards);
+      const aiNowText = makeTarotAiNowText(cards);
+      const aiAfterText = makeTarotAiAfterText(cards);
 
       showTarotSummaryBox(copyText, aiNowText, aiAfterText, "✨ 1枚まとめ");
     }
@@ -713,33 +792,9 @@
         { name: card3.name, reversed: card3.reversed }
       ];
 
-      let copyText = makeHeaderText() + "\n";
-      cards.forEach((card, index) => {
-        copyText += (index + 1) + "枚目："
-          + card.name.replace(".png","")
-          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
-      });
-
-      let aiNowText = "";
-      if(getQuestion()){
-        aiNowText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      cards.forEach((card, index) => {
-        aiNowText += (index + 1) + "枚目："
-          + card.name.replace(".png","")
-          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
-      });
-
-      let aiAfterText = "";
-      aiAfterText += "気づきを受け取ったあと、今のあなたへのやさしいメッセージです🌈\n\n";
-      if(getQuestion()){
-        aiAfterText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      cards.forEach((card, index) => {
-        aiAfterText += (index + 1) + "枚目："
-          + card.name.replace(".png","")
-          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
-      });
+      const copyText = makeTarotCopyText(cards);
+      const aiNowText = makeTarotAiNowText(cards);
+      const aiAfterText = makeTarotAiAfterText(cards);
 
       showTarotSummaryBox(copyText, aiNowText, aiAfterText, "✨ 3枚まとめ");
     }
@@ -750,21 +805,18 @@
       const cardObj = createBossCard("今のラスボス");
       document.getElementById("cards").appendChild(cardObj.element);
 
-      const copyText = makeBossResultText("今のラスボス", cardObj.name, true, false);
+      const cards = [
+        { label: "今のラスボス", name: cardObj.name }
+      ];
 
-      let aiText = "";
-      aiText += "気づいた存在です🌈\n";
-      aiText += "ラスボスは、あなたを守るために現れた守り神様✨\n\n";
-      if(getQuestion()){
-        aiText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      aiText += "今のラスボス\n" + bossToJapanese(cardObj.name);
+      const copyText = makeBossCopyText(cards);
+      const aiText = makeBossAiText(cards);
 
       showBossSummaryBox(copyText, aiText);
       showReturnToTarotBox();
     }
 
-   function drawBossThree(){
+    function drawBossThree(){
       clearCards();
 
       const selectedBosses = getRandomItems(bossFiles, 3);
@@ -783,50 +835,31 @@
         { label: "心のボス戦", name: card3.name }
       ];
 
-      let copyText = makeHeaderText() + "\n\n";
-      cards.forEach(card => {
-        copyText += card.label + "\n" + bossToJapanese(card.name) + "\n\n";
-      });
-
-      let aiText = "";
-      aiText += "気づいた存在です🌈\n";
-      aiText += "ラスボスは、あなたを守るために現れた守り神様✨\n\n";
-      if(getQuestion()){
-        aiText += "質問：\n" + getQuestion() + "\n\n";
-      }
-      cards.forEach(card => {
-        aiText += card.label + "\n" + bossToJapanese(card.name) + "\n\n";
-      });
+      const copyText = makeBossCopyText(cards);
+      const aiText = makeBossAiText(cards);
 
       showBossSummaryBox(copyText, aiText);
       showReturnToTarotBox();
     }
 
     function resetAll(){
-  localStorage.clear();  // ←これ追加✨
-  clearKamiTimer();
-  clearCards();
-  document.getElementById("question").value = "";
-  document.getElementById("username").value = "";
-  hideAllScreens();
-  document.getElementById("welcome-screen").classList.remove("hidden");
-}
-    
+      clearKamiTimer();
+      clearCards();
+      document.getElementById("question").value = "";
+      document.getElementById("clientName").value = "";
+      localStorage.removeItem("question");
+      localStorage.removeItem("clientName");
+      hideAllScreens();
+      document.getElementById("welcome-screen").classList.remove("hidden");
+    }
+
     function goBossHome(){
       location.href = "https://chappy-sally.github.io/chappy-sally-tarot/boss_index.html";
     }
 
-    function saveQuestion() {
-  const q = document.getElementById("question").value;
-  localStorage.setItem("question", q);
-}
-
-window.addEventListener("load", function () {
-  const savedQuestion = localStorage.getItem("question");
-  if (savedQuestion) {
-    document.getElementById("question").value = savedQuestion;
-  }
-});
+    window.addEventListener("load", function () {
+      restoreSessionInputs();
+    });
   </script>
 
 </body>
