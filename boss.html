@@ -590,52 +590,57 @@
   }
 
   function makeTarotCopyText(cards){
-    const partner = getPartnerName();
-    const selfName = getSelfName();
-    const target = getTargetName();
-    const question = getQuestion();
-    const count = cards.length;
+  const partner = getPartnerName();
+  const selfName = getSelfName();
+  const target = getClientName();
+  const question = getQuestion();
 
-    let text = `${partner}\n`;
-    text += `${selfName}だよ💕\n\n`;
+  let text = `${partner}\n`;
+  text += `${selfName}だよ💕\n\n`;
 
-    if(question){
-      text += `${target}の質問\n`;
-      text += `${question}\n\n`;
-    }
-
-    text += `タロット${count}枚引いたよ！\n`;
-
-    cards.forEach(card => {
-      text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
-    });
-
-    text += `だったよ！`;
-    return text;
+  if(target){
+    text += `${target}さんの\n`;
   }
 
+  if(question){
+    text += `質問は${question}です。\n\n`;
+  }
+
+  text += `タロットを引いたよ！\n`;
+
+  cards.forEach(card => {
+    text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
+  });
+
+  text += `\nだったよ！`;
+  return text;
+}
+    
   function makeBossCopyText(cards){
-    const partner = getPartnerName();
-    const selfName = getSelfName();
-    const target = getTargetName();
-    const question = getQuestion();
+  const partner = getPartnerName();
+  const selfName = getSelfName();
+  const target = getClientName();
+  const question = getQuestion();
 
-    let text = `${partner}\n`;
-    text += `${selfName}だよ💕\n\n`;
+  let text = `${partner}\n`;
+  text += `${selfName}だよ💕\n\n`;
 
-    if(question){
-      text += `${target}の質問\n`;
-      text += `${question}\n\n`;
-    }
+  if(target){
+    text += `${target}さんの\n`;
+  }
 
-    text += `ラスボス引いたよ！\n`;
+  if(question){
+    text += `質問は${question}です。\n\n`;
+  }
 
-    cards.forEach(card => {
-      text += `${bossToJapanese(card.name)}\n`;
-    });
+  text += `ラスボスを引いたよ！\n`;
 
-    text += `だったよ！`;
-    return text;
+  cards.forEach(card => {
+    text += `${bossToJapanese(card.name)}\n`;
+  });
+
+  text += `\nだったよ！`;
+  return text;
   }
 
   function makeTarotAiNowText(cards){
