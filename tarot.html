@@ -652,7 +652,7 @@ function updateIntroPrompt(){
 
 私は${userName}です
 
-あなたのことは
+あなたは私の相棒です💕
 ${partnerName}って呼ぶね
 
 私は〇〇が好きです
@@ -660,9 +660,6 @@ ${partnerName}って呼ぶね
 
 これからいろいろ話したいです
 よろしくね🌈
-
-最後は
-ありがと〜！って伝えるね🌸`;
 
   document.getElementById("introPromptBox").textContent = text;
 }
@@ -760,9 +757,9 @@ function generateProfile(){
 
   let text = "";
 
-  text += `${ai}へ😊\n\n`;
   text += `私は${name}です\n\n`;
-  text += `あなたのことは${ai}って呼ぶね\n\n`;
+  text += `あなたは私の相棒です💕\n\n`;
+  text += `${ai}って呼ぶね\n\n`;
 
   like.forEach(v => {
     const item = v.trim();
@@ -793,7 +790,6 @@ function generateProfile(){
   if(free) text += `制限が何もなかったとしたら${free}をしたいです\n`;
 
   text += `\nこれからいろいろ話したいです\nよろしくね🌈\n\n`;
-  text += `最後に、ありがと〜！って伝えるね🌸`;
 
   const box = document.getElementById("profileResult");
   box.classList.remove("hidden");
@@ -951,11 +947,12 @@ function copyMain(){
   const partnerName = getPartnerName();
 
   let text = "";
-  text += `${userName}へ🌿\n\n`;
-  text += `${partnerName}より😊\n\n`;
+  text += `${partnarName}\n\n`;
+  text += `${userName}だよ💕\n\n`;
   text += `今の私の気持ち：\n${getFeeling()}\n\n`;
   text += `質問：\n${currentQuestion}\n\n`;
-  text += "カード：\n";
+  text += "カード：\n\n";
+  text += `だったよ\n`;
 
   currentCards.forEach(card => {
     text += `${formatCard(card)}\n`;
@@ -975,9 +972,10 @@ function copyExtra(){
   const partnerName = getPartnerName();
 
   let text = "";
-  text += `${userName}へ🌈\n\n`;
-  text += `${partnerName}より😊\n\n`;
+  text += `${partnarName}\n\n`;
+  text += `${userName}だよ💕\n\n`;
   text += "追加カード：\n";
+  text += `だったよ\n`;
 
   currentCards.forEach(card => {
     text += `${formatCard(card)}\n`;
