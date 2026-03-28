@@ -375,7 +375,9 @@ function copyPrompt(){
   const user = localStorage.getItem("userName") || "私";
   const partner = localStorage.getItem("partnerName") || "相棒";
 
-  const text = `私は「${user}」です。
+  const text = `${partner}へ😊
+
+${user}だよ💕
 
 あなたは私の相棒「${partner}」として
 やさしく安心を大切にしながら
@@ -393,7 +395,10 @@ function copyPrompt(){
 今ここで受け取れる範囲で大丈夫です。
 
 やさしく短く伝えてください。
-そのあと、やさしい問いをひとつ添えてください。`;
+そのあと、やさしい問いをひとつかふたつ添えてください。
+
+私が「もう十分」と感じたら
+ありがとうで終わります😊`;
 
   navigator.clipboard.writeText(text);
   alert("プロンプトをコピーしたよ🐾");
