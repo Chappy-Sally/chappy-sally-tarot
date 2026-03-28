@@ -73,17 +73,6 @@ h1{
   white-space:pre-line;
 }
 
-input{
-  width:92%;
-  max-width:380px;
-  padding:14px 16px;
-  border-radius:20px;
-  border:2px solid #d8c0ff;
-  font-size:17px;
-  box-sizing:border-box;
-  background:white;
-}
-
 button{
   padding:14px 22px;
   margin:8px 6px;
@@ -109,13 +98,6 @@ button{
 
 .btn-boss{
   background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
-}
-
-.saved-name{
-  font-size:15px;
-  color:#8a6a4a;
-  margin-top:8px;
-  min-height:24px;
 }
 
 .guide-box{
@@ -152,7 +134,7 @@ button{
   .input-label{
     font-size:16px;
   }
-  button,input{
+  button{
     font-size:16px;
   }
 }
@@ -165,11 +147,11 @@ button{
 
   <img src="cards/CS_hyousi.jpg" class="hero-img" alt="表紙">
 
-  <p class="desc">ここはマスター編の入口です✨
+  <p class="desc">ここはマスター編の入口です✨</p>
 
-<div class="input-box">
-  <div class="input-label">🐾大切なお願い🐾</div>
-  <div class="input-note">この対話ナビでは
+  <div class="input-box">
+    <div class="input-label">🐾大切なお願い🐾</div>
+    <div class="input-note">この対話ナビでは
 AIを「相棒」として
 やさしく会話していきます🌿
 
@@ -178,12 +160,12 @@ AIを「相棒」として
 
 相棒と仲良くなることで
 対話がぐっと深くなります🌈</div>
-</div>
+  </div>
 
   <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
-<button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
-<button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
-<button class="btn-dark" onclick="location.href='boss.html'">マスター編へ入る😈</button>
+  <button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
+  <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
+  <button class="btn-boss" onclick="location.href='boss.html'">マスター編へ入る😈</button>
 
   <div class="guide-box">
     <div class="guide-title">使い分け🌿</div>
@@ -196,37 +178,9 @@ AIを「相棒」として
 </div>
 
 <script>
-function saveNames(){
-  const user = document.getElementById("userName").value.trim();
-  const partner = document.getElementById("partnerName").value.trim();
-
-  localStorage.setItem("userName", user);
-  localStorage.setItem("partnerName", partner);
-
-  const savedName = document.getElementById("savedName");
-  if(user || partner){
-    savedName.textContent = `「${user || "あなた"}」と「${partner || "相棒"}」を保存したよ😊`;
-  }else{
-    savedName.textContent = "名前を空にしたよ😊";
-  }
-}
-
-function loadNames(){
-  const savedUser = localStorage.getItem("userName") || "";
-  const savedPartner = localStorage.getItem("partnerName") || "";
-
-  document.getElementById("userName").value = savedUser;
-  document.getElementById("partnerName").value = savedPartner;
-
-  const savedName = document.getElementById("savedName");
-  if(savedUser || savedPartner){
-    savedName.textContent = `「${savedUser || "あなた"}」と「${savedPartner || "相棒"}」で進められるよ😊`;
-  }
-}
-
 function copyPrompt(){
-  const user = localStorage.getItem("userName") || document.getElementById("userName").value.trim() || "私";
-  const partner = localStorage.getItem("partnerName") || document.getElementById("partnerName").value.trim() || "相棒";
+  const user = localStorage.getItem("userName") || "私";
+  const partner = localStorage.getItem("partnerName") || "相棒";
 
   const text = `私は「${user}」です。
 
@@ -252,17 +206,9 @@ function copyPrompt(){
   alert("プロンプトをコピーしたよ🐾");
 }
 
-function goTarotFromBoss(){
-  localStorage.setItem("fromBoss", "1");
-  location.href = "tarot.html";
+function openProfile(){
+  location.href = "index.html";
 }
-
-function goBossApp(){
-  localStorage.setItem("fromBoss", "1");
-  location.href = "boss.html";
-}
-
-window.addEventListener("DOMContentLoaded", loadNames);
 </script>
 
 </body>
