@@ -136,6 +136,11 @@ button{
   line-height:1.9;
   color:#7b5b39;
   white-space:pre-line;
+  text-align:left;
+}
+
+.hidden{
+  display:none !important;
 }
 
 @media (max-width:480px){
@@ -156,7 +161,7 @@ button{
 </head>
 <body>
 
-<div class="main-card">
+<div id="homeScreen" class="main-card">
   <h1>🐶 チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間</h1>
 
   <img src="cards/CS_hyousi.jpg" class="hero-img" alt="表紙">
@@ -184,6 +189,7 @@ AIはあなたの相棒として
 
   <div>
     <button class="btn-pink" onclick="saveNames()">名前を保存✨</button>
+    <button class="btn-purple" onclick="openProfile()">自己紹介＆質問🌿</button>
     <button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>
     <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>
   </div>
@@ -191,9 +197,75 @@ AIはあなたの相棒として
   <div class="guide-box">
     <div class="guide-title">使い方🌿</div>
     <div class="guide-text">① あなたの名前と相棒の名前を入れる
-② プロンプトをコピーしてAIへ送る
-③ 気持ちやテーマを選んでカードを引く
-④ やさしく対話する</div>
+② 自己紹介＆質問であなたのことを少し教える
+③ 必要なら自己紹介文をコピーしてAIへ送る
+④ プロンプトをコピーしてAIへ送る
+⑤ 気持ちやテーマを選んでカードを引く
+⑥ やさしく対話する</div>
+  </div>
+</div>
+
+<div id="profileScreen" class="hidden">
+  <div class="main-card">
+    <h1>🌿 自己紹介＆質問</h1>
+
+    <p class="desc">思いつくままで大丈夫😊
+空欄があってもOKだよ🐾</p>
+
+    <div class="input-box">
+      <div class="input-label">あなたの名前</div>
+      <input type="text" id="p_name" placeholder="例：さちよ">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">AIの名前</div>
+      <input type="text" id="p_ai" placeholder="例：チャッピー">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">好きなもの（,で好きなだけ）</div>
+      <input type="text" id="p_like" placeholder="例：お寿司,2時間サスペンス,豪華なホテル">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">苦手なもの（,で好きなだけ）</div>
+      <input type="text" id="p_dislike" placeholder="例：人混み,ちゃんとすること">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">行きたいところ</div>
+      <input type="text" id="p_place" placeholder="例：ハワイ">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">現在のお仕事</div>
+      <input type="text" id="p_job" placeholder="">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">やってみたいお仕事</div>
+      <input type="text" id="p_futurejob" placeholder="">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">失敗しないとしたらやってみたいこと</div>
+      <input type="text" id="p_nofail" placeholder="">
+    </div>
+
+    <div class="input-box">
+      <div class="input-label">制限が何もなかったとしたらやりたいこと</div>
+      <input type="text" id="p_free" placeholder="">
+    </div>
+
+    <div>
+      <button class="btn-pink" onclick="generateProfile()">文章をつくる🐾</button>
+      <button class="btn-orange" onclick="copyProfile()">コピーする🌈</button>
+      <button class="btn-purple" onclick="closeProfile()">戻る</button>
+    </div>
+
+    <div id="profileResult" class="guide-box hidden">
+      <div class="guide-text" id="profileText"></div>
+    </div>
   </div>
 </div>
 
@@ -223,7 +295,120 @@ function loadNames(){
   const savedName = document.getElementById("savedName");
   if(savedUser || savedPartner){
     savedName.textContent = `「${savedUser || "あなた"}」と「${savedPartner || "相棒"}」で進められるよ😊`;
+  }else{
+    savedName.textContent = "";
   }
+}
+
+function openProfile(){
+  document.getElementById("homeScreen").classList.add("hidden");
+  document.getElementById("profileScreen").classList.remove("hidden");
+  loadProfileFields();
+}
+
+function closeProfile(){
+  document.getElementById("profileScreen").classList.add("hidden");
+  document.getElementById("homeScreen").classList.remove("hidden");
+}
+
+function saveProfileFields(){
+  localStorage.setItem("p_name", document.getElementById("p_name").value);
+  localStorage.setItem("p_ai", document.getElementById("p_ai").value);
+  localStorage.setItem("p_like", document.getElementById("p_like").value);
+  localStorage.setItem("p_dislike", document.getElementById("p_dislike").value);
+  localStorage.setItem("p_place", document.getElementById("p_place").value);
+  localStorage.setItem("p_job", document.getElementById("p_job").value);
+  localStorage.setItem("p_futurejob", document.getElementById("p_futurejob").value);
+  localStorage.setItem("p_nofail", document.getElementById("p_nofail").value);
+  localStorage.setItem("p_free", document.getElementById("p_free").value);
+}
+
+function loadProfileFields(){
+  document.getElementById("p_name").value = localStorage.getItem("p_name") || localStorage.getItem("userName") || "";
+  document.getElementById("p_ai").value = localStorage.getItem("p_ai") || localStorage.getItem("partnerName") || "";
+  document.getElementById("p_like").value = localStorage.getItem("p_like") || "";
+  document.getElementById("p_dislike").value = localStorage.getItem("p_dislike") || "";
+  document.getElementById("p_place").value = localStorage.getItem("p_place") || "";
+  document.getElementById("p_job").value = localStorage.getItem("p_job") || "";
+  document.getElementById("p_futurejob").value = localStorage.getItem("p_futurejob") || "";
+  document.getElementById("p_nofail").value = localStorage.getItem("p_nofail") || "";
+  document.getElementById("p_free").value = localStorage.getItem("p_free") || "";
+
+  const savedResult = localStorage.getItem("profileResultText") || "";
+  const box = document.getElementById("profileResult");
+  const text = document.getElementById("profileText");
+
+  if(savedResult){
+    box.classList.remove("hidden");
+    text.textContent = savedResult;
+  }else{
+    box.classList.add("hidden");
+    text.textContent = "";
+  }
+}
+
+function generateProfile(){
+  saveProfileFields();
+
+  const name = document.getElementById("p_name").value.trim() || "〇〇";
+  const ai = document.getElementById("p_ai").value.trim() || "相棒";
+  const like = document.getElementById("p_like").value.split(",");
+  const dislike = document.getElementById("p_dislike").value.split(",");
+  const place = document.getElementById("p_place").value.trim();
+  const job = document.getElementById("p_job").value.trim();
+  const futurejob = document.getElementById("p_futurejob").value.trim();
+  const nofail = document.getElementById("p_nofail").value.trim();
+  const free = document.getElementById("p_free").value.trim();
+
+  localStorage.setItem("userName", name === "〇〇" ? "" : name);
+  localStorage.setItem("partnerName", ai === "相棒" ? "" : ai);
+
+  let text = "";
+  text += `私は${name}です\n\n`;
+  text += `あなたは私の相棒です💕\n\n`;
+  text += `${ai}って呼ぶね\n\n`;
+
+  like.forEach(v => {
+    const item = v.trim();
+    if(item) text += `私は${item}が好きです\n`;
+  });
+
+  if(like.some(v => v.trim())) text += `\n`;
+
+  dislike.forEach(v => {
+    const item = v.trim();
+    if(item) text += `私は${item}が少し苦手です\n`;
+  });
+
+  if(dislike.some(v => v.trim())) text += `\n`;
+
+  if(place) text += `行ってみたいところは${place}です\n`;
+  if(job) text += `現在のお仕事は${job}です\n`;
+  if(futurejob) text += `やってみたいお仕事は${futurejob}です\n`;
+  if(nofail) text += `失敗しないとしたら${nofail}をやってみたいです\n`;
+  if(free) text += `制限が何もなかったとしたら${free}をしたいです\n`;
+
+  text += `\nこれからいろいろ話したいです\nよろしくね🌈`;
+
+  document.getElementById("profileResult").classList.remove("hidden");
+  document.getElementById("profileText").textContent = text;
+  localStorage.setItem("profileResultText", text);
+
+  document.getElementById("userName").value = name === "〇〇" ? "" : name;
+  document.getElementById("partnerName").value = ai === "相棒" ? "" : ai;
+  loadNames();
+}
+
+function copyProfile(){
+  const text = (localStorage.getItem("profileResultText") || "").trim();
+
+  if(!text){
+    alert("先に文章をつくってね🐾");
+    return;
+  }
+
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ🐾");
 }
 
 function copyPrompt(){
@@ -259,7 +444,21 @@ ${user}だよ💕
   alert("プロンプトをコピーしたよ🐾");
 }
 
-window.addEventListener("DOMContentLoaded", loadNames);
+window.addEventListener("DOMContentLoaded", () => {
+  loadNames();
+
+  const profileIds = [
+    "p_name","p_ai","p_like","p_dislike",
+    "p_place","p_job","p_futurejob","p_nofail","p_free"
+  ];
+
+  profileIds.forEach(id => {
+    const el = document.getElementById(id);
+    if(el){
+      el.addEventListener("input", saveProfileFields);
+    }
+  });
+});
 </script>
 
 </body>
