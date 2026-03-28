@@ -360,7 +360,7 @@ function generateProfile(){
 }
 
 function copyProfile(){
-  const text = (document.getElementById("profileText").textContent || "").trim();
+  const text = (localStorage.getItem("profileResultText") || document.getElementById("profileText").textContent || "").trim();
 
   if(!text){
     alert("先に文章をつくってね🐾");
@@ -402,6 +402,11 @@ ${user}だよ💕
 
   navigator.clipboard.writeText(text);
   alert("プロンプトをコピーしたよ🐾");
+}
+
+function goTarotFromBoss(){
+  localStorage.setItem("fromBoss", "1");
+  location.href = "tarot.html";
 }
 
 window.addEventListener("DOMContentLoaded", () => {
