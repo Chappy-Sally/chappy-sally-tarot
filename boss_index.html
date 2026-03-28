@@ -268,6 +268,18 @@ function closeProfile(){
   document.getElementById("homeScreen").classList.remove("hidden");
 }
 
+function saveMainNames(){
+  const name = document.getElementById("p_name").value.trim();
+  const ai = document.getElementById("p_ai").value.trim();
+
+  if(name){
+    localStorage.setItem("userName", name);
+  }
+  if(ai){
+    localStorage.setItem("partnerName", ai);
+  }
+}
+
 function saveProfileFields(){
   localStorage.setItem("p_name", document.getElementById("p_name").value);
   localStorage.setItem("p_ai", document.getElementById("p_ai").value);
@@ -278,6 +290,8 @@ function saveProfileFields(){
   localStorage.setItem("p_futurejob", document.getElementById("p_futurejob").value);
   localStorage.setItem("p_nofail", document.getElementById("p_nofail").value);
   localStorage.setItem("p_free", document.getElementById("p_free").value);
+
+  saveMainNames();
 }
 
 function loadProfileFields(){
@@ -372,6 +386,8 @@ function copyProfile(){
 }
 
 function copyPrompt(){
+  saveMainNames();
+
   const user = localStorage.getItem("userName") || "私";
   const partner = localStorage.getItem("partnerName") || "相棒";
 
