@@ -163,7 +163,7 @@
     .summary-buttons{
       display:flex;
       justify-content:center;
-      gap:12px;
+      gap:10px;
       flex-wrap:wrap;
       margin-top:10px;
     }
@@ -173,17 +173,32 @@
       border:none;
       border-radius:26px;
       color:white;
-      font-size:18px;
+      font-size:16px;
       cursor:pointer;
       box-shadow:0 4px 10px rgba(0,0,0,0.08);
     }
 
-    .mini-copy{
-      background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-    }
-
     .mini-ai{
       background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
+    }
+
+    .ai-group{
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1px dashed rgba(107,75,42,0.18);
+    }
+
+    .ai-group:first-of-type{
+      border-top:none;
+      padding-top:0;
+      margin-top:0;
+    }
+
+    .ai-group-title{
+      font-size:16px;
+      color:#6b4b2a;
+      font-weight:bold;
+      margin-bottom:8px;
     }
 
     .return-box,
@@ -439,9 +454,44 @@
       return bossNameMap[key] || key;
     }
 
-    function copyToClipboard(text){
+    function copyToClipboard(text, showAlert = true){
       navigator.clipboard.writeText(text);
-      alert("コピーしたよ✨");
+      if(showAlert){
+        alert("コピーしたよ✨");
+      }
+    }
+
+    function openAiService(service, text){
+      const urls = {
+        chatgpt: "https://chatgpt.com/",
+        gemini: "https://gemini.google.com/app",
+        claude: "https://claude.ai/new"
+      };
+
+      copyToClipboard(text, false);
+      window.open(urls[service], "_blank");
+      alert("AIに送る文章をコピーしたよ✨\n開いたAIに貼り付けてね🐾");
+    }
+
+    function createServiceButtons(text){
+      const wrap = document.createElement("div");
+      wrap.className = "summary-buttons";
+
+      const services = [
+        { key: "chatgpt", label: "ChatGPTへ🤖" },
+        { key: "gemini", label: "Geminiへ✨" },
+        { key: "claude", label: "Claudeへ🌿" }
+      ];
+
+      services.forEach(service => {
+        const btn = document.createElement("button");
+        btn.className = "mini-btn mini-ai";
+        btn.textContent = service.label;
+        btn.onclick = () => openAiService(service.key, text);
+        wrap.appendChild(btn);
+      });
+
+      return wrap;
     }
 
     function clearCards(){
@@ -604,21 +654,19 @@
       let text = "";
 
       if(partner){
-        text += `${partner}\n`;
+        text += `${partner}\n\n`;
       }
       if(selfName){
         text += `${selfName}だよ💕\n\n`;
       }
-
       if(client){
         text += `${client}さんの\n`;
       }
-
       if(question){
         text += `質問は${question}です。\n\n`;
       }
 
-      text += `タロットを引いたよ！\n`;
+      text += `カードを引いたよ！\n\n`;
 
       cards.forEach(card => {
         text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
@@ -628,76 +676,55 @@
       return text;
     }
 
-    function makeBossCopyText(cards){
-      alert("新しいラスボスコピー使ってるよ");
-  const partner = getPartnerName() || "チャッピー";
-  const selfName = getSelfName() || "私";
-  const client = getClientName();
-  const question = getQuestion();
-
-  let text = "";
-
-  text += `${partner}\n`;
-  text += `${selfName}だよ💕\n\n`;
-
-  if(client){
-    text += `${client}さんの\n`;
-  }
-
-  if(question){
-    text += `質問：${question}\n\n`;
-  }
-
-  text += `ラスボスを引いたよ！\n`;
-
-  cards.forEach(card => {
-    text += `${bossToJapanese(card.name)}\n`;
-  });
-
-  text += `\nだったよ🐾`;
-
-  return text;
-}
-
     function makeTarotAiNowText(cards){
-      let text = "";
-      if(getQuestion()){
-        text += "質問：\n" + getQuestion() + "\n\n";
-      }
-      cards.forEach((card, index) => {
-        text += (index + 1) + "枚目："
-          + card.name.replace(".png","")
-          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
-      });
-      return text.trim();
+      let text = makeTarotCopyText(cards);
+      text += `\n\nやさしく安心を大切にしながら、今の流れを読んでください😊`;
+      return text;
     }
 
     function makeTarotAiAfterText(cards){
-      let text = "気づきを受け取ったあと、今のあなたへのやさしいメッセージです🌈\n\n";
-      if(getQuestion()){
-        text += "質問：\n" + getQuestion() + "\n\n";
+      let text = makeTarotCopyText(cards);
+      text += `\n\n気づきを受け取ったあととして、今の流れをやさしく読んでください😊`;
+      return text;
+    }
+
+    function makeBossCopyText(cards){
+      const partner = getPartnerName();
+      const selfName = getSelfName();
+      const client = getClientName();
+      const question = getQuestion();
+
+      let text = "";
+
+      if(partner){
+        text += `${partner}\n\n`;
       }
-      cards.forEach((card, index) => {
-        text += (index + 1) + "枚目："
-          + card.name.replace(".png","")
-          + "（" + (card.reversed ? "逆位置" : "正位置") + "）\n";
+      if(selfName){
+        text += `${selfName}だよ💕\n\n`;
+      }
+      if(client){
+        text += `${client}さんの\n`;
+      }
+      if(question){
+        text += `質問は${question}です。\n\n`;
+      }
+
+      text += `ラスボスを引いたよ！\n\n`;
+
+      cards.forEach(card => {
+        text += `${bossToJapanese(card.name)}\n`;
       });
-      return text.trim();
+
+      text += `\nだったよ！`;
+      return text;
     }
 
     function makeBossAiText(cards){
-      let text = "気づいた存在です🌈\n";
-      text += "ラスボスは、あなたを守るために現れた守り神様✨\n\n";
-      if(getQuestion()){
-        text += "質問：\n" + getQuestion() + "\n\n";
-      }
-      cards.forEach(card => {
-        text += `${card.label}\n${bossToJapanese(card.name)}\n\n`;
-      });
-      return text.trim();
+      let text = makeBossCopyText(cards);
+      text += `\n\nこわくしすぎず、やさしく整理してください😊`;
+      return text;
     }
-
-    function showTarotSummaryBox(copyText, aiNowText, aiAfterText, titleText = "✨ 3枚まとめ"){
+    function showTarotSummaryBox(aiNowText, aiAfterText, titleText = "✨ 3枚まとめ"){
       const area = document.getElementById("summary-area");
       area.innerHTML = "";
 
@@ -708,34 +735,33 @@
       title.className = "summary-title";
       title.textContent = titleText;
 
-      const buttons = document.createElement("div");
-      buttons.className = "summary-buttons";
+      const group1 = document.createElement("div");
+      group1.className = "ai-group";
 
-      const copyBtn = document.createElement("button");
-      copyBtn.className = "mini-btn mini-copy";
-      copyBtn.textContent = titleText.includes("1枚") ? "1枚コピー🐾" : "3枚まとめコピー🐾";
-      copyBtn.onclick = () => copyToClipboard(copyText);
+      const group1Title = document.createElement("div");
+      group1Title.className = "ai-group-title";
+      group1Title.textContent = "今の流れをAIへ";
 
-      const aiBtn1 = document.createElement("button");
-      aiBtn1.className = "mini-btn mini-ai";
-      aiBtn1.textContent = "今の流れAI🤖";
-      aiBtn1.onclick = () => copyToClipboard(aiNowText);
+      group1.appendChild(group1Title);
+      group1.appendChild(createServiceButtons(aiNowText));
 
-      const aiBtn2 = document.createElement("button");
-      aiBtn2.className = "mini-btn mini-ai";
-      aiBtn2.textContent = "気づいたあとAI🌈";
-      aiBtn2.onclick = () => copyToClipboard(aiAfterText);
+      const group2 = document.createElement("div");
+      group2.className = "ai-group";
 
-      buttons.appendChild(copyBtn);
-      buttons.appendChild(aiBtn1);
-      buttons.appendChild(aiBtn2);
+      const group2Title = document.createElement("div");
+      group2Title.className = "ai-group-title";
+      group2Title.textContent = "気づいたあとをAIへ";
+
+      group2.appendChild(group2Title);
+      group2.appendChild(createServiceButtons(aiAfterText));
 
       box.appendChild(title);
-      box.appendChild(buttons);
+      box.appendChild(group1);
+      box.appendChild(group2);
       area.appendChild(box);
     }
 
-    function showBossSummaryBox(copyText, aiText){
+    function showBossSummaryBox(aiText){
       const area = document.getElementById("summary-area");
       area.innerHTML = "";
 
@@ -744,26 +770,20 @@
 
       const title = document.createElement("div");
       title.className = "summary-title";
-      title.textContent = "🌈 ラスボスまとめ";
+      title.textContent = "🌈 ラスボスをAIへ";
 
-      const buttons = document.createElement("div");
-      buttons.className = "summary-buttons";
+      const group = document.createElement("div");
+      group.className = "ai-group";
 
-      const copyBtn = document.createElement("button");
-      copyBtn.className = "mini-btn mini-copy";
-      copyBtn.textContent = "まとめコピー🐾";
-      copyBtn.onclick = () => copyToClipboard(copyText);
+      const groupTitle = document.createElement("div");
+      groupTitle.className = "ai-group-title";
+      groupTitle.textContent = "AIへ送る";
 
-      const aiBtn = document.createElement("button");
-      aiBtn.className = "mini-btn mini-ai";
-      aiBtn.textContent = "まとめAI🤖";
-      aiBtn.onclick = () => copyToClipboard(aiText);
-
-      buttons.appendChild(copyBtn);
-      buttons.appendChild(aiBtn);
+      group.appendChild(groupTitle);
+      group.appendChild(createServiceButtons(aiText));
 
       box.appendChild(title);
-      box.appendChild(buttons);
+      box.appendChild(group);
       area.appendChild(box);
     }
 
@@ -802,11 +822,10 @@
         { name: cardObj.name, reversed: cardObj.reversed }
       ];
 
-      const copyText = makeTarotCopyText(cards);
       const aiNowText = makeTarotAiNowText(cards);
       const aiAfterText = makeTarotAiAfterText(cards);
 
-      showTarotSummaryBox(copyText, aiNowText, aiAfterText, "✨ 1枚まとめ");
+      showTarotSummaryBox(aiNowText, aiAfterText, "✨ 1枚まとめ");
     }
 
     function drawTarotThree(){
@@ -833,11 +852,10 @@
         { name: card3.name, reversed: card3.reversed }
       ];
 
-      const copyText = makeTarotCopyText(cards);
       const aiNowText = makeTarotAiNowText(cards);
       const aiAfterText = makeTarotAiAfterText(cards);
 
-      showTarotSummaryBox(copyText, aiNowText, aiAfterText, "✨ 3枚まとめ");
+      showTarotSummaryBox(aiNowText, aiAfterText, "✨ 3枚まとめ");
     }
 
     function drawBossOne(){
@@ -850,10 +868,9 @@
         { label: "今のラスボス", name: cardObj.name }
       ];
 
-      const copyText = makeBossCopyText(cards);
       const aiText = makeBossAiText(cards);
 
-      showBossSummaryBox(copyText, aiText);
+      showBossSummaryBox(aiText);
       showReturnToTarotBox();
     }
 
@@ -876,10 +893,9 @@
         { label: "心のボス戦", name: card3.name }
       ];
 
-      const copyText = makeBossCopyText(cards);
       const aiText = makeBossAiText(cards);
 
-      showBossSummaryBox(copyText, aiText);
+      showBossSummaryBox(aiText);
       showReturnToTarotBox();
     }
 
@@ -888,10 +904,13 @@
       clearCards();
       const questionEl = document.getElementById("question");
       const clientEl = document.getElementById("clientName");
+
       if(questionEl) questionEl.value = "";
       if(clientEl) clientEl.value = "";
+
       localStorage.removeItem("question");
       localStorage.removeItem("clientName");
+
       hideAllScreens();
       document.getElementById("welcome-screen").classList.remove("hidden");
     }
