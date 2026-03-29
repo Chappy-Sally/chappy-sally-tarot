@@ -975,12 +975,12 @@ function copyExtra(){
   text += `${partnerName}\n\n`;
   text += `${userName}だよ💕\n\n`;
   text += "追加カード：\n";
-  text += `だったよ\n`;
-
+  
   currentCards.forEach(card => {
     text += `${formatCard(card)}\n`;
   });
-
+  
+  text += `だったよ\n`;
   navigator.clipboard.writeText(text.trim());
   alert("コピーしたよ🐾");
 }
