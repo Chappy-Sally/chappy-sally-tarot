@@ -438,6 +438,33 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+  window.addEventListener("load", () => {
+  clearProfile();
+});
+  function clearProfile(){
+  const ids = [
+    "p_name","p_ai","p_like","p_dislike",
+    "p_place","p_job","p_futurejob","p_nofail","p_free"
+  ];
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el){
+      el.value = "";
+    }
+  });
+
+  localStorage.removeItem("p_name");
+  localStorage.removeItem("p_ai");
+  localStorage.removeItem("p_like");
+  localStorage.removeItem("p_dislike");
+  localStorage.removeItem("p_place");
+  localStorage.removeItem("p_job");
+  localStorage.removeItem("p_futurejob");
+  localStorage.removeItem("p_nofail");
+  localStorage.removeItem("p_free");
+  localStorage.removeItem("profileResultText");
+  }
 </script>
 
 </body>
