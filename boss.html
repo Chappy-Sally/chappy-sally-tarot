@@ -464,6 +464,42 @@
       return text;
     }
 
+    function buildTarotAfterAiText(cards){
+  const partner = getPartnerName();
+  const selfName = getSelfName();
+  const client = getClientName();
+  const question = getQuestion();
+
+  let text = "";
+
+  if(partner){
+    text += `${partner}\n`;
+  }
+  if(selfName){
+    text += `${selfName}だよ💕\n\n`;
+  }
+  if(client){
+    text += `${client}さんの\n`;
+  }
+  if(question){
+    text += `質問は${question}です。\n\n`;
+  }
+
+  text += `カードを引いたよ！\n\n`;
+
+  cards.forEach(card => {
+    text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
+  });
+
+  text += `\nだったよ！\n\n`;
+  text += `この気づきを受け取ったあと、\n`;
+  text += `今の私がやさしく進むためのヒントを教えてください🌈\n\n`;
+  text += `短くやさしく伝えてください。\n`;
+  text += `そのあと、やさしい問いを1〜2個ください。`;
+
+  return text;
+    }
+
     function buildBossAiText(cards){
       const partner = getPartnerName();
       const selfName = getSelfName();
