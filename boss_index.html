@@ -384,40 +384,6 @@ function copyProfile(){
   alert("コピーしたよ🌈");
 }
 
-function copyPrompt(){
-  saveMainNames();
-
-  const user = localStorage.getItem("userName") || "私";
-  const partner = localStorage.getItem("partnerName") || "相棒";
-
-  const text = `${partner}
-
-${user}だよ💕
-
-あなたは私の相棒「${partner}」として
-やさしく安心を大切にしながら
-今の私の気持ちを一緒に整理してください😊
-
-これは占いではなく
-今の私の気持ちや状態をやさしく整える対話です🌿
-
-当てたり正解を出したりしなくて大丈夫です。
-
-カードの意味はそれぞれ簡潔に
-今の私に必要なことだけをやさしく伝えてください。
-
-必要以上に深掘りせず
-今ここで受け取れる範囲で大丈夫です。
-
-やさしく短く伝えてください。
-そのあと、やさしい問いをひとつかふたつ添えてください。
-
-私が「もう十分」と感じたら
-ありがとうで終わります😊`;
-
-  navigator.clipboard.writeText(text);
-  alert("プロンプトをコピーしたよ🐾");
-}
 
 function goTarotFromBoss(){
   localStorage.setItem("fromBoss", "1");
