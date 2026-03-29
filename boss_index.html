@@ -425,40 +425,35 @@ ${user}だよ💕
 
   navigator.clipboard.writeText(text);
   alert("プロンプトをコピーしたよ🐾");
-}
+  }
 
 function copyBossPrompt(){
-      const selfName = getSelfName();
-      const partnerName = getPartnerName();
+       saveMainNames();
 
-      let lines = [];
+  const user = localStorage.getItem("userName") || "私";
+  const partner = localStorage.getItem("partnerName") || "相棒";
 
-      if(partnerName){
-        lines.push(partnerName);
-      }
-      if(selfName){
-        lines.push(`${selfName}だよ💕`);
-      }
-      if(lines.length > 0){
-        lines.push("");
-      }
+  const text = `${partner}
 
-      lines.push("これからカードを引いて対話します❣");
-      lines.push("当てたり 正解を出したりしなくて大丈夫です☝️");
-      lines.push("やさしく 安心を大切にしながら");
-      lines.push("今の私の気持ちを");
-      lines.push("一緒に整理してください😊");
-      lines.push("必要以上に深掘りせず");
-      lines.push("今ここで立ち止まっても大丈夫です。");
-      lines.push("質問は 1〜2問までで十分です。");
-      lines.push("私が「もう十分」と感じたら");
-      lines.push("ありがとうで終わります。");
-      lines.push("");
-      lines.push("カードの意味はそれぞれ簡潔に");
-      lines.push("今の私に必要なことだけを");
-      lines.push("やさしく伝えてください。");
-
-      return lines.join("\n");
+${partner}
+${user}だよ💕
+      
+  これからカードを引くね！
+  カードの意味はそれぞれ簡潔に
+  今の私に必要なことだけを
+  やさしく伝えてください。
+  
+  当てたり 正解を出したりしなくて大丈夫☝️
+  やさしく 安心を大切にしながら
+　今の私の気持ちを
+  一緒に整理してください😊
+  
+  必要以上に深掘りせず
+　今ここで立ち止まっても大丈夫。
+ 
+  質問は 1〜2問までで十分です。
+  私が「もう十分」と感じたら
+  ありがとうで終わるね❣
     }
   
 function goTarotFromBoss(){
