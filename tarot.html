@@ -952,12 +952,12 @@ function copyMain(){
   text += `今の私の気持ち：\n${getFeeling()}\n\n`;
   text += `質問：\n${currentQuestion}\n\n`;
   text += "カード：\n\n";
-  text += `だったよ\n`;
 
   currentCards.forEach(card => {
     text += `${formatCard(card)}\n`;
   });
 
+  text += `\nだったよ`;
   navigator.clipboard.writeText(text.trim());
   alert("コピーしたよ🐾");
 }
