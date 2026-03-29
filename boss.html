@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>チャッピー＆サリーのタロットカード</title>
+  <title>チャッピー＆サリーの私に戻る時間</title>
 
   <style>
     body{
@@ -379,8 +379,8 @@
       boss_people_eyes: "人の目が気になる",
       boss_perfection: "完璧にしなきゃ",
       boss_fear_of_failure: "失敗したくない",
-      boss_low_confidence: "自信のなさ",
-      boss_comparison: "比べてしまう気持ち",
+      boss_low_confidence: "自信がない",
+      boss_comparison: "比較してしまう",
       boss_impatience: "焦り",
       boss_anxiety: "不安",
       boss_attachment: "執着",
@@ -391,9 +391,8 @@
       boss_guilt: "罪悪感",
       boss_give_up: "あきらめ",
       boss_endurance: "我慢ぐせ",
-      boss_obligation: "〜しなきゃ",
-      boss_hesitation: "迷い",
-      boss_return_to_self: "私に戻りたい気持ち"
+      boss_obligation: "義務感",
+      boss_hesitation: "遠慮",
     };
 
     let kamiTimer = null;
@@ -666,12 +665,12 @@
 
       const aiBtn1 = document.createElement("button");
       aiBtn1.className = "mini-btn mini-ai";
-      aiBtn1.textContent = "AIに送る🤖";
+      aiBtn1.textContent = "１度目診断コピー🤖";
       aiBtn1.onclick = () => copyToClipboard(aiNowText);
 
       const aiBtn2 = document.createElement("button");
       aiBtn2.className = "mini-btn mini-ai";
-      aiBtn2.textContent = "気づいたあとAI🌈";
+      aiBtn2.textContent = "気づいたあと診断コピー🌈";
       aiBtn2.onclick = () => copyToClipboard(aiAfterText);
 
       buttons.appendChild(aiBtn1);
@@ -698,7 +697,7 @@
 
       const aiBtn = document.createElement("button");
       aiBtn.className = "mini-btn mini-ai";
-      aiBtn.textContent = "AIに送る🤖";
+      aiBtn.textContent = "診断コピー🤖";
       aiBtn.onclick = () => copyToClipboard(aiText);
 
       buttons.appendChild(aiBtn);
