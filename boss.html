@@ -629,37 +629,34 @@
     }
 
     function makeBossCopyText(cards){
-      const partner = getPartnerName();
-      const selfName = getSelfName();
-      const client = getClientName();
-      const question = getQuestion();
+  const partner = getPartnerName() || "チャッピー";
+  const selfName = getSelfName() || "私";
+  const client = getClientName();
+  const question = getQuestion();
 
-      let text = "";
+  let text = "";
 
-      if(partner){
-        text += `${partner}\n`;
-      }
-      if(selfName){
-        text += `${selfName}だよ💕\n\n`;
-      }
+  text += `${partner}\n`;
+  text += `${selfName}だよ💕\n\n`;
 
-      if(client){
-        text += `${client}さんの\n`;
-      }
+  if(client){
+    text += `${client}さんの\n`;
+  }
 
-      if(question){
-        text += `質問は${question}です。\n\n`;
-      }
+  if(question){
+    text += `質問：${question}\n\n`;
+  }
 
-      text += `ラスボスを引いたよ！\n`;
+  text += `ラスボスを引いたよ！\n`;
 
-      cards.forEach(card => {
-        text += `${bossToJapanese(card.name)}\n`;
-      });
+  cards.forEach(card => {
+    text += `${bossToJapanese(card.name)}\n`;
+  });
 
-      text += `\nだったよ！`;
-      return text;
-    }
+  text += `\nだったよ🐾`;
+
+  return text;
+}
 
     function makeTarotAiNowText(cards){
       let text = "";
