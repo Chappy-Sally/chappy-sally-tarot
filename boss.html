@@ -872,9 +872,16 @@
       location.href = "https://chappy-sally.github.io/chappy-sally-tarot/boss_index.html";
     }
 
-    window.addEventListener("load", function () {
-      restoreSessionInputs();
-    });
+    window.addEventListener("load", () => {
+  localStorage.removeItem("clientName");
+  localStorage.removeItem("question");
+
+  const questionEl = document.getElementById("question");
+  const clientEl = document.getElementById("clientName");
+
+  if(questionEl) questionEl.value = "";
+  if(clientEl) clientEl.value = "";
+});
   </script>
 
 </body>
