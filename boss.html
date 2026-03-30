@@ -480,19 +480,19 @@
   if(question){
     text += `質問は${question}です。\n\n`;
   }
+　text += `気づきを受け取ったあとの、\n`;
+  text += `今の私がやさしく進むためのヒントを\n\n`;
+  text += `短くやさしく教えてください😊\n`;
+  text += `そのあと、やさしい問いを1〜2個ください。`;
 
-  text += `カードを引いたよ！\n\n`;
+  text += `カードは\n\n`;
 
   cards.forEach(card => {
     text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
   });
 
   text += `\nだったよ！\n\n`;
-  text += `この気づきを受け取ったあと、\n`;
-  text += `今の私がやさしく進むためのヒントを教えてください🌈\n\n`;
-  text += `短くやさしく伝えてください。\n`;
-  text += `そのあと、やさしい問いを1〜2個ください。`;
-
+  
   return text;
     }
 
@@ -517,7 +517,16 @@
         text += `質問は${question}です。\n\n`;
       }
 
-      text += `ラスボスを引いたよ！\n\n`;
+　　　　text += `ラスボスは\n`;
+  　　　text += `問題ではなく私を守るために\n\n`;
+  　　　text += `生まれた思い込みやクセに\n\n`;
+  　　　text += `気づくためのヒント❣\n`;
+      
+  　　　text += `否定や断定ではなく`;
+       text += `今の私がやさしく気づける`;
+       text += `形で教えてね❣`;
+      
+      text += `ラスボスカードを引いたよ！\n\n`;
 
       cards.forEach(card => {
         text += `${bossToJapanese(card.name)}\n`;
