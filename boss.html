@@ -302,7 +302,6 @@
     <div class="button-group">
   <button class="switch-btn" onclick="toggleSwitch()">🌈しあわせスイッチ</button>
 </div>
- </div>
 
 <div id="happySwitch" class="hidden switch-screen">
 
@@ -933,8 +932,11 @@
 });
 
 function toggleSwitch() {
-  const el = document.getElementById("happySwitch");
-  el.classList.toggle("hidden");
+  const master = document.getElementById("masterScreen");
+  const happy = document.getElementById("happySwitch");
+
+  master.classList.add("hidden");
+  happy.classList.remove("hidden");
 }
     
 function backToRoom() {
