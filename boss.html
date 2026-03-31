@@ -962,21 +962,21 @@
 function toggleSwitch() {
   const master = document.getElementById("masterScreen");
   const happy = document.getElementById("happySwitch");
+  const resultArea = document.getElementById("resultArea");
 
-  master.classList.add("hidden");
-  happy.classList.remove("hidden");
+  if (resultArea) resultArea.classList.add("hidden"); // タロット結果を隠す
+  master.classList.add("hidden");                     // ROOM本体を隠す
+  happy.classList.remove("hidden");                   // しあわせスイッチを出す
 }
     
 function backToRoom() {
   const master = document.getElementById("masterScreen");
   const happy = document.getElementById("happySwitch");
-  const tarot = document.getElementById("tarot-screen");
-  const boss = document.getElementById("boss-screen");
+  const resultArea = document.getElementById("resultArea");
 
-  happy.classList.add("hidden");
-  tarot.classList.add("hidden");   // ←これ追加✨
-  boss.classList.add("hidden");    // ←これも追加✨
-  master.classList.remove("hidden");
+  happy.classList.add("hidden");                     // スイッチ画面を隠す
+  if (resultArea) resultArea.classList.add("hidden"); // タロット結果も隠す
+  master.classList.remove("hidden");                 // ROOM本体だけ戻す
 }
   </script>
 
