@@ -936,6 +936,14 @@ function toggleSwitch() {
   const el = document.getElementById("happySwitch");
   el.classList.toggle("hidden");
 }
+    
+function backToRoom() {
+  const master = document.getElementById("masterScreen");
+  const happy = document.getElementById("happySwitch");
+
+  happy.classList.add("hidden");
+  master.classList.remove("hidden");
+}
   </script>
 
 </body>
