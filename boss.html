@@ -15,6 +15,21 @@
       margin:0;
     }
 
+    .switch-image {
+  width: 80%;
+  max-width: 320px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.switch-text {
+  background: rgba(255,255,255,0.8);
+  padding: 12px;
+  border-radius: 15px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+    
     .hidden{
       display:none;
     }
@@ -259,10 +274,10 @@
 
     <img src="images/CS_hyousi.jpg" class="header-img" alt="表紙">
 
-    <div class="name-note">自分のお名前は保存済みでOK🐾<br>セッションのときは今回のお相手のお名前を入れてね</div>
-    <input id="clientName" placeholder="今回のお相手のお名前（任意）">
+    <div class="name-note">自分のお名前は保存済みでOK🐾<br>セッションのときは相談者さんのお名前を入れてね</div>
+    <input id="clientName" placeholder="相談者さんのお名前（任意）">
     <br>
-    <input id="question" placeholder="今日の問いを入れてから引く">
+    <input id="question" placeholder="問いを入れてから引く">
 
     <div class="button-group">
       <button class="main-btn" onclick="saveSessionInputs(); drawTarotOne()">1枚引き</button>
@@ -273,6 +288,24 @@
     <div class="button-group">
       <button class="boss-btn" onclick="showBossScreen()">ラスボスをみつける🐾</button>
     </div>
+    <div class="button-group">
+  <button class="switch-btn" onclick="toggleSwitch()">🌈しあわせスイッチ</button>
+</div>
+
+<div id="happySwitch" style="display:none; text-align:center; margin-top:15px;">
+
+  <img src="switch.png" class="switch-image">
+
+  <div class="switch-text">
+    <p>🌈しあわせスイッチが入りました</p>
+    <p>今この瞬間、ホッとできることはある？</p>
+    <p>小さな「よかった」を見つけてみてね😊</p>
+    <p>それにちょっと大げさに喜んでみて🤭</p>
+    <p>もう、満たされてるとしたらどんな気持ち？🌿</p>
+    <p>もう、願いが叶ってるかも🤭🌿</p>
+  </div>
+
+</div>
   </div>
 
   <div id="boss-screen" class="hidden">
@@ -887,6 +920,16 @@
   if(questionEl) questionEl.value = "";
   if(clientEl) clientEl.value = "";
 });
+
+function toggleSwitch() {
+  const el = document.getElementById("happySwitch");
+  if (el.style.display === "none") {
+    el.style.display = "block";
+  } else {
+    el.style.display = "none";
+  }
+}
+</script>
   </script>
 
 </body>
