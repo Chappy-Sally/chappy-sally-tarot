@@ -962,18 +962,20 @@
 function toggleSwitch() {
   const master = document.getElementById("masterScreen");
   const happy = document.getElementById("happySwitch");
-  const tarot = document.getElementById("tarot-screen");
 
   master.classList.add("hidden");
-  tarot.classList.add("hidden"); // ←これ追加✨
   happy.classList.remove("hidden");
 }
     
 function backToRoom() {
   const master = document.getElementById("masterScreen");
   const happy = document.getElementById("happySwitch");
+  const tarot = document.getElementById("tarot-screen");
+  const boss = document.getElementById("boss-screen");
 
   happy.classList.add("hidden");
+  tarot.classList.add("hidden");   // ←これ追加✨
+  boss.classList.add("hidden");    // ←これも追加✨
   master.classList.remove("hidden");
 }
   </script>
