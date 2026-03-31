@@ -275,11 +275,13 @@
   </div>
 
   <div id="tarot-screen" class="hidden">
-    <div class="title-wrap">
+    　<div id="masterScreen">
+    　<div class="title-wrap">
       <div class="title-icon">🔮</div>
       <h1>チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間⏳️</h1>
       <div class="title-icon">🔮</div>
     </div>
+
 
     <img src="images/CS_hyousi.jpg" class="header-img" alt="表紙">
 
@@ -300,6 +302,7 @@
     <div class="button-group">
   <button class="switch-btn" onclick="toggleSwitch()">🌈しあわせスイッチ</button>
 </div>
+ </div>
 
 <div id="happySwitch" class="hidden switch-screen">
 
@@ -933,8 +936,6 @@ function toggleSwitch() {
   const el = document.getElementById("happySwitch");
   el.classList.toggle("hidden");
 }
-}
-</script>
   </script>
 
 </body>
