@@ -962,9 +962,11 @@
 function toggleSwitch() {
   const master = document.getElementById("masterScreen");
   const happy = document.getElementById("happySwitch");
+  const tarot = document.getElementById("tarot-screen");
 
-  master.style.display = "none";
-  happy.style.display = "block";
+  master.classList.add("hidden");
+  tarot.classList.add("hidden"); // ←これ追加✨
+  happy.classList.remove("hidden");
 }
     
 function backToRoom() {
@@ -972,10 +974,7 @@ function backToRoom() {
   const happy = document.getElementById("happySwitch");
 
   happy.classList.add("hidden");
-  happy.style.display = "none";
-
   master.classList.remove("hidden");
-  master.style.display = "block";
 }
   </script>
 
