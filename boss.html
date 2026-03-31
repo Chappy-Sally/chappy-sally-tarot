@@ -237,6 +237,11 @@
       margin-bottom:8px;
     }
 
+    .switch-text {
+ 　　　 text-align: left;
+ 　　　 padding: 0 16px;
+    }
+    
     .name-note{
       font-size:14px;
       color:#9a7b5d;
@@ -307,12 +312,15 @@
  <img src="images/switch.png" class="switch-image">
 
   <div class="switch-text">
-    <p>🌈しあわせスイッチが入りました</p>
+    <p>しあわせスイッチの練習してみよう🌈</p>
+    
     <p>今この瞬間、ホッとできることはある？</p>
     <p>小さな「よかった」を見つけてみてね😊</p>
-    <p>それにちょっと大げさに喜んでみて🤭</p>
+    <p>そのよかったを、ちょっと大げさに喜んでみて🤭</p>
     <p>もう、満たされてるとしたらどんな気持ち？🌿</p>
     <p>もう、願いが叶ってるかも🤭🌿</p>
+    
+    <p>しあわせスイッチ　入りました🌈🌿</p>
   </div>
   
 　<div class="button-group">
@@ -947,7 +955,10 @@ function backToRoom() {
   const happy = document.getElementById("happySwitch");
 
   happy.classList.add("hidden");
+  happy.style.display = "none";
+
   master.classList.remove("hidden");
+  master.style.display = "block";
 }
   </script>
 
