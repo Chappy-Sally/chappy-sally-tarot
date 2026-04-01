@@ -183,7 +183,10 @@
 
     .button-group{
   margin-top:10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
     }
 
     .summary-box{
@@ -367,9 +370,9 @@
       <button class="boss-btn" onclick="saveSessionInputs(); drawBossOne()">1枚引き</button>
       <button class="boss-btn" onclick="saveSessionInputs(); drawBossThree()">3枚引き</button>
     </div>
-  </div>
+ 　 </div>
 
-  <div id="kami-screen" class="hidden">
+  　<div id="kami-screen" class="hidden">
     <div class="title-wrap">
       <div class="title-icon">✨</div>
       <h1>やさしい光のステージ</h1>
