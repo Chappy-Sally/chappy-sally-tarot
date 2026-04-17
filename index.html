@@ -136,19 +136,17 @@ button{
   display:none !important;  
 }  
   
-@media (max-width:480px){  
-  h1{  
-    font-size:25px;  
-  }  
-  .desc,.guide-text{  
-    font-size:15px;  
-  }  
-  .input-label{  
-    font-size:16px;  
-  }  
-  button,input{  
-    font-size:16px;  
-  }  
+@media (max-width: 480px) {
+  .menu-grid button {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+  .menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 10px; /* ←ちょい詰める */
+  margin: 20px 0;
+  }
 }  
 </style>  </head>  
 <body>  <div class="main-card">  
@@ -167,10 +165,31 @@ AIを「相棒」として
 相棒と仲良くなることで
 対話がぐっと深くなります🌈</div>
 
-  </div>    <div>  
-    <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>  
-    <button class="btn-orange" onclick="copyPrompt()">プロンプトコピー🐾</button>  
-    <button class="btn-purple" onclick="location.href='tarot.html'">対話ナビをひらく🔮</button>  
+ <div class="menu-grid">
+
+  <button class="btn-pink" onclick="location.href='tarot.html'">
+    対話ナビをひらく<br>🔮
+  </button>
+  <button class="btn-orange" onclick="copyPrompt()">
+    対話ナビプロンプト<br>🐾
+  </button>
+  <button class="btn-purple" onclick="location.href='boss_index.html'">
+    マスター編をひらく<br>😈
+  </button>
+  <button class="btn-orange" onclick="copyMasterPrompt()">
+    マスター編プロンプト<br>🐾
+  </button>
+  <button class="btn-pink" onclick="openProfile()">
+    自己紹介＆質問<br>🌿
+  </button>
+  <button class="btn-purple" onclick="location.href='talk.html'">
+    AIとさらに仲良くなる<br>💫
+  </button>
+  <button class="btn-orange full-width">
+    使い方🌿
+  </button>
+
+ </div>
   </div>    <div class="guide-box">  
     <div class="guide-title">使い方🌿</div>  
     <div class="guide-text">① 自己紹介＆質問であなたのことを少し教える  
