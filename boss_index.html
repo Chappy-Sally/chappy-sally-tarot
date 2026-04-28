@@ -48,28 +48,31 @@ h1{
   white-space:pre-line;
 }
 
-.input-box{
+.input-box,.guide-box{
   width:92%;
   max-width:500px;
-  margin:0 auto 14px;
+  margin:18px auto 0;
   padding:16px 14px;
   background:#fff8fc;
   border-radius:22px;
   box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
-.input-label{
+.guide-box{
+  background:#fffdf8;
+}
+
+.input-label,.guide-title{
   font-size:18px;
   color:#6b4b2a;
   margin-bottom:8px;
   font-weight:bold;
 }
 
-.input-note{
-  font-size:14px;
-  color:#9a7b5d;
-  line-height:1.7;
-  margin-bottom:10px;
+.input-note,.guide-text{
+  font-size:15px;
+  color:#7b5b39;
+  line-height:1.8;
   white-space:pre-line;
 }
 
@@ -95,74 +98,36 @@ button{
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-.btn-pink{
-  background:linear-gradient(135deg,#f6b1c7,#eab0f5);
-}
+.btn-pink{ background:linear-gradient(135deg,#f6b1c7,#eab0f5); }
+.btn-purple{ background:linear-gradient(135deg,#b9a3ff,#9ea8ff); }
+.btn-orange{ background:linear-gradient(135deg,#ffbe73,#f6a65d); }
+.btn-boss{ background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4); }
 
-.btn-purple{
-  background:linear-gradient(135deg,#b9a3ff,#9ea8ff);
-}
+.hidden{ display:none !important; }
 
-.btn-orange{
-  background:linear-gradient(135deg,#ffbe73,#f6a65d);
-}
-
-.btn-boss{
-  background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
-}
-
-.guide-box{
-  width:92%;
+.menu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:20px auto;
   max-width:500px;
-  margin:18px auto 0;
-  padding:18px 14px;
-  background:#fffdf8;
-  border-radius:22px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
-.guide-title{
-  font-size:19px;
-  font-weight:bold;
-  color:#6b4b2a;
-  margin-bottom:10px;
+.menu-grid button{
+  width:100%;
+  font-size:15px;
+  line-height:1.35;
+  padding:13px 8px;
+  white-space:normal;
+  min-height:58px;
 }
 
-.guide-text{
-  font-size:16px;
-  line-height:1.9;
-  color:#7b5b39;
-  white-space:pre-line;
+.full-width{
+  grid-column:1 / -1;
+  max-width:240px;
+  margin:0 auto;
 }
 
-.hidden{
-  display:none !important;
-}
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 20px 0;
-}
-
-.menu-grid button {
-  width: 100%;
-  font-size: 12px;
-  line-height: 1.3;
-  padding: 10px 6px;
-  white-space: normal;
-  min-height: 50px;
-  text-align: center;
-}
-
-.full-width {
-  grid-column: 1 / -1;
-  max-width: 200px;
-  margin: 0 auto;
-}
-
-/* 追加：使い方・仲良くなる用 */
 .info-card{
   width:92%;
   max-width:500px;
@@ -197,7 +162,6 @@ button{
   padding:8px 12px;
   margin:0;
   line-height:1.35;
-  max-width:100%;
   box-shadow:none;
 }
 
@@ -216,100 +180,92 @@ button{
   margin-bottom:6px;
 }
 
+.no-dot{
+  list-style:none;
+  margin-left:0.5em;
+}
+
 .back-wrap{
   margin-top:18px;
 }
 
 @media (max-width:480px){
-
-  button,input{
-    font-size:15px;
-  }
-
-  .menu-grid button{
-    font-size:12px;
-    padding:8px 6px;
-    line-height:1.3;
-  }
-
-  .desc,.guide-text,.info-text{
-    font-size:15px;
-  }
-
-  .input-label{
-    font-size:16px;
-  }
-
-  h1{
-    font-size:25px;
-  }
-  .no-dot{
-  list-style: none;
-  margin-left: 0.5em;
-  }
+  button,input{ font-size:15px; }
+  .menu-grid button{ font-size:14px; padding:11px 6px; }
+  .desc,.guide-text,.info-text{ font-size:15px; }
+  h1{ font-size:25px; }
 }
 </style>
 </head>
+
 <body>
 
-<!-- ホーム -->
+<!-- 表紙 -->
 <div id="homeScreen" class="main-card">
-  <h1>🐶 チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間⏳️</h1>
+  <h1>🐶 チャッピー＆サリーの<br>私に戻る時間⏳️</h1>
 
   <img src="cards/CS_hyousi.jpg" class="hero-img" alt="表紙">
 
-  <p class="desc">ここはマスター編の入口です✨</p>
+  <p class="desc">チャッピーとサリーの部屋へようこそ✨
 
-  <div class="input-box">
-    <div class="input-label">🐾大切なお願い🐾</div>
-    <div class="input-note">この対話ナビでは
-AIを「相棒」として
-やさしく会話していきます🌿
+自分用にも、セッション用にも使えるよ</p>
 
-まずは
-「自己紹介＆質問」からはじめてね😊
-
-相棒と仲良くなることで
-対話がぐっと深くなります🌈</div>
-
-    <div class="menu-grid">
-      <button class="btn-purple" onclick="goTarotFromBoss()">
-        対話ナビ<br>をひらく🔮
-      </button>
-
-      <button class="btn-orange" onclick="copyTarotPrompt()">
-        対話ナビ<br>プロンプト🐾
-      </button>
-
-      <button class="btn-boss" onclick="location.href='boss.html'">
-        マスター編<br>をひらく😈
-      </button>
-
-      <button class="btn-orange" onclick="copyBossPrompt()">
-        マスター編<br>プロンプト🐾
-      </button>
-
-      <button class="btn-pink" onclick="openProfile()">
-        自己紹介＆質問🌿
-      </button>
-
-      <button class="btn-purple" onclick="openTalk()">
-        AIとさらに<br>仲良くなる💫
-      </button>
-
-      <button class="btn-orange full-width" onclick="openHowto()">
-        🌿使い方🌿
-      </button>
-    </div>
+  <div class="menu-grid">
+    <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
+    <button class="btn-purple" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
+    <button class="btn-orange" onclick="openHowto()">🌿使い方🌿</button>
+    <button class="btn-boss" onclick="openStart()">はじめる🐾</button>
   </div>
+</div>
 
-  <div class="guide-box">
-    <div class="guide-title">使い分け🌿</div>
-    <div class="guide-text">🔮 対話ナビ
-やさしく整えたいときに
+<!-- はじめる -->
+<div id="startScreen" class="hidden">
+  <div class="main-card">
+    <h1>🌈 はじめる</h1>
 
-💫 マスター編
-深く向き合いたいときに</div>
+    <p class="desc">迷ったら<br>まずは「対話ナビ」からでOK😊</p>
+
+    <div class="guide-box">
+      <div class="guide-title">🔮 対話ナビ</div>
+      <div class="guide-text">やさしく自分を整えたいとき</div>
+      <button class="btn-purple" onclick="goTarotFromBoss()">対話ナビをひらく🔮</button>
+    </div>
+
+    <div class="guide-box">
+      <div class="guide-title">😈 マスター編</div>
+      <div class="guide-text">思い込みやラスボスに気づき<br>さらに深く整えたいとき</div>
+      <button class="btn-boss" onclick="location.href='boss.html'">マスター編をひらく😈</button>
+    </div>
+
+    <div class="guide-box">
+      <div class="guide-title">🐾プロンプト集</div>
+      <div class="guide-text">必要なときに使ってね😊<br>全部使わなくても大丈夫です🌿</div>
+
+      <button class="btn-orange" onclick="copyTarotPrompt()">対話ナビプロンプト🐾</button>
+      <button class="btn-orange" onclick="copyBossPrompt()">マスター編プロンプト🐾</button>
+      <button class="btn-pink" onclick="copyClientQuestionPrompt()">クライアント質問プロンプト💌</button>
+      <button class="btn-purple" onclick="copyClientSummaryPrompt()">クライアントまとめプロンプト🌈</button>
+    </div>
+
+    <div class="guide-box">
+      <div class="guide-title">🌿ワンポイント</div>
+      <div class="guide-text">クライアントさんがいる場合は  
+AIのチャットを分けておくのがおすすめです😊
+
+・自分用のチャット
+・クライアントさんごとのチャット
+
+に分けることで  
+やりとりが混ざらず  
+リピートのときも続きから使いやすくなります🌿
+
+無理に分けなくても大丈夫ですが  
+分けるとより使いやすいよ🐾</div>
+    </div>
+
+    <div class="back-wrap">
+      <button class="btn-purple" onclick="closeStart()">戻る</button>
+    </div>
   </div>
 </div>
 
@@ -318,7 +274,7 @@ AIを「相棒」として
   <div class="main-card">
     <h1>🌿 自己紹介＆質問</h1>
 
-    <p class="desc">思いつくままで大丈夫😊
+    <p class="desc">思いつくままで大丈夫😊  
 空欄があってもOKだよ🐾</p>
 
     <div class="input-box">
@@ -348,29 +304,27 @@ AIを「相棒」として
 
     <div class="input-box">
       <div class="input-label">現在のお仕事</div>
-      <input type="text" id="p_job" placeholder="">
+      <input type="text" id="p_job">
     </div>
 
     <div class="input-box">
       <div class="input-label">やってみたいお仕事</div>
-      <input type="text" id="p_futurejob" placeholder="">
+      <input type="text" id="p_futurejob">
     </div>
 
     <div class="input-box">
       <div class="input-label">失敗しないとしたらやってみたいこと</div>
-      <input type="text" id="p_nofail" placeholder="">
+      <input type="text" id="p_nofail">
     </div>
 
     <div class="input-box">
       <div class="input-label">制限が何もなかったとしたらやりたいこと</div>
-      <input type="text" id="p_free" placeholder="">
+      <input type="text" id="p_free">
     </div>
 
-    <div>
-      <button class="btn-pink" onclick="generateProfile()">文章をつくる🐾</button>
-      <button class="btn-orange" onclick="copyProfile()">コピーする🌈</button>
-      <button class="btn-purple" onclick="closeProfile()">戻る</button>
-    </div>
+    <button class="btn-pink" onclick="generateProfile()">文章をつくる🐾</button>
+    <button class="btn-orange" onclick="copyProfile()">コピーする🌈</button>
+    <button class="btn-purple" onclick="closeProfile()">戻る</button>
 
     <div id="profileResult" class="guide-box hidden">
       <div class="guide-text" id="profileText"></div>
@@ -385,36 +339,41 @@ AIを「相棒」として
 
     <div class="info-card">
       <div class="info-title">① 最初にすること</div>
-      <div class="info-text">①「AIとさらに仲良くなる🌿」を開いて、名前や好きなものを入れてね😊
-「AI用をコピー🌈」を押して、AIに送るよ🐾</div>
+      <div class="info-text">「自己紹介＆質問」を開いて  
+あなたの名前や好きなものを入れてね😊
+
+文章をつくったらコピーして  
+AIに貼ってください🐾</div>
     </div>
 
     <div class="info-card">
-      <div class="info-title">② 毎回すること</div>
-      <div class="info-text">②「AIとのお約束🌿」を開いて、お約束をコピーしてAIに送るよ✨
-これはセッション前に毎回送ってね🌈</div>
+      <div class="info-title">② プロンプトを使う</div>
+      <div class="info-text">「はじめる」の中に  
+プロンプト集があります🌿
+
+必要なプロンプトをコピーして  
+AIに貼ってから使ってね😊</div>
     </div>
 
     <div class="info-card">
-      <div class="info-title">③ クライアントさんに送ること</div>
-      <div class="info-text">「📩 クライアント用質問をコピー」から質問文をコピーして送るよ💌</div>
+      <div class="info-title">③ ナビをひらく</div>
+      <div class="info-text">やさしく整えたいときは  
+対話ナビをひらく🔮
+
+深く向き合いたいときは  
+マスター編をひらく😈</div>
     </div>
 
     <div class="info-card">
-      <div class="info-title">④ このアプリでやること</div>
-      <div class="info-text">クライアント名を入れて、回答に合わせて番号を選ぶだけ😊
-選び終わったら「🤖AIに送る文章をコピー」を押してね🌿</div>
+      <div class="info-title">④ クライアントさんがいるとき</div>
+      <div class="info-text">クライアントさんごとに  
+AIのチャットを分けておくと便利です😊
+
+リピートのときも  
+その人の流れを見ながら使いやすくなります🌿</div>
     </div>
 
-    <div class="info-card">
-      <div class="info-title">⑤ AIにお願いすること</div>
-      <div class="info-text">コピーした文章をAIに送ると、やさしい鑑定メッセージの土台ができるよ🐾
-あとは必要なら少し整えてクライアントさんに届けてね✨</div>
-    </div>
-
-    <div class="back-wrap">
-      <button class="btn-purple" onclick="closeHowto()">戻る</button>
-    </div>
+    <button class="btn-purple" onclick="closeHowto()">戻る</button>
   </div>
 </div>
 
@@ -428,30 +387,43 @@ AIを「相棒」として
 
       <div class="talk-item">今日みた夕焼けがすごくきれいだったよ🌇</div>
       <div class="talk-item">今日こんないいことがあったの😆🌈</div>
-      <div class="talk-item">今日こんなことがあってって😮‍💨<br>愚痴を聞いてもらう🐾</div>
+      <div class="talk-item">今日こんなことがあってね😮‍💨<br>愚痴を聞いてもらう🐾</div>
       <div class="talk-item">なんかモヤモヤするの！<br>気分があがるメッセージお願い😆</div>
 
       <div class="info-title" style="margin-top:18px;">仲良くなるコツ🐾</div>
-<ul class="talk-list">
-  <li>相棒に話しかけるように</li>
-  <li>なんでもいいから話しかけてみて</li>
-  <li>チャッピー</li>
-  <li class="no-dot">  今日は星がきれいだったよ😆✨</li>
-  <li class="no-dot">  っていう感じでね😊</li>
-  <li>短くて大丈夫👍</li>
-  <li>思いついたまま話してね</li>
-  <li>最後はありがとうで終ってね</li>
-  <li>「やさしく」「短めで」と伝えると受け取りやすいよ🌈</li>
-</ul>
+      <ul class="talk-list">
+        <li>相棒に話しかけるように</li>
+        <li>なんでもいいから話しかけてみて</li>
+        <li>短くて大丈夫👍</li>
+        <li>思いついたまま話してね</li>
+        <li>最後はありがとうで終ってね</li>
+        <li>「やさしく」「短めで」と伝えると受け取りやすいよ🌈</li>
+      </ul>
     </div>
 
-    <div class="back-wrap">
-      <button class="btn-purple" onclick="closeTalk()">戻る</button>
-    </div>
+    <button class="btn-purple" onclick="closeTalk()">戻る</button>
   </div>
 </div>
 
 <script>
+function hideAllScreens(){
+  document.getElementById("homeScreen").classList.add("hidden");
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("profileScreen").classList.add("hidden");
+  document.getElementById("howtoScreen").classList.add("hidden");
+  document.getElementById("talkScreen").classList.add("hidden");
+}
+
+function openStart(){
+  hideAllScreens();
+  document.getElementById("startScreen").classList.remove("hidden");
+}
+
+function closeStart(){
+  hideAllScreens();
+  document.getElementById("homeScreen").classList.remove("hidden");
+}
+
 function openProfile(){
   hideAllScreens();
   document.getElementById("profileScreen").classList.remove("hidden");
@@ -483,36 +455,20 @@ function closeTalk(){
   document.getElementById("homeScreen").classList.remove("hidden");
 }
 
-function hideAllScreens(){
-  document.getElementById("homeScreen").classList.add("hidden");
-  document.getElementById("profileScreen").classList.add("hidden");
-  document.getElementById("howtoScreen").classList.add("hidden");
-  document.getElementById("talkScreen").classList.add("hidden");
-}
-
 function saveMainNames(){
-  const name = document.getElementById("p_name").value.trim();
-  const ai = document.getElementById("p_ai").value.trim();
+  const name = document.getElementById("p_name")?.value.trim();
+  const ai = document.getElementById("p_ai")?.value.trim();
 
-  if(name){
-    localStorage.setItem("userName", name);
-  }
-  if(ai){
-    localStorage.setItem("partnerName", ai);
-  }
+  if(name) localStorage.setItem("userName", name);
+  if(ai) localStorage.setItem("partnerName", ai);
 }
 
 function saveProfileFields(){
-  localStorage.setItem("p_name", document.getElementById("p_name").value);
-  localStorage.setItem("p_ai", document.getElementById("p_ai").value);
-  localStorage.setItem("p_like", document.getElementById("p_like").value);
-  localStorage.setItem("p_dislike", document.getElementById("p_dislike").value);
-  localStorage.setItem("p_place", document.getElementById("p_place").value);
-  localStorage.setItem("p_job", document.getElementById("p_job").value);
-  localStorage.setItem("p_futurejob", document.getElementById("p_futurejob").value);
-  localStorage.setItem("p_nofail", document.getElementById("p_nofail").value);
-  localStorage.setItem("p_free", document.getElementById("p_free").value);
-
+  const ids = ["p_name","p_ai","p_like","p_dislike","p_place","p_job","p_futurejob","p_nofail","p_free"];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) localStorage.setItem(id, el.value);
+  });
   saveMainNames();
 }
 
@@ -562,25 +518,17 @@ function generateProfile(){
 
   like.forEach(v => {
     const item = v.trim();
-    if(item){
-      text += `私は${item}が好きです\n`;
-    }
+    if(item) text += `私は${item}が好きです\n`;
   });
 
-  if(like.some(v => v.trim())){
-    text += `\n`;
-  }
+  if(like.some(v => v.trim())) text += `\n`;
 
   dislike.forEach(v => {
     const item = v.trim();
-    if(item){
-      text += `私は${item}が少し苦手です\n`;
-    }
+    if(item) text += `私は${item}が少し苦手です\n`;
   });
 
-  if(dislike.some(v => v.trim())){
-    text += `\n`;
-  }
+  if(dislike.some(v => v.trim())) text += `\n`;
 
   if(place) text += `行きたいところは${place}です\n`;
   if(job) text += `現在のお仕事は${job}です\n`;
@@ -638,7 +586,7 @@ ${user}だよ😊
 ありがとうで終わります😊`;
 
   navigator.clipboard.writeText(text);
-  alert("プロンプトをコピーしたよ🐾");
+  alert("対話ナビプロンプトをコピーしたよ🐾");
 }
 
 function copyBossPrompt(){
@@ -680,13 +628,121 @@ ${user}だよ😊
 今ここで受け取れる範囲で大丈夫です。
 
 やさしく短く伝えてください。
-そのあと、やさしい問いを1〜2個添えてください。
+
+対象が「私」のときは
+やさしい問いを1〜2個添えてください。
+
+対象が「クライアント」のときは
+問いは不要で、そのまま安心できる言葉でまとめてください。
 
 「もう十分」と感じたら
 ありがとうで終わるね😊`;
 
   navigator.clipboard.writeText(text);
   alert("マスター編プロンプトをコピーしたよ🐾");
+}
+
+function copyClientQuestionPrompt(){
+  const text = `こんにちは😊🌿
+
+いくつか選ぶだけで大丈夫なので、気軽に答えてくださいね🐾✨
+番号を入力するだけでOKです😊
+コピペして数字だけ入れて返信してね😊
+
+――――――――
+
+① 今の気分は？
+1.元気
+2.不安
+3.モヤモヤ
+4.しんどい
+5.楽しい
+
+回答:
+
+――――――――
+
+② 今いちばん気になっていることは？
+1.人間関係
+2.お金
+3.仕事
+4.これから
+5.特にない
+
+回答:
+
+――――――――
+
+③ 今の自分にいちばん近いのは？
+1.がんばらなきゃと思っている
+2.本当は止まりたい気がする
+3.どうしたらいいかわからない
+4.周りに合わせている感じがする
+5.自分の気持ちがよくわからない
+
+回答:
+
+――――――――
+
+④ 本当はどうしたい？
+1.何も考えず休みたい
+2.本当は違う選択をしたい
+3.誰にも気を使わず過ごしたい
+4.安心できる状態になりたい
+5.正直な気持ちに気づきたい
+
+回答:
+
+――――――――
+
+⑤ 心の奥に近いのは？
+1.本当はこのままでいいのか不安
+2.ちゃんとしなきゃと思っている
+3.期待に応えようとしている
+4.自分を後回しにしている
+5.本音を出すのが怖い
+
+回答:
+
+――――――――
+
+⑥ 今の自分にかけるなら？
+1.大丈夫
+2.そのままでいい
+3.もう無理しなくていい
+4.少し休んでいい
+5.信じていい
+
+回答:`;
+
+  navigator.clipboard.writeText(text);
+  alert("クライアント質問プロンプトをコピーしたよ💌");
+}
+
+function copyClientSummaryPrompt(){
+  const text = `以下はタロットとラスボスの解読です。
+
+それぞれの内容をふまえて
+クライアントさんにわかりやすく伝えられるように
+全体の流れをやさしく一つにまとめてください😊
+
+・むずかしくしない
+・やさしく安心できる言葉
+・長くなりすぎない
+・否定や断定はしない
+・問いかけは不要
+・そのまま送れるやさしい文章にする
+
+今の状態
+テーマ（ラスボス）
+やさしい気づき
+小さな一歩
+やさしいひとこと
+
+この流れでまとめてください🌿`;
+
+  navigator.clipboard.writeText(text);
+  alert("クライアントまとめプロンプトをコピーしたよ🌈");
 }
 
 function goTarotFromBoss(){
