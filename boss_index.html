@@ -122,10 +122,22 @@ button{
   min-height:58px;
 }
 
-.full-width{
-  grid-column:1 / -1;
-  max-width:240px;
-  margin:0 auto;
+.menu-vertical{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:center;
+  max-width:300px;
+  margin:16px auto;
+}
+
+.menu-vertical button{
+  width:88%;
+  min-height:42px;
+  font-size:14px;
+  padding:8px 12px;
+  border-radius:24px;
+  margin:5px auto;
 }
 
 .info-card{
@@ -192,22 +204,14 @@ button{
 @media (max-width:480px){
   button,input{ font-size:15px; }
   .menu-grid button{ font-size:14px; padding:11px 6px; }
+  .menu-vertical button{
+    width:88%;
+    min-height:42px;
+    font-size:14px;
+    padding:8px 12px;
+  }
   .desc,.guide-text,.info-text{ font-size:15px; }
   h1{ font-size:25px; }
-}
-.menu-vertical{
-  display:flex;
-  flex-direction:column;
-  gap:8px;  /* ← 10→8で少しコンパクトに */
-  align-items:center;
-  max-width:300px;
-  margin:16px auto;
-}
-
-.menu-vertical button{
-  width:100%;
-  min-height:56px;
-  font-size:17px;
 }
 </style>
 </head>
@@ -225,13 +229,11 @@ button{
 自分用にも、セッション用にも使えるよ</p>
 
   <div class="menu-grid menu-vertical">
-  <button class="btn-orange" onclick="openHowto()">🌿使い方🌿</button>
-
-  <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
-
-  <button class="btn-purple" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
-
-  <button class="btn-boss" onclick="openStart()">はじめる🐾</button>
+    <button class="btn-orange" onclick="openHowto()">🌿使い方🌿</button>
+    <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
+    <button class="btn-purple" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
+    <button class="btn-boss" onclick="openStart()">はじめる🐾</button>
+  </div>
 </div>
 
 <!-- はじめる -->
