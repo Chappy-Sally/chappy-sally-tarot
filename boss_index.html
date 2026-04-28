@@ -195,6 +195,20 @@ button{
   .desc,.guide-text,.info-text{ font-size:15px; }
   h1{ font-size:25px; }
 }
+  .menu-vertical{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  max-width:320px;
+  margin:20px auto;
+}
+
+.menu-vertical button{
+  width:100%;
+  min-height:56px;
+  font-size:17px;
+}
 </style>
 </head>
 
@@ -210,12 +224,14 @@ button{
 
 自分用にも、セッション用にも使えるよ</p>
 
-  <div class="menu-grid">
-    <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
-    <button class="btn-purple" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
-    <button class="btn-orange" onclick="openHowto()">🌿使い方🌿</button>
-    <button class="btn-boss" onclick="openStart()">はじめる🐾</button>
-  </div>
+  <div class="menu-grid menu-vertical">
+  <button class="btn-orange" onclick="openHowto()">🌿使い方🌿</button>
+
+  <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
+
+  <button class="btn-purple" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
+
+  <button class="btn-boss" onclick="openStart()">はじめる🐾</button>
 </div>
 
 <!-- はじめる -->
