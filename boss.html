@@ -320,7 +320,9 @@
     <div class="button-group">
       <button class="main-btn" onclick="saveSessionInputs(); drawTarotOne()">🂠1枚引き</button>
       <button class="main-btn" onclick="saveSessionInputs(); drawTarotThree()">🂠3枚引き</button>
-      <button class="back-btn" onclick="resetAll()">🚪ROOMに戻る</button>
+      <button onclick="backToStart()">
+🏠 はじめる画面に戻る
+      </button>
     </div>
 
    <div class="button-group">
@@ -991,6 +993,10 @@ function backToRoom() {
   if (resultArea) resultArea.classList.add("hidden"); // タロット結果も隠す
   master.classList.remove("hidden");                 // ROOM本体だけ戻す
 }
+    function backToStart(){
+  hideAllScreens();
+  document.getElementById("startScreen").classList.remove("hidden");
+    }
   </script>
 
 </body>
