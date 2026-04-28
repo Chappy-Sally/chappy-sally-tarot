@@ -1,288 +1,223 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>チャッピー＆サリーの私に戻る時間</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チャッピー＆サリーの私に戻る時間</title>
 
-  <style>
-    body{
-      font-family:"Hiragino Kaku Gothic ProN", sans-serif;
-      text-align:center;
-      background:#fff0f5;
-      padding:20px;
-      color:#5b3a1e;
-      margin:0;
-    }
-
- .switch-image {
-  width: 80%;
-  max-width: 320px;
-  border-radius: 20px;
-  margin-bottom: 10px;
+<style>
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  text-align:center;
+  background:#fff0f5;
+  padding:20px;
+  color:#5b3a1e;
+  margin:0;
 }
 
-.switch-text {
-  background: rgba(255,255,255,0.8);
-  padding: 12px;
-  border-radius: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-  text-align: left;
-}
-    
-.switch-text p:last-child {
-  font-weight: bold;
-  margin-top: 10px;
-}
-    
-.switch-note {
-  font-size: 15px;
-  color: #8a7f76;
-  margin-top: 12px;
-  text-align: center;
-  line-height: 1.8;
-  letter-spacing: 0.5px; /* 少しだけ */
-}
-
-.switch-btn {
-  background: #c8f7dc;
-  color: #2e6b4f !important;
-  border: none;
-  padding: 14px 22px;
-  border-radius: 30px;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(255,255,255,0.8);
-
-  display: block;
-  margin: 10px auto 0;
-  text-align: center;
-  letter-spacing: 1px;  /* ←これ追加✨ */
-  }
-    
-.hidden{
-  display:none;
-  }
+.hidden{display:none !important;}
 
 .title-wrap{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:15px;
-      margin-top:10px;
-    }
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  margin-top:10px;
+}
 
-    .title-icon{
-      font-size:32px;
-    }
+.title-icon{font-size:32px;}
 
-    h1{
-      color:#5b3a1e;
-      font-size:26px;
-      line-height:1.4;
-      margin:0;
-    }
+h1{
+  color:#5b3a1e;
+  font-size:26px;
+  line-height:1.4;
+  margin:0;
+}
 
-    .welcome-img,
-    .header-img,
-    .kami-img{
-      width:80%;
-      max-width:400px;
-      border-radius:20px;
-      margin:18px 0;
-      box-shadow:0 6px 14px rgba(0,0,0,0.12);
-    }
+.header-img,.kami-img{
+  width:80%;
+  max-width:400px;
+  border-radius:20px;
+  margin:18px 0;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+}
 
-    .desc{
-      font-size:18px;
-      color:#6b4b2a;
-      margin:14px 0 20px;
-      line-height:1.8;
-      white-space:pre-line;
-    }
+.desc{
+  font-size:18px;
+  color:#6b4b2a;
+  margin:14px 0 20px;
+  line-height:1.8;
+  white-space:pre-line;
+}
 
-    input{
-      width:82%;
-      max-width:360px;
-      padding:14px;
-      border-radius:22px;
-      border:2px solid #d6b6ff;
-      margin-bottom:12px;
-      font-size:17px;
-      box-sizing:border-box;
-      background:white;
-    }
+.name-note{
+  font-size:14px;
+  color:#9a7b5d;
+  line-height:1.7;
+  margin:0 auto 14px;
+  white-space:pre-line;
+  width:82%;
+  max-width:360px;
+}
 
-    .main-btn{
-      background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
-    }
+input{
+  width:82%;
+  max-width:360px;
+  padding:14px;
+  border-radius:22px;
+  border:2px solid #d6b6ff;
+  margin-bottom:12px;
+  font-size:17px;
+  box-sizing:border-box;
+  background:white;
+}
 
-    .boss-btn{
-      background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
-    }
+button{
+  padding:14px 22px;
+  margin:6px;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  min-width:160px;
+}
 
-    .back-btn{
-      background:linear-gradient(135deg,#a89adb,#cdbff4);
-    }
+.main-btn{
+  background:linear-gradient(135deg,#f7c1cc,#c9b6ff);
+}
 
-    .prompt-btn{
-      background:linear-gradient(135deg,#ffcf7d,#ffb76b,#ff9f68);
-    }
+.boss-btn{
+  background:linear-gradient(135deg,#233b6e,#3f5f9a,#6d85c4);
+}
 
-    .return-btn{
-      background:linear-gradient(135deg,#f7c97d,#f2a86b,#ec8fd0);
-    }
+.back-btn,
+.orange-btn{
+  background:linear-gradient(135deg,#ffbe73,#f6a65d);
+}
 
-    .skip-btn{
-      background:linear-gradient(135deg,#f7c97d,#f2a86b,#ec8fd0);
-    }
+.return-btn,
+.skip-btn{
+  background:linear-gradient(135deg,#f7c97d,#f2a86b,#ec8fd0);
+}
 
-    .cards-area{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:20px;
-      margin-top:25px;
-      min-height:180px;
-    }
+.switch-btn{
+  background:#c8f7dc;
+  color:#2e6b4f !important;
+  font-weight:bold;
+}
 
-    .card-box{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      width:170px;
-    }
+.button-group{
+  margin-top:10px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
 
-    .card-box img{
-      width:160px;
-      border-radius:12px;
-      box-shadow:0 6px 14px rgba(0,0,0,0.2);
-      background:white;
-    }
+.cards-area{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:25px;
+  min-height:180px;
+}
 
-    .reversed{
-      transform:rotate(180deg);
-    }
+.card-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:170px;
+}
 
-    .label{
-      margin-top:10px;
-      font-size:16px;
-      color:#5b3a1e;
-      line-height:1.5;
-      min-height:24px;
-      white-space:pre-line;
-    }
+.card-box img{
+  width:160px;
+  border-radius:12px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.2);
+  background:white;
+}
 
-    .button-group{
- 　   argin-top:10px;
-　    display: flex;
-     justify-content: center;
-     flex-wrap: wrap;
-     gap: 12px;
-    }
+.reversed{transform:rotate(180deg);}
 
-    .summary-box{
-      width:92%;
-      max-width:560px;
-      margin:22px auto 0;
-      padding:18px 16px;
-      border-radius:22px;
-      background:rgba(255,255,255,0.78);
-      box-shadow:0 4px 10px rgba(0,0,0,0.06);
-    }
+.label{
+  margin-top:10px;
+  font-size:16px;
+  color:#5b3a1e;
+  line-height:1.5;
+  min-height:24px;
+  white-space:pre-line;
+}
 
-    .summary-title{
-      font-size:20px;
-      font-weight:bold;
-      color:#6b4b2a;
-      margin-bottom:12px;
-    }
+.summary-box,.return-box,.kami-box{
+  width:92%;
+  max-width:560px;
+  margin:22px auto 0;
+  padding:18px 16px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.82);
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
 
-    .summary-buttons{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:10px;
-    }
+.summary-title{
+  font-size:20px;
+  font-weight:bold;
+  color:#6b4b2a;
+  margin-bottom:12px;
+}
 
-    .mini-btn{
-      padding:12px 18px;
-      border:none;
-      border-radius:26px;
-      color:white;
-      font-size:18px;
-      cursor:pointer;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
+.summary-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
 
-    .mini-copy{
-      background:linear-gradient(135deg,#f7c1cc,#e6a4b4,#f3d1dc);
-    }
+.mini-btn{
+  padding:12px 18px;
+  border-radius:26px;
+  font-size:18px;
+}
 
-    .mini-ai{
-      background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
-    }
+.mini-ai{
+  background:linear-gradient(135deg,#8bb7ff,#6f8fff,#8e7cff);
+}
 
-    .return-box,
-    .kami-box{
-      width:92%;
-      max-width:560px;
-      margin:22px auto 0;
-      padding:20px 16px;
-      border-radius:22px;
-      background:rgba(255,255,255,0.82);
-      box-shadow:0 4px 10px rgba(0,0,0,0.06);
-    }
+.return-message,.kami-message{
+  font-size:20px;
+  color:#7a4d28;
+  line-height:1.9;
+  margin-bottom:14px;
+  white-space:pre-line;
+}
 
-    .return-message,
-    .kami-message{
-      font-size:20px;
-      color:#7a4d28;
-      line-height:1.9;
-      margin-bottom:14px;
-      white-space:pre-line;
-    }
+.kami-note{
+  font-size:15px;
+  color:#9a7b5d;
+  margin:8px 0;
+}
 
-    .kami-note{
-      font-size:15px;
-      color:#9a7b5d;
-      margin-top:8px;
-      margin-bottom:8px;
-    }
+.switch-note{
+  font-size:15px;
+  color:#8a7f76;
+  margin-top:12px;
+  line-height:1.8;
+}
 
-    .name-note{
-      font-size:14px;
-      color:#9a7b5d;
-      line-height:1.7;
-      margin:0 auto 14px;
-      white-space:pre-line;
-      width:82%;
-      max-width:360px;
-    }
-
-    button{
-     padding:14px 22px;
-     margin:6px;
-     border:none;
-     border-radius:30px;
-     color:white;
-     font-size:18px;
-     cursor:pointer;
-     box-shadow:0 4px 10px rgba(0,0,0,0.08);
-
-     min-width: 160px;  /* ←これ重要✨ */
-    }
-  </style>
+@media(max-width:480px){
+  h1{font-size:24px;}
+  button{font-size:16px; min-width:140px;}
+}
+</style>
 </head>
 
 <body>
-　　　<body>
 
-      <div id="tarot-screen" class="hidden">
-    　<div id="masterScreen">
-    　<div class="title-wrap">
+<div id="tarot-screen">
+  <div id="masterScreen">
+    <div class="title-wrap">
       <div class="title-icon">🔮</div>
       <h1>チャッピー＆サリーの<br>AI×タロットで<br>やさしく整う時間⏳️</h1>
       <div class="title-icon">🔮</div>
@@ -290,7 +225,11 @@
 
     <img src="images/CS_hyousi.jpg" class="header-img" alt="表紙">
 
-    <div class="name-note">自分のお名前は保存済みでOK🐾<br>セッションのときは相談者さんのお名前を入れてね</div>
+    <div class="name-note">
+      自分のお名前は保存済みでOK🐾<br>
+      セッションのときは相談者さんのお名前を入れてね
+    </div>
+
     <input id="clientName" placeholder="相談者さんのお名前（任意）">
     <br>
     <input id="question" placeholder="問いを入れてから引く">
@@ -298,233 +237,231 @@
     <div class="button-group">
       <button class="main-btn" onclick="saveSessionInputs(); drawTarotOne()">🂠1枚引き</button>
       <button class="main-btn" onclick="saveSessionInputs(); drawTarotThree()">🂠3枚引き</button>
-      <button onclick="backToStart()">
-🏠 はじめる画面に戻る
-      </button>
     </div>
-
-   <div class="button-group">
-  <button class="boss-btn" onclick="showBossScreen()">✵ラスボスをみつける✵</button>
-</div>
-
-<div class="button-group">
-  <button class="switch-btn" onclick="location.href='switch.html'">🌟しあわせスイッチ🌟</button>
-</div>
-
-<p class="switch-note">
-  心にちょっと余裕ができたら<br>
-  押してみてね🤭🌿
-</p>
-　   </div>
-  </div>
-
-　　<div id="happySwitch" class="hidden">
- 　<img src="images/switch.png" class="switch-image">
-
-  <div class="switch-text">
-    <p>　　🌈しあわせスイッチの練習してみよう☝️</p>
-    
-    <p>　🐾今この瞬間、ホッとできることはある？</p>
-    <p>　🐾小さな「よかった」を見つけてみてね😊</p>
-    <p>　🐾そのよかったを、ちょっと大げさに喜んでみて🤭</p>
-    <p>　🐾もう、満たされてるとしたらどんな気持ち？🌿</p>
-    <p>　🐾もう、願いが叶ってるかも🤭🌿</p>
-    
-    <p>　　🌈しあわせスイッチ　入りました🌟</p>
-  </div>
-  
-　<div class="button-group">
-  <button class="back-btn" onclick="backToRoom()">🏠ROOMに戻る</button>
-</div>
-  
-  </div>
-
-  <div id="boss-screen" class="hidden">
-    <div class="title-wrap">
-      <div class="title-icon">🌟</div>
-      <h1>ラスボスをみつける</h1>
-      <div class="title-icon">🌟</div>
-    </div>
-
-    <img src="images/boss_hyousi.png" class="header-img" alt="ラスボス表紙"
-         onerror="this.src='images/CS_hyousi.jpg'">
-
-    <p class="desc">
-      今の心にひそんでいるラスボスを<br>
-      やさしく見つけてみよう✨
-    </p>
 
     <div class="button-group">
-      <button class="boss-btn" onclick="saveSessionInputs(); drawBossOne()">🂠1枚引き</button>
-      <button class="boss-btn" onclick="saveSessionInputs(); drawBossThree()">🂠3枚引き</button>
-    </div>
- 　 </div>
-
-  　<div id="kami-screen" class="hidden">
-    <div class="title-wrap">
-      <div class="title-icon">✨</div>
-      <h1>やさしい光のステージ</h1>
-      <div class="title-icon">🌈</div>
+      <button class="orange-btn" onclick="backToStart()">🏠 はじめる画面に戻る</button>
     </div>
 
-    <div class="kami-box">
-      <img src="images/boss_kami.png" class="kami-img" alt="神様化チャッピーとサリー"
-           onerror="this.src='images/CS_hyousi.jpg'">
+    <div class="button-group">
+      <button class="boss-btn" onclick="showBossScreen()">✵ラスボスをみつける✵</button>
+    </div>
 
-      <div class="kami-message" id="kami-message">ラスボスは
+    <div class="button-group">
+      <button class="switch-btn" onclick="location.href='switch.html'">🌟しあわせスイッチ🌟</button>
+    </div>
+
+    <p class="switch-note">
+      心にちょっと余裕ができたら<br>
+      押してみてね🤭🌿
+    </p>
+  </div>
+</div>
+
+<div id="boss-screen" class="hidden">
+  <div class="title-wrap">
+    <div class="title-icon">🌟</div>
+    <h1>ラスボスをみつける</h1>
+    <div class="title-icon">🌟</div>
+  </div>
+
+  <img src="images/boss_hyousi.png" class="header-img" alt="ラスボス表紙"
+       onerror="this.src='images/CS_hyousi.jpg'">
+
+  <p class="desc">
+    今の心にひそんでいるラスボスを<br>
+    やさしく見つけてみよう✨
+  </p>
+
+  <div class="button-group">
+    <button class="boss-btn" onclick="saveSessionInputs(); drawBossOne()">🂠1枚引き</button>
+    <button class="boss-btn" onclick="saveSessionInputs(); drawBossThree()">🂠3枚引き</button>
+  </div>
+
+  <div class="button-group">
+    <button class="orange-btn" onclick="showTarotScreen()">🏠 はじめる画面に戻る</button>
+  </div>
+</div>
+
+<div id="kami-screen" class="hidden">
+  <div class="title-wrap">
+    <div class="title-icon">✨</div>
+    <h1>やさしい光のステージ</h1>
+    <div class="title-icon">🌈</div>
+  </div>
+
+  <div class="kami-box">
+    <img src="images/boss_kami.png" class="kami-img" alt="神様化チャッピーとサリー"
+         onerror="this.src='images/CS_hyousi.jpg'">
+
+    <div class="kami-message">
+ラスボスは
 あなたを守るために現れた
 守神様
 
 気づいたあなたはもう大丈夫🌈
 
 いまのあなたで
-もう一度カードを引いてみよう🐾</div>
-
-      <div class="kami-note">10秒後にタロット画面へ移動します✨</div>
-      <button class="skip-btn" onclick="skipToTarot()">🐾スキップ🐾</button>
+もう一度カードを引いてみよう🐾
     </div>
+
+    <div class="kami-note">10秒後にタロット画面へ移動します✨</div>
+    <button class="skip-btn" onclick="skipToTarot()">🐾スキップ🐾</button>
   </div>
+</div>
 
-  <div class="cards-area" id="cards"></div>
-  <div id="summary-area"></div>
+<div class="cards-area" id="cards"></div>
+<div id="summary-area"></div>
+<script>
+const tarotFiles = [
+  "00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
+  "03_The_Empress.png","04_The_Emperor.png","05_The_Hierophant.png",
+  "06_The_Lovers.png","07_The_Chariot.png","08_Strength.png",
+  "09_The_Hermit.png","10_Wheel_of_Fortune.png","11_Justice.png",
+  "12_The_Hanged_Man.png","13_Death.png","14_Temperance.png",
+  "15_The_Devil.png","16_The_Tower.png","17_The_Star.png",
+  "18_The_Moon.png","19_The_Sun.png","20_Judgement.png",
+  "21_The_World.png","22_Compass.png"
+];
 
-  <script>
-    const tarotFiles = [
-      "00_The_Fool.png",
-      "01_The_Magician.png",
-      "02_The_High_Priestess.png",
-      "03_The_Empress.png",
-      "04_The_Emperor.png",
-      "05_The_Hierophant.png",
-      "06_The_Lovers.png",
-      "07_The_Chariot.png",
-      "08_Strength.png",
-      "09_The_Hermit.png",
-      "10_Wheel_of_Fortune.png",
-      "11_Justice.png",
-      "12_The_Hanged_Man.png",
-      "13_Death.png",
-      "14_Temperance.png",
-      "15_The_Devil.png",
-      "16_The_Tower.png",
-      "17_The_Star.png",
-      "18_The_Moon.png",
-      "19_The_Sun.png",
-      "20_Judgement.png",
-      "21_The_World.png",
-      "22_Compass.png"
-    ];
+const bossFiles = [
+  "boss_people_eyes.png","boss_perfection.png","boss_fear_of_failure.png",
+  "boss_low_confidence.png","boss_comparison.png","boss_impatience.png",
+  "boss_anxiety.png","boss_attachment.png","boss_past.png",
+  "boss_future_worry.png","boss_money.png","boss_overwork.png",
+  "boss_guilt.png","boss_give_up.png","boss_endurance.png",
+  "boss_obligation.png","boss_hesitation.png"
+];
 
-    const bossFiles = [
-      "boss_people_eyes.png",
-      "boss_perfection.png",
-      "boss_fear_of_failure.png",
-      "boss_low_confidence.png",
-      "boss_comparison.png",
-      "boss_impatience.png",
-      "boss_anxiety.png",
-      "boss_attachment.png",
-      "boss_past.png",
-      "boss_future_worry.png",
-      "boss_money.png",
-      "boss_overwork.png",
-      "boss_guilt.png",
-      "boss_give_up.png",
-      "boss_endurance.png",
-      "boss_obligation.png",
-      "boss_hesitation.png"
-    ];
+const bossNameMap = {
+  boss_people_eyes:"人の目が気になる",
+  boss_perfection:"完璧にしなきゃ",
+  boss_fear_of_failure:"失敗したくない",
+  boss_low_confidence:"自信がない",
+  boss_comparison:"比較してしまう",
+  boss_impatience:"焦り",
+  boss_anxiety:"不安",
+  boss_attachment:"執着",
+  boss_past:"過去へのとらわれ",
+  boss_future_worry:"未来への不安",
+  boss_money:"お金の不安",
+  boss_overwork:"がんばりすぎ",
+  boss_guilt:"罪悪感",
+  boss_give_up:"あきらめ",
+  boss_endurance:"我慢ぐせ",
+  boss_obligation:"義務感",
+  boss_hesitation:"遠慮"
+};
 
-    const bossNameMap = {
-      boss_people_eyes: "人の目が気になる",
-      boss_perfection: "完璧にしなきゃ",
-      boss_fear_of_failure: "失敗したくない",
-      boss_low_confidence: "自信がない",
-      boss_comparison: "比較してしまう",
-      boss_impatience: "焦り",
-      boss_anxiety: "不安",
-      boss_attachment: "執着",
-      boss_past: "過去へのとらわれ",
-      boss_future_worry: "未来への不安",
-      boss_money: "お金の不安",
-      boss_overwork: "がんばりすぎ",
-      boss_guilt: "罪悪感",
-      boss_give_up: "あきらめ",
-      boss_endurance: "我慢ぐせ",
-      boss_obligation: "義務感",
-      boss_hesitation: "遠慮",
-    };
+let kamiTimer = null;
 
-    let kamiTimer = null;
+function getRandomItem(list){
+  return list[Math.floor(Math.random() * list.length)];
+}
 
-    function getRandomItem(list){
-      return list[Math.floor(Math.random() * list.length)];
-    }
+function getRandomItems(list,count){
+  return [...list].sort(() => Math.random() - 0.5).slice(0,count);
+}
 
-    function getRandomItems(list, count){
-      const shuffled = [...list].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count);
-    }
+function getSelfName(){
+  return localStorage.getItem("userName") || "";
+}
 
-    function getSelfName(){
-      return localStorage.getItem("userName") || "";
-    }
+function getPartnerName(){
+  return localStorage.getItem("partnerName") || "";
+}
 
-    function getPartnerName(){
-      return localStorage.getItem("partnerName") || "";
-    }
+function getClientName(){
+  const el = document.getElementById("clientName");
+  return el ? el.value.trim() : "";
+}
 
-    function getClientName(){
-      const el = document.getElementById("clientName");
-      return el ? el.value.trim() : "";
-    }
+function getQuestion(){
+  const el = document.getElementById("question");
+  return el ? el.value.trim() : "";
+}
 
-    function getQuestion(){
-      const el = document.getElementById("question");
-      return el ? el.value.trim() : "";
-    }
+function saveSessionInputs(){
+  localStorage.setItem("clientName", getClientName());
+  localStorage.setItem("question", getQuestion());
+}
 
-    function bossToJapanese(fileName){
-      const key = fileName.replace(".png", "");
-      return bossNameMap[key] || key;
-    }
+function restoreSessionInputs(){
+  const clientEl = document.getElementById("clientName");
+  const questionEl = document.getElementById("question");
+  if(clientEl) clientEl.value = localStorage.getItem("clientName") || "";
+  if(questionEl) questionEl.value = localStorage.getItem("question") || "";
+}
 
-    function formatTarotCard(card){
-      return `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）`;
-    }
+function clearCards(){
+  document.getElementById("cards").innerHTML = "";
+  document.getElementById("summary-area").innerHTML = "";
+}
 
-    function buildTarotAiText(cards){
-      const partner = getPartnerName();
-      const selfName = getSelfName();
-      const client = getClientName();
-      const question = getQuestion();
+function clearKamiTimer(){
+  if(kamiTimer){
+    clearTimeout(kamiTimer);
+    kamiTimer = null;
+  }
+}
 
-      let text = "";
+function hideAllScreens(){
+  ["tarot-screen","boss-screen","kami-screen"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.add("hidden");
+  });
+}
 
-      if(partner){
-        text += `${partner}\n`;
-      }
-      if(selfName){
-        text += `${selfName}だよ😊\n\n`;
-      }
-      if(client){
-        text += `${client}さんの\n`;
-      }
-      if(question){
-        text += `質問は${question}です。\n\n`;
-      }
+function showTarotScreen(){
+  clearKamiTimer();
+  hideAllScreens();
+  document.getElementById("tarot-screen").classList.remove("hidden");
+  clearCards();
+  restoreSessionInputs();
+}
 
-      text += `カードを引いたよ！\n\n`;
+function showBossScreen(){
+  clearKamiTimer();
+  hideAllScreens();
+  document.getElementById("boss-screen").classList.remove("hidden");
+  clearCards();
+}
 
-      cards.forEach(card => {
-        text += `${formatTarotCard(card)}\n`;
-      });
+function showKamiScreen(){
+  clearKamiTimer();
+  hideAllScreens();
+  clearCards();
+  document.getElementById("kami-screen").classList.remove("hidden");
 
-      text += `\nだったよ！`;
-      return text;
-    }
+  kamiTimer = setTimeout(() => {
+    showTarotScreen();
+  }, 10000);
+}
 
-    function buildTarotAfterAiText(cards){
+function skipToTarot(){
+  clearKamiTimer();
+  showTarotScreen();
+}
+
+function backToStart(){
+  location.href = "boss_index.html";
+}
+
+function bossToJapanese(fileName){
+  const key = fileName.replace(".png","");
+  return bossNameMap[key] || key;
+}
+
+function formatTarotCard(card){
+  return `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）`;
+}
+
+function copyToClipboard(text){
+  navigator.clipboard.writeText(text);
+  alert("コピーしたよ✨");
+}
+
+function buildTarotAiText(cards){
   const partner = getPartnerName();
   const selfName = getSelfName();
   const client = getClientName();
@@ -532,416 +469,274 @@
 
   let text = "";
 
-  if(partner){
-    text += `${partner}\n`;
-  }
-  if(selfName){
-    text += `${selfName}だよ😊\n\n`;
-  }
-  if(client){
-    text += `${client}さんの\n`;
-  }
-  if(question){
-    text += `質問は${question}です。\n\n`;
-  }
-　text += `気づきを受け取ったあとの、\n`;
+  if(partner) text += `${partner}\n`;
+  if(selfName) text += `${selfName}だよ😊\n\n`;
+  if(client) text += `${client}さんの\n`;
+  if(question) text += `質問は${question}です。\n\n`;
+
+  text += `カードを引いたよ！\n\n`;
+
+  cards.forEach(card => {
+    text += `${formatTarotCard(card)}\n`;
+  });
+
+  text += `\nだったよ！`;
+  return text;
+}
+
+function buildTarotAfterAiText(cards){
+  const partner = getPartnerName();
+  const selfName = getSelfName();
+  const client = getClientName();
+  const question = getQuestion();
+
+  let text = "";
+
+  if(partner) text += `${partner}\n`;
+  if(selfName) text += `${selfName}だよ😊\n\n`;
+  if(client) text += `${client}さんの\n`;
+  if(question) text += `質問は${question}です。\n\n`;
+
+  text += `気づきを受け取ったあとの、\n`;
   text += `今の私がやさしく進むためのヒントを\n\n`;
   text += `短くやさしく教えてください😊\n`;
-  text += `そのあと、やさしい問いを1〜2個ください。`;
-
+  text += `そのあと、やさしい問いを1〜2個ください。\n\n`;
   text += `カードは\n\n`;
 
   cards.forEach(card => {
-    text += `${card.name.replace(".png","")}（${card.reversed ? "逆位置" : "正位置"}）\n`;
+    text += `${formatTarotCard(card)}\n`;
   });
 
-  text += `\nだったよ！\n\n`;
-  
+  text += `\nだったよ！`;
   return text;
-    }
-
-    function buildBossAiText(cards){
-      const partner = getPartnerName();
-      const selfName = getSelfName();
-      const client = getClientName();
-      const question = getQuestion();
-
-      let text = "";
-
-      if(partner){
-        text += `${partner}\n`;
-      }
-      if(selfName){
-        text += `${selfName}だよ😊\n\n`;
-      }
-      if(client){
-        text += `${client}さんの\n`;
-      }
-      if(question){
-        text += `質問は${question}です。\n\n`;
-      }
-
-　　　　text += `ラスボスは\n`;
-  　　　text += `問題ではなく私を守るために\n\n`;
-  　　　text += `生まれた思い込みやクセに\n\n`;
-  　　　text += `気づくためのヒント❣\n`;
-      
-  　　　text += `否定や断定ではなく\n\n`;
-       text += `今の私がやさしく気づける\n\n`;
-       text += `形で教えてね❣\n`;
-      
-      text += `ラスボスカードを引いたよ！\n\n`;
-
-      cards.forEach(card => {
-        text += `${bossToJapanese(card.name)}\n`;
-      });
-
-      text += `\nだったよ！`;
-      return text;
-    }
-
-    function copyToClipboard(text){
-      navigator.clipboard.writeText(text);
-      alert("コピーしたよ✨");
-    }
-
-    function clearCards(){
-      document.getElementById("cards").innerHTML = "";
-      document.getElementById("summary-area").innerHTML = "";
-    }
-
-    function clearKamiTimer(){
-      if(kamiTimer){
-        clearTimeout(kamiTimer);
-        kamiTimer = null;
-      }
-    }
-
-    function hideAllScreens(){
-      document.getElementById("welcome-screen").classList.add("hidden");
-      document.getElementById("tarot-screen").classList.add("hidden");
-      document.getElementById("boss-screen").classList.add("hidden");
-      document.getElementById("kami-screen").classList.add("hidden");
-    }
-
-    function showTarotScreen(){
-      clearKamiTimer();
-      hideAllScreens();
-      document.getElementById("tarot-screen").classList.remove("hidden");
-      clearCards();
-      restoreSessionInputs();
-    }
-
-    function showBossScreen(){
-      clearKamiTimer();
-      hideAllScreens();
-      document.getElementById("boss-screen").classList.remove("hidden");
-      clearCards();
-    }
-
-    function showKamiScreen(){
-      clearKamiTimer();
-      hideAllScreens();
-      clearCards();
-      document.getElementById("kami-screen").classList.remove("hidden");
-
-      kamiTimer = setTimeout(() => {
-        showTarotScreen();
-      }, 10000);
-    }
-
-    function skipToTarot(){
-      clearKamiTimer();
-      showTarotScreen();
-    }
-
-    function saveSessionInputs(){
-      localStorage.setItem("clientName", getClientName());
-      localStorage.setItem("question", getQuestion());
-    }
-
-    function restoreSessionInputs(){
-      const savedClient = localStorage.getItem("clientName") || "";
-      const savedQuestion = localStorage.getItem("question") || "";
-      const clientEl = document.getElementById("clientName");
-      const questionEl = document.getElementById("question");
-
-      if(clientEl) clientEl.value = savedClient;
-      if(questionEl) questionEl.value = savedQuestion;
-    }
-
-    function getBasePrompt(){
-      const selfName = getSelfName();
-      const partnerName = getPartnerName();
-
-      let lines = [];
-
-      if(partnerName){
-        lines.push(partnerName);
-      }
-      if(selfName){
-        lines.push(`${selfName}だよ😊`);
-      }
-      if(lines.length > 0){
-        lines.push("");
-      }
-
-      lines.push("これからカードを引いて対話します❣");
-      lines.push("当てたり 正解を出したりしなくて大丈夫です☝️");
-      lines.push("やさしく 安心を大切にしながら");
-      lines.push("今の私の気持ちを");
-      lines.push("一緒に整理してください😊");
-      lines.push("必要以上に深掘りせず");
-      lines.push("今ここで立ち止まっても大丈夫です。");
-      lines.push("質問は 1〜2問までで十分です。");
-      lines.push("私が「もう十分」と感じたら");
-      lines.push("ありがとうで終わります。");
-      lines.push("");
-      lines.push("カードの意味はそれぞれ簡潔に");
-      lines.push("今の私に必要なことだけを");
-      lines.push("やさしく伝えてください。");
-
-      return lines.join("\n");
-    }
-
-    function copyBasePrompt(){
-      copyToClipboard(getBasePrompt());
-    }
-
-    function createTarotCard(labelText = "", forcedCard = null, forcedReversed = null){
-      const card = forcedCard || getRandomItem(tarotFiles);
-
-      const box = document.createElement("div");
-      box.className = "card-box";
-
-      const img = document.createElement("img");
-      img.src = "images/" + card;
-      img.alt = card;
-
-      const reversed = forcedReversed !== null ? forcedReversed : Math.random() < 0.5;
-      if(reversed){
-        img.classList.add("reversed");
-      }
-
-      const label = document.createElement("div");
-      label.className = "label";
-      label.textContent = labelText;
-
-      box.appendChild(img);
-      if(labelText !== ""){
-        box.appendChild(label);
-      }
-
-      return { element: box, name: card, reversed: reversed };
-    }
-
-    function createBossCard(labelText, forcedBoss = null){
-      const boss = forcedBoss || getRandomItem(bossFiles);
-
-      const box = document.createElement("div");
-      box.className = "card-box";
-
-      const img = document.createElement("img");
-      img.src = "images/" + boss;
-      img.alt = boss;
-
-      const label = document.createElement("div");
-      label.className = "label";
-      label.textContent = labelText;
-
-      box.appendChild(img);
-      box.appendChild(label);
-
-      return { element: box, name: boss, label: labelText };
-    }
-    function showTarotSummaryBox(aiNowText, aiAfterText, titleText = "✨ 3枚まとめ"){
-      const area = document.getElementById("summary-area");
-      area.innerHTML = "";
-
-      const box = document.createElement("div");
-      box.className = "summary-box";
-
-      const title = document.createElement("div");
-      title.className = "summary-title";
-      title.textContent = titleText;
-
-      const buttons = document.createElement("div");
-      buttons.className = "summary-buttons";
-
-      const aiBtn1 = document.createElement("button");
-      aiBtn1.className = "mini-btn mini-ai";
-      aiBtn1.textContent = "１度目診断コピー🤖";
-      aiBtn1.onclick = () => copyToClipboard(aiNowText);
-
-      const aiBtn2 = document.createElement("button");
-      aiBtn2.className = "mini-btn mini-ai";
-      aiBtn2.textContent = "気づいたあと診断コピー🌈";
-      aiBtn2.onclick = () => copyToClipboard(aiAfterText);
-
-      buttons.appendChild(aiBtn1);
-      buttons.appendChild(aiBtn2);
-
-      box.appendChild(title);
-      box.appendChild(buttons);
-      area.appendChild(box);
-    }
-
-    function showBossSummaryBox(aiText){
-      const area = document.getElementById("summary-area");
-      area.innerHTML = "";
-
-      const box = document.createElement("div");
-      box.className = "summary-box";
-
-      const title = document.createElement("div");
-      title.className = "summary-title";
-      title.textContent = "🌈 ラスボスまとめ";
-
-      const buttons = document.createElement("div");
-      buttons.className = "summary-buttons";
-
-      const aiBtn = document.createElement("button");
-      aiBtn.className = "mini-btn mini-ai";
-      aiBtn.textContent = "診断コピー🤖";
-      aiBtn.onclick = () => copyToClipboard(aiText);
-
-      buttons.appendChild(aiBtn);
-
-      box.appendChild(title);
-      box.appendChild(buttons);
-      area.appendChild(box);
-    }
-
-    function showReturnToTarotBox(){
-      const area = document.getElementById("summary-area");
-
-      const box = document.createElement("div");
-      box.className = "return-box";
-
-      const message = document.createElement("div");
-      message.className = "return-message";
-      message.textContent =
-        "ラスボスは\n" +
-        "あなたを守るために現れた\n" +
-        "守神様\n\n" +
-        "気づいたあなたはもう大丈夫🌈\n\n" +
-        "いまのあなたで\nもう一度カードを引いてみよう🐾";
-
-      const btn = document.createElement("button");
-      btn.className = "return-btn";
-      btn.textContent = "もう一度タロットを引く🔮";
-      btn.onclick = () => showKamiScreen();
-
-      box.appendChild(message);
-      box.appendChild(btn);
-      area.appendChild(box);
-    }
-
-    function drawTarotOne(){
-      clearCards();
-
-      const cardObj = createTarotCard("");
-      document.getElementById("cards").appendChild(cardObj.element);
-
-      const cards = [
-        { name: cardObj.name, reversed: cardObj.reversed }
-      ];
-
-      const aiNowText = buildTarotAiText(cards);
-      const aiAfterText = buildTarotAfterAiText(cards);
-
-      showTarotSummaryBox(aiNowText, aiAfterText, "✨ 1枚まとめ");
-    }
-
-    function drawTarotThree(){
-      clearCards();
-
-      const selectedCards = getRandomItems(tarotFiles, 3);
-      const reversedStates = [
-        Math.random() < 0.5,
-        Math.random() < 0.5,
-        Math.random() < 0.5
-      ];
-
-      const card1 = createTarotCard("", selectedCards[0], reversedStates[0]);
-      const card2 = createTarotCard("", selectedCards[1], reversedStates[1]);
-      const card3 = createTarotCard("", selectedCards[2], reversedStates[2]);
-
-      document.getElementById("cards").appendChild(card1.element);
-      document.getElementById("cards").appendChild(card2.element);
-      document.getElementById("cards").appendChild(card3.element);
-
-      const cards = [
-        { name: card1.name, reversed: card1.reversed },
-        { name: card2.name, reversed: card2.reversed },
-        { name: card3.name, reversed: card3.reversed }
-      ];
-
-      const aiNowText = buildTarotAiText(cards);
-      const aiAfterText = buildTarotAfterAiText(cards);
-
-      showTarotSummaryBox(aiNowText, aiAfterText, "✨ 3枚まとめ");
-    }
-
-    function drawBossOne(){
-      clearCards();
-
-      const cardObj = createBossCard("今のラスボス");
-      document.getElementById("cards").appendChild(cardObj.element);
-
-      const cards = [
-        { label: "今のラスボス", name: cardObj.name }
-      ];
-
-      const aiText = buildBossAiText(cards);
-
-      showBossSummaryBox(aiText);
-      showReturnToTarotBox();
-    }
-
-    function drawBossThree(){
-      clearCards();
-
-      const selectedBosses = getRandomItems(bossFiles, 3);
-
-      const card1 = createBossCard("今のラスボス", selectedBosses[0]);
-      const card2 = createBossCard("隠れラスボス", selectedBosses[1]);
-      const card3 = createBossCard("心のボス戦", selectedBosses[2]);
-
-      document.getElementById("cards").appendChild(card1.element);
-      document.getElementById("cards").appendChild(card2.element);
-      document.getElementById("cards").appendChild(card3.element);
-
-      const cards = [
-        { label: "今のラスボス", name: card1.name },
-        { label: "隠れラスボス", name: card2.name },
-        { label: "心のボス戦", name: card3.name }
-      ];
-
-      const aiText = buildBossAiText(cards);
-
-      showBossSummaryBox(aiText);
-      showReturnToTarotBox();
-    }
-
-    function resetAll(){
-      clearKamiTimer();
-      clearCards();
-      const questionEl = document.getElementById("question");
-      const clientEl = document.getElementById("clientName");
-      if(questionEl) questionEl.value = "";
-      if(clientEl) clientEl.value = "";
-      localStorage.removeItem("question");
-      localStorage.removeItem("clientName");
-      hideAllScreens();
-      document.getElementById("welcome-screen").classList.remove("hidden");
-    }
-
-    function goBossHome(){
-      location.href = "https://chappy-sally.github.io/chappy-sally-tarot/boss_index.html";
-    }
-
-    window.addEventListener("load", () => {
+}
+
+function buildBossAiText(cards){
+  const partner = getPartnerName();
+  const selfName = getSelfName();
+  const client = getClientName();
+  const question = getQuestion();
+
+  let text = "";
+
+  if(partner) text += `${partner}\n`;
+  if(selfName) text += `${selfName}だよ😊\n\n`;
+  if(client) text += `${client}さんの\n`;
+  if(question) text += `質問は${question}です。\n\n`;
+
+  text += `ラスボスは\n`;
+  text += `問題ではなく私を守るために\n\n`;
+  text += `生まれた思い込みやクセに\n\n`;
+  text += `気づくためのヒント❣\n\n`;
+  text += `否定や断定ではなく\n\n`;
+  text += `今の私がやさしく気づける\n\n`;
+  text += `形で教えてね❣\n\n`;
+
+  text += `ラスボスカードを引いたよ！\n\n`;
+
+  cards.forEach(card => {
+    text += `${bossToJapanese(card.name)}\n`;
+  });
+
+  text += `\nだったよ！`;
+  return text;
+}
+
+function createTarotCard(forcedCard = null, forcedReversed = null){
+  const card = forcedCard || getRandomItem(tarotFiles);
+  const box = document.createElement("div");
+  box.className = "card-box";
+
+  const img = document.createElement("img");
+  img.src = "images/" + card;
+  img.alt = card;
+
+  const reversed = forcedReversed !== null ? forcedReversed : Math.random() < 0.5;
+  if(reversed) img.classList.add("reversed");
+
+  box.appendChild(img);
+
+  return {element:box,name:card,reversed};
+}
+
+function createBossCard(labelText, forcedBoss = null){
+  const boss = forcedBoss || getRandomItem(bossFiles);
+
+  const box = document.createElement("div");
+  box.className = "card-box";
+
+  const img = document.createElement("img");
+  img.src = "images/" + boss;
+  img.alt = boss;
+
+  const label = document.createElement("div");
+  label.className = "label";
+  label.textContent = labelText;
+
+  box.appendChild(img);
+  box.appendChild(label);
+
+  return {element:box,name:boss,label:labelText};
+}
+
+function showTarotSummaryBox(aiNowText, aiAfterText, titleText){
+  const area = document.getElementById("summary-area");
+  area.innerHTML = "";
+
+  const box = document.createElement("div");
+  box.className = "summary-box";
+
+  const title = document.createElement("div");
+  title.className = "summary-title";
+  title.textContent = titleText;
+
+  const buttons = document.createElement("div");
+  buttons.className = "summary-buttons";
+
+  const aiBtn1 = document.createElement("button");
+  aiBtn1.className = "mini-btn mini-ai";
+  aiBtn1.textContent = "１度目診断コピー🤖";
+  aiBtn1.onclick = () => copyToClipboard(aiNowText);
+
+  const aiBtn2 = document.createElement("button");
+  aiBtn2.className = "mini-btn mini-ai";
+  aiBtn2.textContent = "気づいたあと診断コピー🌈";
+  aiBtn2.onclick = () => copyToClipboard(aiAfterText);
+
+  buttons.appendChild(aiBtn1);
+  buttons.appendChild(aiBtn2);
+  box.appendChild(title);
+  box.appendChild(buttons);
+  area.appendChild(box);
+}
+
+function showBossSummaryBox(aiText){
+  const area = document.getElementById("summary-area");
+  area.innerHTML = "";
+
+  const box = document.createElement("div");
+  box.className = "summary-box";
+
+  const title = document.createElement("div");
+  title.className = "summary-title";
+  title.textContent = "🌈 ラスボスまとめ";
+
+  const buttons = document.createElement("div");
+  buttons.className = "summary-buttons";
+
+  const aiBtn = document.createElement("button");
+  aiBtn.className = "mini-btn mini-ai";
+  aiBtn.textContent = "診断コピー🤖";
+  aiBtn.onclick = () => copyToClipboard(aiText);
+
+  buttons.appendChild(aiBtn);
+  box.appendChild(title);
+  box.appendChild(buttons);
+  area.appendChild(box);
+}
+
+function showReturnToTarotBox(){
+  const area = document.getElementById("summary-area");
+
+  const box = document.createElement("div");
+  box.className = "return-box";
+
+  const message = document.createElement("div");
+  message.className = "return-message";
+  message.textContent =
+    "ラスボスは\n" +
+    "あなたを守るために現れた\n" +
+    "守神様\n\n" +
+    "気づいたあなたはもう大丈夫🌈\n\n" +
+    "いまのあなたで\nもう一度カードを引いてみよう🐾";
+
+  const btn = document.createElement("button");
+  btn.className = "return-btn";
+  btn.textContent = "もう一度タロットを引く🔮";
+  btn.onclick = () => showKamiScreen();
+
+  box.appendChild(message);
+  box.appendChild(btn);
+  area.appendChild(box);
+}
+
+function drawTarotOne(){
+  clearCards();
+
+  const cardObj = createTarotCard();
+  document.getElementById("cards").appendChild(cardObj.element);
+
+  const cards = [{name:cardObj.name,reversed:cardObj.reversed}];
+
+  showTarotSummaryBox(
+    buildTarotAiText(cards),
+    buildTarotAfterAiText(cards),
+    "✨ 1枚まとめ"
+  );
+}
+
+function drawTarotThree(){
+  clearCards();
+
+  const selectedCards = getRandomItems(tarotFiles,3);
+
+  const card1 = createTarotCard(selectedCards[0], Math.random() < 0.5);
+  const card2 = createTarotCard(selectedCards[1], Math.random() < 0.5);
+  const card3 = createTarotCard(selectedCards[2], Math.random() < 0.5);
+
+  document.getElementById("cards").appendChild(card1.element);
+  document.getElementById("cards").appendChild(card2.element);
+  document.getElementById("cards").appendChild(card3.element);
+
+  const cards = [
+    {name:card1.name,reversed:card1.reversed},
+    {name:card2.name,reversed:card2.reversed},
+    {name:card3.name,reversed:card3.reversed}
+  ];
+
+  showTarotSummaryBox(
+    buildTarotAiText(cards),
+    buildTarotAfterAiText(cards),
+    "✨ 3枚まとめ"
+  );
+}
+
+function drawBossOne(){
+  clearCards();
+
+  const cardObj = createBossCard("今のラスボス");
+  document.getElementById("cards").appendChild(cardObj.element);
+
+  const cards = [{label:"今のラスボス",name:cardObj.name}];
+
+  showBossSummaryBox(buildBossAiText(cards));
+  showReturnToTarotBox();
+}
+
+function drawBossThree(){
+  clearCards();
+
+  const selectedBosses = getRandomItems(bossFiles,3);
+
+  const card1 = createBossCard("今のラスボス", selectedBosses[0]);
+  const card2 = createBossCard("隠れラスボス", selectedBosses[1]);
+  const card3 = createBossCard("心のボス戦", selectedBosses[2]);
+
+  document.getElementById("cards").appendChild(card1.element);
+  document.getElementById("cards").appendChild(card2.element);
+  document.getElementById("cards").appendChild(card3.element);
+
+  const cards = [
+    {label:"今のラスボス",name:card1.name},
+    {label:"隠れラスボス",name:card2.name},
+    {label:"心のボス戦",name:card3.name}
+  ];
+
+  showBossSummaryBox(buildBossAiText(cards));
+  showReturnToTarotBox();
+}
+
+window.addEventListener("load", () => {
   localStorage.removeItem("clientName");
   localStorage.removeItem("question");
 
@@ -950,32 +745,10 @@
 
   if(questionEl) questionEl.value = "";
   if(clientEl) clientEl.value = "";
+
+  showTarotScreen();
 });
-
-function toggleSwitch() {
-  const master = document.getElementById("masterScreen");
-  const happy = document.getElementById("happySwitch");
-  const resultArea = document.getElementById("resultArea");
-
-  if (resultArea) resultArea.classList.add("hidden"); // タロット結果を隠す
-  master.classList.add("hidden");                     // ROOM本体を隠す
-  happy.classList.remove("hidden");                   // しあわせスイッチを出す
-}
-    
-function backToRoom() {
-  const master = document.getElementById("masterScreen");
-  const happy = document.getElementById("happySwitch");
-  const resultArea = document.getElementById("resultArea");
-
-  happy.classList.add("hidden");                     // スイッチ画面を隠す
-  if (resultArea) resultArea.classList.add("hidden"); // タロット結果も隠す
-  master.classList.remove("hidden");                 // ROOM本体だけ戻す
-}
-    function backToStart(){
-  hideAllScreens();
-  document.getElementById("startScreen").classList.remove("hidden");
-    }
-  </script>
+</script>
 
 </body>
 </html>
