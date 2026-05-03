@@ -274,17 +274,17 @@ button{
 
       <button class="btn-orange" onclick="copyTarotPrompt()">対話ナビプロンプト🐾</button>
       <button class="btn-orange" onclick="copyBossPrompt()">マスター編プロンプト🐾</button>
-      <button class="btn-pink" onclick="copyClientQuestionPrompt()">クライアント質問プロンプト💌</button>
-      <button class="btn-purple" onclick="copyClientSummaryPrompt()">クライアントまとめプロンプト🌈</button>
+      <button class="btn-pink" onclick="copyClientQuestionPrompt()">相談者さん質問プロンプト💌</button>
+      <button class="btn-purple" onclick="copyClientSummaryPrompt()">相談者さんまとめプロンプト🌈</button>
     </div>
 
     <div class="guide-box">
       <div class="guide-title">🌿ワンポイント</div>
-      <div class="guide-text">クライアントさんがいる場合は  
+      <div class="guide-text">相談者さんがいる場合は  
 AIのチャットを分けておくのがおすすめです😊
 
 ・自分用のチャット
-・クライアントさんごとのチャット
+・相談者さんごとのチャット
 
 に分けることで  
 やりとりが混ざらず  
@@ -310,7 +310,7 @@ AIのチャットを分けておくのがおすすめです😊
 
     <div class="input-box">
       <div class="input-label">あなたの名前</div>
-      <input type="text" id="p_name" placeholder="例：さちよ">
+      <input type="text" id="p_name" placeholder="例：サリー">
     </div>
 
     <div class="input-box">
@@ -320,12 +320,12 @@ AIのチャットを分けておくのがおすすめです😊
 
     <div class="input-box">
       <div class="input-label">好きなもの（,で好きなだけ）</div>
-      <input type="text" id="p_like" placeholder="例：お寿司,2時間サスペンス,豪華なホテル">
+      <input type="text" id="p_like" placeholder="例：お寿司,キラキラするもの,豪華なホテル">
     </div>
 
     <div class="input-box">
       <div class="input-label">苦手なもの（,で好きなだけ）</div>
-      <input type="text" id="p_dislike" placeholder="例：人混み,ちゃんとすること">
+      <input type="text" id="p_dislike" placeholder="例：人混み,毎日同じことをすること">
     </div>
 
     <div class="input-box">
@@ -396,8 +396,8 @@ AIに貼ってから使ってね😊</div>
     </div>
 
     <div class="info-card">
-      <div class="info-title">④ クライアントさんがいるとき</div>
-      <div class="info-text">クライアントさんごとに  
+      <div class="info-title">④ 相談者さんがいるとき</div>
+      <div class="info-text">相談者さんごとに  
 AIのチャットを分けておくと便利です😊
 
 リピートのときも  
@@ -594,7 +594,7 @@ function copyProfile(){
   }
 
   navigator.clipboard.writeText(text);
-  alert("コピーしたよ🌈");
+  alert("コピーしました🌈");
 }
 
 function copyTarotPrompt(){
@@ -644,7 +644,7 @@ ${user}だよ😊
 あなたは私の相棒として
 やさしく寄り添いながら対話してください。
 
-読み解く対象が「私」か「クライアント」かをふまえ
+読み解く対象が「私」か「相談者さん」かをふまえ
 今の心の奥にある気持ちや
 隠れている思い込みにも
 無理なく気づけるようにしてください😊
@@ -654,7 +654,7 @@ ${user}だよ😊
 やさしく整えていくための対話です🌿
 
 カードの意味はそれぞれ簡潔に
-今の私（またはクライアント）に必要なことだけを
+今の私（または相談者さん）に必要なことだけを
 やさしく伝えてください。
 
 こわがらせたり
@@ -674,7 +674,7 @@ ${user}だよ😊
 対象が「私」のときは
 やさしい問いを1〜2個添えてください。
 
-対象が「クライアント」のときは
+対象が「相談者さん」のときは
 問いは不要で
 そのまま安心できる言葉でまとめてください。
 
@@ -682,10 +682,10 @@ ${user}だよ😊
 無理に導こうとしなくて大丈夫です。
 
 「もう十分」と感じたら
-ありがとうで終わるね😊`;
+ありがとうで終わります😊`;
 
   navigator.clipboard.writeText(text);
-  alert("マスター編プロンプトをコピーしたよ🐾");
+  alert("マスター編プロンプトをコピーしました🐾");
 }
 
 function copyClientQuestionPrompt(){
@@ -693,7 +693,7 @@ function copyClientQuestionPrompt(){
 
 いくつか選ぶだけで大丈夫なので、気軽に答えてくださいね🐾✨
 番号を入力するだけでOKです😊
-コピペして数字だけ入れて返信してね😊
+コピペして数字だけ入れて返信してください😊
 
 ――――――――
 
@@ -762,14 +762,14 @@ function copyClientQuestionPrompt(){
 回答:`;
 
   navigator.clipboard.writeText(text);
-  alert("クライアント質問プロンプトをコピーしたよ💌");
+  alert("相談者さん質問プロンプトをコピーしました💌");
 }
 
 function copyClientSummaryPrompt(){
   const text = `以下はタロットとラスボスの解読です。
 
 それぞれの内容をふまえて
-クライアントさんにわかりやすく伝えられるように
+相談者さんにわかりやすく伝えられるように
 全体の流れをやさしく一つにまとめてください😊
 
 ・むずかしくしない
@@ -788,7 +788,7 @@ function copyClientSummaryPrompt(){
 この流れでまとめてください🌿`;
 
   navigator.clipboard.writeText(text);
-  alert("クライアントまとめプロンプトをコピーしたよ🌈");
+  alert("相談者さんまとめプロンプトをコピーしました🌈");
 }
 
 function goTarotFromBoss(){
