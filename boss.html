@@ -602,8 +602,14 @@ function showTarotSummaryBox(aiNowText, aiAfterText, titleText){
   aiBtn2.textContent = "気づいたあと診断コピー🌈";
   aiBtn2.onclick = () => copyToClipboard(aiAfterText);
 
+  const aiBtn3 = document.createElement("button");
+  aiBtn3.className = "mini-btn mini-ai";
+  aiBtn3.textContent = "相談者さんまとめプロンプト🌈";
+  aiBtn3.onclick = () => copyClientSummaryPrompt();
+
   buttons.appendChild(aiBtn1);
   buttons.appendChild(aiBtn2);
+  container.appendChild(aiBtn3);
   box.appendChild(title);
   box.appendChild(buttons);
   area.appendChild(box);
