@@ -245,7 +245,7 @@ button{
 
     <div class="button-group">
       <button class="switch-btn" onclick="location.href='switch.html'">🌟しあわせスイッチ🌟</button>
-       </div>
+    </div>
 
     <p class="switch-note">
       心にちょっと余裕ができたら<br>
@@ -253,11 +253,9 @@ button{
     </p>
   </div>
 
-      <div class="button-group">
-      <button class="orange-btn" onclick="backToStart()">🏠 はじめる画面に戻る</button>
-    </div>
-   
-
+  <div class="button-group">
+    <button class="orange-btn" onclick="backToStart()">🏠 はじめる画面に戻る</button>
+  </div>
 </div>
 
 <div id="boss-screen" class="hidden">
@@ -279,7 +277,6 @@ button{
     <button class="boss-btn" onclick="saveSessionInputs(); drawBossOne()">🂠1枚引き</button>
     <button class="boss-btn" onclick="saveSessionInputs(); drawBossThree()">🂠3枚引き</button>
   </div>
-
 </div>
 
 <div id="kami-screen" class="hidden">
@@ -311,6 +308,7 @@ button{
 
 <div class="cards-area" id="cards"></div>
 <div id="summary-area"></div>
+
 <script>
 const tarotFiles = [
   "00_The_Fool.png","01_The_Magician.png","02_The_High_Priestess.png",
@@ -424,6 +422,7 @@ function showBossScreen(){
   hideAllScreens();
   document.getElementById("boss-screen").classList.remove("hidden");
   clearCards();
+  restoreSessionInputs();
 }
 
 function showKamiScreen(){
@@ -456,8 +455,11 @@ function formatTarotCard(card){
 }
 
 function copyToClipboard(text){
-  navigator.clipboard.writeText(text);
-  alert("コピーしたよ✨");
+  navigator.clipboard.writeText(text).then(() => {
+    alert("コピーしたよ✨");
+  }).catch(() => {
+    alert("コピーできませんでした。手動でコピーしてください🙏");
+  });
 }
 
 function buildTarotAiText(cards){
@@ -610,6 +612,7 @@ function showTarotSummaryBox(aiNowText, aiAfterText, titleText){
   buttons.appendChild(aiBtn1);
   buttons.appendChild(aiBtn2);
   buttons.appendChild(aiBtn3);
+
   box.appendChild(title);
   box.appendChild(buttons);
   area.appendChild(box);
@@ -741,19 +744,7 @@ function drawBossThree(){
   showReturnToTarotBox();
 }
 
-window.addEventListener("load", () => {
-  localStorage.removeItem("clientName");
-  localStorage.removeItem("question");
-
-  const questionEl = document.getElementById("question");
-  const clientEl = document.getElementById("clientName");
-
-  if(questionEl) questionEl.value = "";
-  if(clientEl) clientEl.value = "";
-
-  showTarotScreen();
-
-  function copyClientSummaryPrompt(){
+function copyClientSummaryPrompt(){
   const text = `以下はタロットとラスボスの解読です。
 
 まずはカードの流れを日本語で簡単にまとめてください。
@@ -774,18 +765,29 @@ window.addEventListener("load", () => {
 ・問いかけは不要
 ・そのまま送れるやさしい文章にする
 
+以下の流れでまとめてください🌿
+
 今の状態
 テーマ（ラスボス）
 やさしい気づき
 小さな一歩
-やさしいひとこと
-
-この流れでまとめてください🌿`;
+やさしいひとこと`;
 
   copyToClipboard(text);
-  alert("相談者さんまとめプロンプトをコピーしました🌈");
-  }
+}
 
+window.addEventListener("load", () => {
+  localStorage.removeItem("clientName");
+  localStorage.removeItem("question");
+
+  const questionEl = document.getElementById("question");
+  const clientEl = document.getElementById("clientName");
+
+  if(questionEl) questionEl.value = "";
+  if(clientEl) clientEl.value = "";
+
+  showTarotScreen();
+});
 </script>
 
 </body>
