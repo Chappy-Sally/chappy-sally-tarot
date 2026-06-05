@@ -9,11 +9,8 @@ body{
 
 .mini-card img{
   width:100%;
-  min-height:180px;
-  object-fit:cover;
-  border-radius:14px;
-  box-shadow:0 5px 12px rgba(0,0,0,0.15);
-  background:white;
+  border-radius:18px;
+  display:block;
 }
 
 h1{
@@ -102,12 +99,13 @@ button{
 }
 
 .mini-card{
-  width:150px;
-  background:#f8f6ff;
-  border:2px solid #d8d6ff;
-  border-radius:20px;
-  padding:12px 10px;
+  width:220px;
+  background:#ffffff;
+  border:3px solid #d8d6ff;
+  border-radius:28px;
+  padding:14px;
   box-sizing:border-box;
+  text-align:center;
 }
 
 .mini-card img{
@@ -118,18 +116,17 @@ button{
 }
 
 .card-label{
-  font-size:14px;
+  font-size:18px;
   color:#7b5b39;
-  margin-top:8px;
+  margin-top:10px;
   line-height:1.5;
-  white-space:pre-line;
 }
 
 .card-name{
-  font-size:18px;
+  font-size:24px;
   font-weight:bold;
   color:#5f58c9;
-  margin-top:4px;
+  margin-top:6px;
 }
 
 .note{
