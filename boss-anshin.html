@@ -27,12 +27,12 @@
     <textarea id="blocks" placeholder="例：でも働けない。どうせ私には無理。そんな商品がない。"></textarea>
   </div>
 
-  <div class="button-group">
-    <button class="boss-btn" onclick="drawBossOne()">ラスボス1枚引き</button>
-    <button class="boss-btn" onclick="drawBossThree()">ラスボス3枚引き</button>
-  </div>
+  <button class="boss-btn" onclick="drawCard()">ラスボスカードを引く</button>
 
-  <div id="cardsArea" class="cards-area hidden"></div>
+  <div id="cardBox" class="card-box hidden">
+    <p>今回のラスボス</p>
+    <div id="cardName" class="card-name"></div>
+  </div>
 
   <button id="copyBtn" class="copy-btn" onclick="copyPrompt()" disabled>
     AIに送る文章をコピー
@@ -43,6 +43,7 @@
   </p>
 
   <div class="button-group">
+    <button class="back-btn" onclick="location.href='boss.html'">🔮 マスター編に戻る</button>
     <button class="back-btn" onclick="location.href='bossindex.html'">🏠 はじめる画面に戻る</button>
   </div>
 </div>
